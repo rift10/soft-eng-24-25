@@ -6,5 +6,5 @@
   "public boolean canSleepIn(boolean isWeekday, boolean isVacation) {\n  if (isVacation) return true;\n  if (!isWeekday) return true;\n  return false;\n}",
   "public boolean getsSpeedingTicket(double speed, double angryCop) {\n  if (angryCop && speed > 65) return true;\n  if (speed > 70) return true;\n  return false;\n}",
   "public String slug(String a, String b, String c) {\n  return String.toLowerCase(a) + \"-\" + String.toLowerCase(b) + \"-\" + String.toLowerCase(c);\n}\n",
-  "public String middle(String a) {\n  public int b = a.length() / 4;\n  a.substring(b)\n}\n"
+  "public String middle(String a) {\n  public int b = a.length() / 4;\n  return a.substring(b) \n}\n"
 ]
