@@ -8,5 +8,5 @@
   "public String slug(String a, String b, String c) {\n  return String.toLowerCase(a) + \"-\" + String.toLowerCase(b) + \"-\" + String.toLowerCase(c);\n}\n",
   "public String middle(String a) {\n  public int b = a.length() / 4;\n  return a.substring(b, b * 3);\n}\n",
   "public int sum(Array<int> a) {\n  public int b;\n  for (int i = 0; i <= a.length(); i++) {\n    b += a[i];\n  }\n  return b;\n}\n",
-  "public double average(Array<int> array) {\n  return \n}"
+  "public double average(int[] array) {\n  \n}"
 ]
