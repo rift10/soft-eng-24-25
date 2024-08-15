@@ -2,7 +2,7 @@
   "public int sum(int a, int b) {\n  return a + b;\n}\n",
   "public double average(int a, int b) {\n  return (a + b) / 2;\n}\n",
   "public int randomNumber(int a) {\n  return Math.random(0, a);\n}\n",
-  "public int randomNumber(int a, int b) {\n  return Math.random(a, b-1);\n}\n\n",
+  "public int randomNumber(int a, int b) {\n  return (int) Math.random(a, b-1);\n}\n\n",
   "public boolean canSleepIn(boolean isWeekday, boolean isVacation) {\n  if (isVacation) return true;\n  if (!isWeekday) return true;\n  return false;\n}",
   "public boolean getsSpeedingTicket(double speed, double angryCop) {\n  if (angryCop && speed > 65) return true;\n  if (speed > 70) return true;\n  return false;\n}",
   "public String slug(String a, String b, String c) {\n  return String.toLowerCase(a) + \"-\" + String.toLowerCase(b) + \"-\" + String.toLowerCase(c);\n}\n",
