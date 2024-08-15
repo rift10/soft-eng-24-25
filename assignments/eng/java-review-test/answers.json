@@ -9,5 +9,6 @@
   "public String middle(String a) {\n  public int b = a.length() / 4;\n  return a.substring(b, b * 3);\n}\n",
   "public int sum(int[] a) {\n  public int b;\n  for (int i = 0; i <= a.length(); i++) {\n    b += a[i];\n  }\n  return b;\n}\n",
   "public double average(int[] array) {\n  \n}\n",
-  "public Object randomChoice(Object[] objects) {\n  public int b = Math.random(0, objects.length());\n  return objects[b];\n}\n"
+  "public Object randomChoice(Object[] objects) {\n  public int b = Math.random(0, objects.length());\n  return objects[b];\n}\n",
+  "public \n"
 ]
