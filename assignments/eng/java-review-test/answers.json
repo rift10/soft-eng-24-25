@@ -10,5 +10,5 @@
   "public int sum(int[] a) {\n  public int b;\n  for (int i = 0; i <= a.length(); i++) {\n    b += a[i];\n  }\n  return b;\n}\n",
   "public double average(int[] array) {\n  \n}\n",
   "public Object randomChoice(Object[] objects) {\n  public int b = Math.random(0, objects.length());\n  return objects[b];\n}\n",
-  "public \n"
+  "public class Greeter() {\n  public Greeter(String greeting) {\n    \n  }\n\n  public void greet() {\n    System.out.println(+ \".\");\n  }\n\n  public void greet(String name) {\n    System.out.println();\n  }\n}\n"
 ]
