@@ -38,6 +38,17 @@ public class Xor {
   // above for decoding. (This is a symmetric cipher meaning encryption
   // and decryption are the same process.)
 
+  private int key;
+
+  public Xor(int key) {
+    this.key = key;
+  }
+
+  public double decode(String input) {
+    private int i = Integer.parseInt(input);
+    return i;
+  }
+
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
   }
