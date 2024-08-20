@@ -44,7 +44,7 @@ public class Xor {
     this.key = key;
   }
 
-  public double decode(String input) {
+  public int decode(String input) {
     private int i = Integer.parseInt(input);
     return i;
   }
