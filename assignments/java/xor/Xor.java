@@ -44,12 +44,16 @@ public class Xor {
     this.key = key;
   }
 
-  public int decode(String input) {
-    int i = Integer.parseInt(input);
-    return i;
+  public byte getByte(String input, int index) {
+    return (byte) Integer.parseInt(input.substring(index, index+2));
   }
 
+  // int x = Integer.parseInt(input);
+
+  public void decode() {}
+
   public static void main(String[] argv) throws Exception {
-    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).getByte(CIPHERTEXT, 1));
+    // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
   }
 }
