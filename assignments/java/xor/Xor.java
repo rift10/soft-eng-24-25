@@ -45,7 +45,7 @@ public class Xor {
   }
 
   public byte getByte(String input, int index) {
-    return (byte) Integer.parseInt(input.substring(index, index+2));
+    return (byte) Integer.parseInt(input.substring(index, index+2), 16);
   }
 
   // int x = Integer.parseInt(input);
