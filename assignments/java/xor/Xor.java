@@ -51,7 +51,7 @@ public class Xor {
   public byte[] getByteArray() {
     byte[] result = new byte[CIPHERTEXT.length];
     for (int i = 0; i < result.length; i++) {
-        byte[i] = getByte(i);
+        result[i] = getByte(i);
     }
   }
 
