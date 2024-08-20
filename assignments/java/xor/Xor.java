@@ -45,7 +45,7 @@ public class Xor {
   }
 
   public int decode(String input) {
-    private int i = Integer.parseInt(input);
+    int i = Integer.parseInt(input);
     return i;
   }
 
