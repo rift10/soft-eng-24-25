@@ -44,8 +44,15 @@ public class Xor {
     this.key = key;
   }
 
-  public byte getByte(String input, int index) {
-    return (byte) Integer.parseInt(input.substring(index, index+2), 16);
+  public byte getByte(int index) {
+    return (byte) Integer.parseInt(CIPHERTEXT.substring(index, index+2), 16);
+  }
+
+  public byte[] getByteArray() {
+    byte[] result = new byte[CIPHERTEXT.length];
+    for (int i = 0; i < byte.length; i++) {
+        byte[i] = getByte(i);
+    }
   }
 
   // int x = Integer.parseInt(input);
@@ -53,7 +60,7 @@ public class Xor {
   public void decode() {}
 
   public static void main(String[] argv) throws Exception {
-    System.out.println(new Xor(567231495).getByte(CIPHERTEXT, 0));
+    // System.out.println(new Xor(567231495).getByte(CIPHERTEXT, 0));
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
   }
 }
