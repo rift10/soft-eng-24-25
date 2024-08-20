@@ -53,7 +53,7 @@ public class Xor {
   public void decode() {}
 
   public static void main(String[] argv) throws Exception {
-    System.out.println(new Xor(567231495).getByte(CIPHERTEXT, 1));
+    System.out.println(new Xor(567231495).getByte(CIPHERTEXT, 0));
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
   }
 }
