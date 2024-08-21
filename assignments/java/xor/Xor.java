@@ -11,8 +11,6 @@ public class Xor {
   private static final String CIPHERTEXT =
     "452dbb017333a6456328a64f6064a6522722ba4f26";
 
-  private static final int length = CIPHERTEXT.length();
-
   // You shouldn't change the code in main but you do need to implement
   // the decode method and an appropriate constructor to make it work.
   // And you'll probably want to implement some helper methods along the
@@ -58,11 +56,11 @@ public class Xor {
     return result;
   }
 
-  public String decode(String cipher, int length) {
-    return new String(getByteArray(cipher, length), StandardCharsets.UTF_8);
+  public String decode(String cipher) {
+    return new String(getByteArray(cipher, CIPHERTEXT.length()), StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
-    System.out.println(new Xor(567231495).decode(CIPHERTEXT, length));
+    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
   }
 }
