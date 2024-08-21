@@ -66,7 +66,7 @@ public class Xor {
 
   public byte[] xorByteArray(byte[] array) {
     for (int i = 0; i < array.length; i++) {
-      xor(array[i], (byte) key);
+      // xor(array[i], (byte) key);
     }
   }
 
