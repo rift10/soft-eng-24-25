@@ -49,7 +49,7 @@ public class Xor {
   }
 
   public byte[] getByteArray(String text) {
-    byte[] result = new byte[text.length];
+    byte[] result = new byte[10];
     for (int i = 0; i < result.length; i++) {
         result[i] = getByte(i);
     }
