@@ -64,15 +64,17 @@ public class Xor {
     return (n >> k) & 1;
   }
 
-  public byte[] xorByteArray(byte[] array) {
+  public byte[] xorByteArray(byte[] array, int length) {
+    byte[] result = new byte[length];
     for (int i = 0; i < array.length; i++) {
-      xor(array[i], key);
+      result[i] = xor(array[i], getBit(key, i));
     }
-    return new byte[1];
+    return result;
   }
 
   public String decode(String cipher) {
-    return new String(xorByteArray(getByteArray(cipher, CIPHERTEXT.length())), StandardCharsets.UTF_8);
+    // return new String(getByteArray(cipher, CIPHERTEXT.length()), StandardCharsets.UTF_8);
+    return new String(xorByteArray(getByteArray(cipher, CIPHERTEXT.length()), CIPHERTEXT.length()), StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
