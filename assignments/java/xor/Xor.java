@@ -48,19 +48,18 @@ public class Xor {
     return (byte) Integer.parseInt(CIPHERTEXT.substring(index, index+2), 16);
   }
 
-  public byte[] getByteArray() {
-    byte[] result = new byte[CIPHERTEXT.length];
+  public byte[] getByteArray(String text) {
+    byte[] result = new byte[text.length];
     for (int i = 0; i < result.length; i++) {
         result[i] = getByte(i);
     }
   }
 
-  // int x = Integer.parseInt(input);
-
-  public void decode() {}
+  public String decode(String cipher) {
+    return new String(getByteArray(cipher), StandardCharsets.UTF_8);
+  }
 
   public static void main(String[] argv) throws Exception {
-    // System.out.println(new Xor(567231495).getByte(CIPHERTEXT, 0));
-    // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
   }
 }
