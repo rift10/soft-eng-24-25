@@ -56,7 +56,7 @@ public class Xor {
     return result;
   }
 
-  public byte xor(byte b, int i) {
+  public byte xor(byte b, byte i) {
     return b ^ i;
   }
 
@@ -66,7 +66,7 @@ public class Xor {
 
   public byte[] xorByteArray(byte[] array) {
     for (int i = 0; i < array.length; i++) {
-      xor(array[i], key);
+      xor(array[i], (byte) key);
     }
   }
 
