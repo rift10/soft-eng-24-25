@@ -83,6 +83,6 @@ public class Xor {
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
     System.out.println(new Xor(567231495).otherDecode(CIPHERTEXT));
-    System.out.println(new Integer(567231495).byteValue());
+    System.out.println(new String(new Integer(567231495).byteValue()));
   }
 }
