@@ -57,7 +57,7 @@ public class Xor {
   }
 
   public String decode(String cipher) {
-    return new String(getByteArray(cipher, cipher.length), StandardCharsets.UTF_8);
+    return new String(getByteArray(cipher, 42), StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
