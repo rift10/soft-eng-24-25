@@ -68,6 +68,7 @@ public class Xor {
     for (int i = 0; i < array.length; i++) {
       // xor(array[i], (byte) key);
     }
+    return new byte[];
   }
 
   public String decode(String cipher) {
