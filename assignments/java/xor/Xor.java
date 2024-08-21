@@ -48,15 +48,16 @@ public class Xor {
     return (byte) Integer.parseInt(CIPHERTEXT.substring(index, index+2), 16);
   }
 
-  public byte[] getByteArray(String text) {
-    byte[] result = new byte[10];
-    for (int i = 0; i < result.length; i++) {
+  public byte[] getByteArray(String text, int length) {
+    byte[] result = new byte[length];
+    for (int i = 0; i < length; i++) {
         result[i] = getByte(i);
     }
+    return result;
   }
 
   public String decode(String cipher) {
-    return new String(getByteArray(cipher), StandardCharsets.UTF_8);
+    return new String(getByteArray(cipher, cipher.length), StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
