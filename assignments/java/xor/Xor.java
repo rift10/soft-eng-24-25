@@ -11,7 +11,7 @@ public class Xor {
   private static final String CIPHERTEXT =
     "452dbb017333a6456328a64f6064a6522722ba4f26";
 
-  private static final int length = CIPHERTEXT.length;
+  private static final int length = CIPHERTEXT.length();
 
   // You shouldn't change the code in main but you do need to implement
   // the decode method and an appropriate constructor to make it work.
