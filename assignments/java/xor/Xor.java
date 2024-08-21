@@ -56,9 +56,9 @@ public class Xor {
     return result;
   }
 
-  // public byte xor(byte b, byte i) {
-  //   return b ^ i;
-  // }
+  public byte xor(byte b, byte i) {
+    return (byte) b ^ i;
+  }
 
   public int getBit(int n, int k) {
     return (n >> k) & 1;
