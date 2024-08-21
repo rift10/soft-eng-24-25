@@ -56,8 +56,8 @@ public class Xor {
     return result;
   }
 
-  public byte xor(byte b, byte i) {
-    return (byte) ((int) b ^ (int) i);
+  public byte xor(byte b, int i) {
+    return (byte) ((int) b ^ i);
   }
 
   public int getBit(int n, int k) {
@@ -66,7 +66,7 @@ public class Xor {
 
   public byte[] xorByteArray(byte[] array) {
     for (int i = 0; i < array.length; i++) {
-      // xor(array[i], (byte) key);
+      xor(array[i], key);
     }
     return new byte[1];
   }
@@ -77,6 +77,5 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(Integer.bitCount(567231495));
   }
 }
