@@ -50,7 +50,7 @@ public class Xor {
 
   public byte[] getByteArray(String text, int length) {
     byte[] result = new byte[length];
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length-1; i++) {
         result[i] = getByte(i);
     }
     return result;
