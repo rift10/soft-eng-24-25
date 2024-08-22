@@ -57,7 +57,7 @@ public class Xor {
     byte[] cipherBytes = cipherToBytes(cipher);
     byte[] result = new byte[15];
     for (int i = 0; i < cipher.length(); i++) {
-      result[i] = keySection ^ cipherBytes[i];
+      result[i] = (byte) (keySection ^ cipherBytes[i]);
       keySection = key & ((1 << 8) - 1);
     }
     return result;
