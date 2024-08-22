@@ -44,44 +44,11 @@ public class Xor {
     this.key = key;
   }
 
-  public byte getByte(int index) {
-    return (byte) Integer.parseInt(CIPHERTEXT.substring(index, index+2), 16);
-  }
-
-  public byte[] getByteArray(String text, int length) {
-    byte[] result = new byte[length];
-    for (int i = 0; i < length - 1; i++) {
-        result[i] = getByte(i);
-    }
-    return result;
-  }
-
-  public byte xor(byte b, int i) {
-    return (byte) ((int) b ^ i);
-  }
-
-  public int getBit(int n, int k) {
-    return (n >> k) & 1;
-  }
-
-  public byte[] xorByteArray(byte[] array, int length) {
-    byte[] result = new byte[length];
-    for (int i = 0; i < array.length; i++) {
-      result[i] = xor(array[i], getBit(key, i++));
-    }
-    return result;
-  }
-
-  public String decode(String cipher) {
-    return new String(xorByteArray(getByteArray(cipher, CIPHERTEXT.length()), CIPHERTEXT.length()), StandardCharsets.UTF_8);
-  }
-
-  public String otherDecode(String cipher) {
-    return new String(getByteArray(cipher, CIPHERTEXT.length()), StandardCharsets.UTF_8);
+  public String decode(String ciper) {
+    return new String(cipher, StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(new Xor(567231495).otherDecode(CIPHERTEXT));
   }
 }
