@@ -80,7 +80,7 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(Integer.toBinaryString(new Xor(567231495).xor(CIPHERTEXT)));
+    System.out.println((int) (new Xor(567231495).xor(CIPHERTEXT)));
     // System.out.println(new Xor(567231495).decodeWithUtf8(CIPHERTEXT));
   }
 }
