@@ -66,11 +66,21 @@ public class Xor {
     return result;
   }
 
+  // public String decodeToUtf8(byte[] bytes) {
+    
+  // }
+
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
   }
 
+  public String decodeWithUtf8(String cipher) {
+    return decodeToUtf8(xor(cipher));
+  }
+
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).xor(CIPHERTEXT));
+    // System.out.println(new Xor(567231495).decodeWithUtf8(CIPHERTEXT));
   }
 }
