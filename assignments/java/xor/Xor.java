@@ -58,10 +58,8 @@ public class Xor {
     int keySection = key;
     byte[] cipherBytes = cipherToBytes(cipher);
     byte[] result = new byte[cipher.length() / 2];
-    for (int i = 0; i < cipher.length() / 2 + 1; i++) {
-      if (i % 4 == 0) {
-        keySection = key;
-      }
+    for (int i = 0; i < cipher.length() / 2; i++) {
+      if (i % 4 == 0) keySection = key;
       System.out.println("Iteration: " + i);
       System.out.println("Section of the key: " + keySection);
       System.out.println("Section of the key as binary: " + Integer.toBinaryString(keySection));
