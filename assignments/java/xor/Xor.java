@@ -52,8 +52,8 @@ public class Xor {
     return cipherBytes;
   }
 
-  public static String keyToBits(int key) {
-    return Integer.toBinaryString(key);
+  public static int keyToBits(int key) {
+    return Integer.valueOf(Integer.toBinaryString(key));
   }
 
   // public byte[] xor() {}
@@ -64,6 +64,6 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(keyToBits(Integer.valueOf(567231495)));
+    System.out.println(keyToBits((567231495)));
   }
 }
