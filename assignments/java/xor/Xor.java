@@ -52,8 +52,8 @@ public class Xor {
     return cipherBytes;
   }
 
-  public static int keyToBits(int key) {
-    return Integer.valueOf(Integer.toBinaryString(key));
+  public static String keyToBits(int key) {
+    return Integer.toBinaryString(key);
   }
 
   // public byte[] xor() {}
