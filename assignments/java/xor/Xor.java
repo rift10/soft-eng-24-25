@@ -57,8 +57,8 @@ public class Xor {
   public byte[] xor(String cipher) {
     int keySection = key;
     byte[] cipherBytes = cipherToBytes(cipher);
-    byte[] result = new byte[cipher.length() / 2];
-    for (int i = 0; i < cipher.length() / 2; i++) {
+    byte[] result = new byte[cipher.length() / 2 + 1];
+    for (int i = 0; i < cipher.length() / 2 + 1; i++) {
       if (i % 4 == 0) keySection = key;
       System.out.println("Iteration: " + i);
       System.out.println("Section of the key: " + keySection);
