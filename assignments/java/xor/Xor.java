@@ -44,15 +44,26 @@ public class Xor {
     this.key = key;
   }
 
-  public String decode(String cipher) {
+  public byte[] cipherToBytes(String cipher) {
     byte[] cipherBytes = new byte[cipher.length() / 2];
     for (int i = 0; i < cipher.length() - 3; i += 2) {
       cipherBytes[i] = (byte) Integer.parseInt(cipher.substring(i, i+2), 16);
     }
-    return new String(cipherBytes, StandardCharsets.UTF_8);
+    return cipherBytes;
+  }
+
+  public int keyToBits(int key) {
+    return Integer.valueOf(Integer.toBinaryString(key));
+  }
+
+  public byte[] xor() {}
+
+  public String decode(String cipher) {
+    return new String(, StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
-    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(keyToBits(567231495));
   }
 }
