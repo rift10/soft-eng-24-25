@@ -52,7 +52,7 @@ public class Xor {
     return cipherBytes;
   }
 
-  public int keyToBits(int key) {
+  public static int keyToBits(int key) {
     return Integer.valueOf(Integer.toBinaryString(key));
   }
 
