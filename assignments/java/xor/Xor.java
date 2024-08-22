@@ -74,9 +74,9 @@ public class Xor {
     return new String(xor(cipher), StandardCharsets.UTF_8);
   }
 
-  public String decodeWithUtf8(String cipher) {
-    return decodeToUtf8(xor(cipher));
-  }
+  // public String decodeWithUtf8(String cipher) {
+  //   return decodeToUtf8(xor(cipher));
+  // }
 
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
