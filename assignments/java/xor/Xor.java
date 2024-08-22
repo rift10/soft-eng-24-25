@@ -52,18 +52,22 @@ public class Xor {
     return cipherBytes;
   }
 
-  public static int keyToBits(int key) {
-    return Integer.valueOf(Integer.toBinaryString(key));
+  public byte[] xor(String cipher) {
+    int keySection = key & ((1 << 0) - 1);
+    byte[] cipherBytes = cipherToBytes(cipher);
+    byte[] result = new byte[15];
+    for (int i = 0; i < cipher.length(); i++) {
+      result[i] = keySection ^ cipherBytes[i];
+      keySection = key & ((1 << 8) - 1);
+    }
+    return result;
   }
 
-  // public byte[] xor() {}
-
   public String decode(String cipher) {
-    return new String(cipherToBytes(cipher), StandardCharsets.UTF_8);
+    return new String(xor(cipher), StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(keyToBits((567231495)));
   }
 }
