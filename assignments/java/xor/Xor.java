@@ -62,7 +62,7 @@ public class Xor {
       System.out.println(keySection);
       System.out.println(Integer.toBinaryString(keySection));
       result[i] = (byte) (keySection ^ cipherBytes[i]);
-      keySection = key << 8;
+      keySection = key >> 8;
     }
     return result;
   }
