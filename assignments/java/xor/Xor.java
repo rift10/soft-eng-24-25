@@ -55,8 +55,8 @@ public class Xor {
   public byte[] xor(String cipher) {
     int keySection = key;
     byte[] cipherBytes = cipherToBytes(cipher);
-    byte[] result = new byte[15];
-    for (int i = 0; i < 14; i++) {
+    byte[] result = new byte[30];
+    for (int i = 0; i < 30; i++) {
       result[i] = (byte) (keySection ^ cipherBytes[i]);
       keySection = key & ((1 << 8) - 1);
     }
