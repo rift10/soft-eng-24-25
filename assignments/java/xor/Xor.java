@@ -45,7 +45,7 @@ public class Xor {
   }
 
   public byte[] cipherToBytes(String cipher) {
-    byte[] cipherBytes = new byte[cipher.length() / 2];
+    byte[] cipherBytes = new byte[cipher.length()];
     for (int i = 0; i < cipher.length() - 3; i += 2) {
       cipherBytes[i] = (byte) Integer.parseInt(cipher.substring(i, i+2), 16);
     }
