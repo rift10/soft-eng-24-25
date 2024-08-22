@@ -59,7 +59,7 @@ public class Xor {
   public byte[] xor() {}
 
   public String decode(String cipher) {
-    return new String(, StandardCharsets.UTF_8);
+    return new String(cipherToBytes(cipher), StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
