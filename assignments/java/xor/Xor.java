@@ -56,7 +56,7 @@ public class Xor {
     return Integer.valueOf(Integer.toBinaryString(key));
   }
 
-  public byte[] xor() {}
+  // public byte[] xor() {}
 
   public String decode(String cipher) {
     return new String(cipherToBytes(cipher), StandardCharsets.UTF_8);
