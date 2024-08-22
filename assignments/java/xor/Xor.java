@@ -44,7 +44,7 @@ public class Xor {
     this.key = key;
   }
 
-  public String decode(String ciper) {
+  public String decode(String cipher) {
     return new String(cipher, StandardCharsets.UTF_8);
   }
 
