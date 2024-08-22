@@ -59,7 +59,7 @@ public class Xor {
     byte[] cipherBytes = cipherToBytes(cipher);
     byte[] result = new byte[cipher.length() / 2];
     for (int i = 0; i < cipher.length() / 2; i++) {
-      if ((i-1) % 4 == 0) {
+      if (i % 4 == 0) {
         keySection = key;
       }
       System.out.println("Iteration: " + i);
