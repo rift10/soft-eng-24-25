@@ -45,7 +45,11 @@ public class Xor {
   }
 
   public String decode(String cipher) {
-    return new String(cipher, StandardCharsets.UTF_8);
+    byte[] cipherBytes = new byte[cipher.length() / 2];
+    for (int i = 0; i < cipher.length(); i += 2) {
+      byte[i] = (byte) Integer.parseInt(String.substring(i, i+2), 16);
+    }
+    return new String(cipherBytes, StandardCharsets.UTF_8);
   }
 
   public static void main(String[] argv) throws Exception {
