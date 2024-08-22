@@ -57,10 +57,11 @@ public class Xor {
   public byte[] xor(String cipher) {
     int keySection = key;
     byte[] cipherBytes = cipherToBytes(cipher);
-    byte[] result = new byte[21];
-    for (int i = 0; i < 21; i++) {
+    byte[] result = new byte[cipher.length() / 2];
+    for (int i = 0; i < cipher.length() / 2; i++) {
       result[i] = (byte) (keySection ^ cipherBytes[i]);
       keySection = key & ((1 << 8) - 1);
+      System.out.println(keySection);
     }
     return result;
   }
