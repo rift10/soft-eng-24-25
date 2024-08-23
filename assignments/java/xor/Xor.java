@@ -72,11 +72,11 @@ public class Xor {
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
       byte currentByte = letterBytes[i];
-      while ((currentByte >> numBytes) & 1) {
+      while (((currentByte >> numBytes) & 1) == 1) {
         numBytes++;
       }
       for (int iter = 0; iter < numBytes; i++) {
-        letterBytes[i + iter] = Character.toChars(letterBytes[i + iter]);
+        result[i + iter] = Character.toChars(letterBytes[i + iter]);
       }
     }
     return new String(result);
