@@ -72,7 +72,7 @@ public class Xor {
     char lastResult[] = new char[5];
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
-      char[] result = new char[5]
+      char[] result = new char[5];
       byte currentByte = letterBytes[i];
       while (((currentByte >> numBytes) & 1) == 1) {
         numBytes++;
