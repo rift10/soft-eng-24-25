@@ -69,7 +69,7 @@ public class Xor {
 
   public String decodeToUtf8(byte[] letterBytes) {
     int numBytes = 0;
-    char[][] result = new char[][];
+    char[][] result = new char[21][5];
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
       byte currentByte = letterBytes[i];
