@@ -78,7 +78,7 @@ public class Xor {
         numBytes++;
       }
       for (int iter = 0; iter < numBytes; i++) {
-        result[i + iter] = Character.toChars(letterBytes[i + iter]);
+        result = Character.toChars(letterBytes[i + iter]);
       }
       lastResult = result;
       if (i >= 1) concatWithStream(lastResult, result);
