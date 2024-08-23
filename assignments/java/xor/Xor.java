@@ -69,27 +69,24 @@ public class Xor {
 
   public String decodeToUtf8(byte[] letterBytes) {
     int numBytes = 0;
-    char lastResult[] = new char[5];
+    char[][] result = new char[][];
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
-      char[] result = new char[5];
       byte currentByte = letterBytes[i];
       while (((currentByte >> numBytes) & 1) == 1) {
         numBytes++;
       }
       for (int iter = 0; iter < numBytes; i++) {
-        result = Character.toChars(letterBytes[i + iter]);
+        result[i + iter] = Character.toChars(letterBytes[i + iter]);
       }
-      lastResult = result;
-      if (i >= 1) concatWithStream(lastResult, result);
     }
     return new String(result);
   }
 
-  public char[] concatWithStream(char[] array1, char[] array2) {
-    return Stream.concat(Arrays.stream(array1), Arrays.stream(array2))
-      .toArray(size -> (char[]) Array.newInstance(array1.getClass().getComponentType(), size));
-  }
+  // public char[] concatWithStream(char[] array1, char[] array2) {
+  //   return Stream.concat(Arrays.stream(array1), Arrays.stream(array2))
+  //     .toArray(size -> (char[]) Array.newInstance(array1.getClass().getComponentType(), size));
+  // }
 
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
