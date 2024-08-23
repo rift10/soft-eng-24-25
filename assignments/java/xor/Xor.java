@@ -84,14 +84,10 @@ public class Xor {
     for (int j = 0; j < arr.length; j++) {
       for (int k = 0; k < arr[j].length; k++) {
         temp = arr[j][k];
+      }
     }
     return new String(resultArray);
   }
-
-  // public char[] concatWithStream(char[] array1, char[] array2) {
-  //   return Stream.concat(Arrays.stream(array1), Arrays.stream(array2))
-  //     .toArray(size -> (char[]) Array.newInstance(array1.getClass().getComponentType(), size));
-  // }
 
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
