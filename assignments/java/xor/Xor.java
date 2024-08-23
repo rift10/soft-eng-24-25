@@ -76,9 +76,13 @@ public class Xor {
       while (((currentByte >> numBytes) & 1) == 1) {
         numBytes++;
       }
-      for (int iter = 0; iter < numBytes; i++) {
-        result[i + iter] = Character.toChars(letterBytes[i + iter]);
+      for (int j = 0; j < numBytes; j++) {
+        result[i + j] = Character.toChars(letterBytes[i + j]);
       }
+    }
+    for (int j = 0; j < arr.length; j++) {
+      for (int k = 0; k < arr[j].length; k++) {
+        temp = arr[j][k];
     }
     return new String(result);
   }
