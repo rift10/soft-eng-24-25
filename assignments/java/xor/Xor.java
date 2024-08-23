@@ -80,11 +80,12 @@ public class Xor {
         result[i + j] = Character.toChars(letterBytes[i + j]);
       }
     }
+    char[] resultArray = new char[21*5];
     for (int j = 0; j < arr.length; j++) {
       for (int k = 0; k < arr[j].length; k++) {
         temp = arr[j][k];
     }
-    return new String(result);
+    return new String(resultArray);
   }
 
   // public char[] concatWithStream(char[] array1, char[] array2) {
