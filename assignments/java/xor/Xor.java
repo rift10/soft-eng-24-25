@@ -99,7 +99,7 @@ public class Xor {
     System.out.println(letterBytes.length);
     for (int i = 0; i < letterBytes.length; i++) {
       byte currentByte = letterBytes[i];
-      while (((currentByte >> numBytes) & 1) == 1) {
+      while (((currentByte << numBytes) & 1) == 1) {
         System.out.println(((currentByte >> numBytes) & 1));
         numBytes++;
       }
