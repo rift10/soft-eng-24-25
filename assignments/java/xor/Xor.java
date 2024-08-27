@@ -67,27 +67,35 @@ public class Xor {
     return result;
   }
 
+  // public String decodeToUtf8(byte[] letterBytes) {
+  //   int numBytes = 0;
+  //   char[][] result = new char[21][5];
+  //   for (int i = 0; i < letterBytes.length; i += numBytes) {
+  //     numBytes = 0;
+  //     byte currentByte = letterBytes[i];
+  //     while (((currentByte >> numBytes) & 1) == 1) {
+  //       numBytes++;
+  //     }
+  //     for (int j = 0; j < numBytes; j++) {
+  //       result[i + j] = Character.toChars(letterBytes[i + j]);
+  //       System.out.println(Character.toChars(letterBytes[i + j]));
+  //     }
+  //   }
+  //   char[] resultArray = new char[21*5];
+  //   for (int j = 0; j < result.length; j++) {
+  //     for (int k = 0; k < result[j].length; k++) {
+  //       resultArray[j*k] = result[j][k];
+  //     }
+  //   }
+  //   return new String(resultArray);
+  // }
+
   public String decodeToUtf8(byte[] letterBytes) {
-    int numBytes = 0;
-    char[][] result = new char[21][5];
-    for (int i = 0; i < letterBytes.length; i += numBytes) {
-      numBytes = 0;
-      byte currentByte = letterBytes[i];
-      while (((currentByte >> numBytes) & 1) == 1) {
-        numBytes++;
-      }
-      for (int j = 0; j < numBytes; j++) {
-        result[i + j] = Character.toChars(letterBytes[i + j]);
-        System.out.println(Character.toChars(letterBytes[i + j]));
-      }
+    char[] result = new char[21];
+    for (int i = 0; i < letterBytes.length; i++) {
+      result[i] = Character.toChars(letterBytes[i]);
+      System.out.println(Character.toChars(letterBytes[i]));
     }
-    char[] resultArray = new char[21*5];
-    for (int j = 0; j < result.length; j++) {
-      for (int k = 0; k < result[j].length; k++) {
-        resultArray[j*k] = result[j][k];
-      }
-    }
-    return new String(resultArray);
   }
 
   public String decode(String cipher) {
