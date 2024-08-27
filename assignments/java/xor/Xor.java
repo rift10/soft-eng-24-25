@@ -81,9 +81,9 @@ public class Xor {
       }
     }
     char[] resultArray = new char[21*5];
-    for (int j = 0; j < arr.length; j++) {
-      for (int k = 0; k < arr[j].length; k++) {
-        temp = arr[j][k];
+    for (int j = 0; j < result.length; j++) {
+      for (int k = 0; k < result[j].length; k++) {
+        resultArray = result[j][k];
       }
     }
     return new String(resultArray);
