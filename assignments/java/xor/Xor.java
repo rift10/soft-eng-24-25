@@ -103,7 +103,13 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
-    return String.valueOf(resultArray);
+    StringBuilder sb = new StringBuilder();
+ 
+    for (int i = 0; i < resultArray.length; i++) {
+        sb.append(resultArray[i]);
+    }
+ 
+    return sb.toString();
   }
 
   public String decode(String cipher) {
