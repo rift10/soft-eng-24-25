@@ -1,5 +1,5 @@
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.*;
 
 public class Xor {
 
@@ -103,13 +103,10 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
-    StringBuilder sb = new StringBuilder();
- 
-    for (int i = 0; i < resultArray.length; i++) {
-        sb.append(resultArray[i]);
-    }
- 
-    return sb.toString();
+
+    return Stream.of(resultArray)
+      .map(resultArray -> new String(resultArray))
+      .collect(Collectors.joining());
   }
 
   public String decode(String cipher) {
