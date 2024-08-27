@@ -96,6 +96,7 @@ public class Xor {
     int numBytes = 0;
     char[][] result = new char[21] [1];
     char[] resultArray = new char[21*5];
+    System.out.println(letterBytes.length);
     for (int i = 0; i < letterBytes.length; i++) {
       byte currentByte = letterBytes[i];
       while (((currentByte >> numBytes) & 1) == 1) {
