@@ -96,6 +96,7 @@ public class Xor {
       result[i] = Character.toChars(letterBytes[i]);
       System.out.println(Character.toChars(letterBytes[i]));
     }
+    return result;
   }
 
   public String decode(String cipher) {
