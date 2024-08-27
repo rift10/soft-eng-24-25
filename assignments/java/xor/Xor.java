@@ -97,13 +97,12 @@ public class Xor {
       result[i] = Character.toChars((int) letterBytes[i]);
       System.out.println(Character.toChars(letterBytes[i]));
     }
-
-    for (int j = 0; j < result.length; j++) {
-      for (int k = 0; k < result[j].length; k++) {
-        resultArray[j*k] = result[j][k];
+    for (int i = 0; i < result.length; i++) {
+      for (int j = 0; j < result[i].length; j++) {
+        resultArray[i*j] = result[i][j];
       }
     }
-    return new String(resultArray);
+    return String.valueOf(resultArray);
   }
 
   public String decode(String cipher) {
