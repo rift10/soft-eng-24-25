@@ -103,7 +103,7 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
-    return toString(resultArray);
+    return String.valueOf(resultArray);
   }
 
   public String decode(String cipher) {
