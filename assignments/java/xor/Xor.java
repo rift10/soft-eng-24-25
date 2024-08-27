@@ -94,7 +94,7 @@ public class Xor {
 
   public String decodeToUtf8(byte[] letterBytes) {
     int numBytes = 0;
-    char[][] result = new char[21] [5];
+    char[][] result = new char[21] [4];
     char[] resultArray = new char[21*5];
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars((int) letterBytes[i]);
@@ -105,10 +105,7 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
-
-    return Stream.of(resultArray)
-      .map(res -> new String(resultArray))
-      .collect(Collectors.joining());
+    return new String(resultArray);
   }
 
   public String decode(String cipher) {
