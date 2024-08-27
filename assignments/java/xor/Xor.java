@@ -107,7 +107,7 @@ public class Xor {
     }
 
     return Stream.of(resultArray)
-      .map(resultArray -> new String(resultArray))
+      .map(res -> new String(resultArray))
       .collect(Collectors.joining());
   }
 
