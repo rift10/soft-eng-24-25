@@ -104,6 +104,7 @@ public class Xor {
         numBytes++;
       }
     }
+    System.out.println(numBytes);
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars((int) letterBytes[i]);
       System.out.println(Character.toChars(letterBytes[i]));
