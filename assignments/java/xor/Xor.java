@@ -126,7 +126,7 @@ public class Xor {
   }
 
   public String decodeWithUtf8(String cipher) {
-    return decodeToUtf8(new String("Bit twiddling is fun!").getBytes(StandardCharsets.UTF_8));
+    return decodeToUtf8(new String("hello world").getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
