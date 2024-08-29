@@ -122,7 +122,7 @@ public class Xor {
   }
 
   public String decodeWithUtf8(String cipher) {
-    return decodeToUtf8(cipherToBytes("(づ ◕‿◕ )づ"));
+    return decodeToUtf8(cipherToBytes("٩(◕‿◕)۶"));
   }
 
   public static void main(String[] argv) throws Exception {
