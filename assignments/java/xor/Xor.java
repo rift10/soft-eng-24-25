@@ -57,10 +57,6 @@ public class Xor {
     return cipherBytes;
   }
 
-  // public byte[] encodeToUtf8(String text) {
-    
-  // }
-
   public byte[] xor(String cipher) {
     int keySection = key;
     byte[] cipherBytes = cipherToBytes(cipher);
@@ -126,7 +122,7 @@ public class Xor {
   }
 
   public String decodeWithUtf8(String cipher) {
-    return decodeToUtf8(new String("hello world").getBytes(StandardCharsets.UTF_8));
+    return decodeToUtf8(new String("(づ ◕‿◕ )づ").getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
