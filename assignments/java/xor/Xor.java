@@ -57,9 +57,9 @@ public class Xor {
     return cipherBytes;
   }
 
-  public byte[] encodeToUtf8(String text) {
+  // public byte[] encodeToUtf8(String text) {
     
-  }
+  // }
 
   public byte[] xor(String cipher) {
     int keySection = key;
