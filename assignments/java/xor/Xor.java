@@ -118,7 +118,7 @@ public class Xor {
   }
 
   public String decode(String cipher) {
-    byte[] b = {xF0, x9F, x98, xB1};
+    byte[] b = {0, 9, 98, 1};
     return new String(b, StandardCharsets.UTF_8);
   }
 
