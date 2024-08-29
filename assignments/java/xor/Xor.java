@@ -94,7 +94,7 @@ public class Xor {
 
   public String decodeToUtf8(byte[] letterBytes) {
     int numBytes = 0;
-    char[][] result = new char[21] [1];
+    char[][] result = new char[21][1];
     char[] resultArray = new char[21*5];
     System.out.println(letterBytes.length);
     for (int i = 0; i < letterBytes.length; i++) {
@@ -104,7 +104,7 @@ public class Xor {
         numBytes++;
       }
     }
-    System.out.println(numBytes);
+    System.out.println("numBytes: " + numBytes);
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars((int) letterBytes[i]);
       System.out.println(Character.toChars(letterBytes[i]));
@@ -118,7 +118,7 @@ public class Xor {
   }
 
   public String decode(String cipher) {
-    return new String(xor(cipher), StandardCharsets.UTF_8);
+    return new String(U+1F44F, StandardCharsets.UTF_8);
   }
 
   public String decodeWithUtf8(String cipher) {
@@ -126,7 +126,7 @@ public class Xor {
   }
 
   public static void main(String[] argv) throws Exception {
-    // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
     System.out.println(new Xor(567231495).decodeWithUtf8(CIPHERTEXT));
   }
 }
