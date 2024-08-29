@@ -118,7 +118,7 @@ public class Xor {
   }
 
   public String decode(String cipher) {
-    return new String(xor(cipher), StandardCharsets.UTF_8);
+    return new String(new byte[4] {\xF0\x9F\x98\xB1}, StandardCharsets.UTF_8);
   }
 
   public String decodeWithUtf8(String cipher) {
@@ -126,7 +126,7 @@ public class Xor {
   }
 
   public static void main(String[] argv) throws Exception {
-    // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
     System.out.println(new Xor(567231495).decodeWithUtf8(CIPHERTEXT));
   }
 }
