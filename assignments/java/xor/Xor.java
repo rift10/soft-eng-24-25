@@ -71,12 +71,12 @@ public class Xor {
 
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     char[][] result = new char[letterBytes.length][1];
+    String resultString = new String("");
+
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars(letterBytes[i]);
-      // System.out.println(Character.toChars(letterBytes[i]));
     }
 
-    String resultString = new String();
     for (char[] element : result) {
       resultString.concat(new String(element));
       System.out.println(new String(element));
