@@ -69,6 +69,22 @@ public class Xor {
     return result;
   }
 
+  public String decodeTOUtf8(byte[] letterBytes) {
+    char[][] result = new char[letterBytes.length][4];
+    String resultString = new String("a");
+    int numBytes = 0;
+
+    for (int i = 0; i < letterBytes.length; i += numBytes) {
+      result[i] = Character.toChars(letterBytes[i]);
+    }
+
+    for (char[] element : result) {
+      resultString.concat(new String(element));
+    }
+
+    return new String();
+  }
+
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     char[][] result = new char[letterBytes.length][1];
     String resultString = new String("a");
@@ -78,7 +94,7 @@ public class Xor {
     }
 
     for (char[] element : result) {
-      resultString.concat(new String(element));
+      resultString.concat("a");
       System.out.println(new String(element));
     }
 
