@@ -107,7 +107,7 @@ public class Xor {
 
     String res = new String();
     for (char[] element : result) {
-      res.concat(element);
+      res.concat(new String(element));
     }
 
     System.out.println(res);
