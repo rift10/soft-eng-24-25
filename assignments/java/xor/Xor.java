@@ -93,6 +93,7 @@ public class Xor {
       result[i] = Character.toChars(letterBytes[i]);
     }
 
+    System.out.println(result.length);
     for (int i = 0; i < result.length; i++) {
       resultString.concat("a");
       // System.out.println(new String(element));
