@@ -73,8 +73,8 @@ public class Xor {
     int numBytes = 0;
 
     for (int i = 0; i < letterBytes.length; i += numBytes) {
-      while (letterBytes[i] & 1 << 3) {
-        System.out.printlnt(letterBytes[i] + ", " + 1 << 3 + ", " + letterBytes[i] & 1 << 3);
+      while ((letterBytes[i] & 1 << 3) = 0) {
+        System.out.printlnt(letterBytes[i] + ", " + Integer.toBinaryString(1 << 3) + ", " + letterBytes[i] & 1 << 3);
         // result[i] = Character.toChars(letterBytes[i]);
       }
     }
