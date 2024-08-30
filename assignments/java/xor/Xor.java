@@ -1,6 +1,5 @@
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.lang.String;
 
 public class Xor {
 
@@ -94,7 +93,7 @@ public class Xor {
 
     System.out.println(result.length);
     for (int i = 0; i < result.length; i++) {
-      resultString.concat("a");
+      resultString += "a";
       // System.out.println(new String(element));
     }
 
