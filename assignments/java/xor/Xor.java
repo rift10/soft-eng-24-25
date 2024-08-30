@@ -82,8 +82,8 @@ public class Xor {
       System.out.println(new String(element));
     }
 
-    System.out.println(resultString);
     System.out.println(new String(result[1]));
+    System.out.println(resultString);
     return new String();
   }
 
