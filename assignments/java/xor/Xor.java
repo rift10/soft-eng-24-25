@@ -118,6 +118,6 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(new Xor(567231495).decodeWithUtf8(text));
+    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
   }
 }
