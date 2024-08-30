@@ -104,7 +104,7 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
-    System.out.println(resultArray[1]);
+    System.out.println(resultArray[2]);
     return new String(resultArray);
   }
 
