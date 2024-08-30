@@ -101,7 +101,7 @@ public class Xor {
     }
     for (int i = 0; i < result.length; i++) {
       for (int j = 0; j < result[i].length; j++) {
-        resultArray[i*j] = result[i][j];
+        resultArray[i*j] = result[j][i];
       }
     }
     System.out.println(new String(resultArray).getBytes(StandardCharsets.UTF_8));
