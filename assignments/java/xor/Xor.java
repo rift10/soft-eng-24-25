@@ -99,11 +99,11 @@ public class Xor {
       result[i] = Character.toChars(letterBytes[i]);
       // System.out.println(Character.toChars(letterBytes[i]));
     }
-    for (int i = 0; i < result.length; i++) {
-      for (int j = 0; j < result[i].length; j++) {
-        resultArray[i*j] = result[i][j];
-      }
-    }
+    // for (int i = 0; i < result.length; i++) {
+    //   for (int j = 0; j < result[i].length; j++) {
+    //     resultArray[i*j] = result[i][j];
+    //   }
+    // }
 
     String res = new String();
     for (char element : resultArray) {
@@ -111,8 +111,8 @@ public class Xor {
     }
 
     System.out.println(res);
-    // System.out.println(new String(result[]));
-    return new String(resultArray);
+    System.out.println(new String(result[1]));
+    return new String();
   }
 
   public String decode(String cipher) {
