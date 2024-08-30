@@ -105,10 +105,10 @@ public class Xor {
     //   }
     // }
 
-    // String res = new String();
-    // for (char element : resultArray) {
-    //   res.concat(element);
-    // }
+    String res = new String();
+    for (char[] element : result) {
+      res.concat(element);
+    }
 
     System.out.println(res);
     System.out.println(new String(result[1]));
