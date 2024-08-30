@@ -69,48 +69,20 @@ public class Xor {
     return result;
   }
 
-  // public String decodeToUtf8(byte[] letterBytes) {
-  //   int numBytes = 0;
-  //   char[][] result = new char[21][5];
-  //   for (int i = 0; i < letterBytes.length; i += numBytes) {
-  //     numBytes = 0;
-  //     byte currentByte = letterBytes[i];
-  //     while (((currentByte >> numBytes) & 1) == 1) {
-  //       numBytes++;
-  //     }
-  //     for (int j = 0; j < numBytes; j++) {
-  //       result[i + j] = Character.toChars(letterBytes[i + j]);
-  //       System.out.println(Character.toChars(letterBytes[i + j]));
-  //     }
-  //   }
-  //   char[] resultArray = new char[21*5];
-  //   for (int j = 0; j < result.length; j++) {
-  //     for (int k = 0; k < result[j].length; k++) {
-  //       resultArray[j*k] = result[j][k];
-  //     }
-  //   }
-  //   return new String(resultArray);
-  // }
-
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     char[][] result = new char[21][1];
-    char[] resultArray = new char[21*1];
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars(letterBytes[i]);
       // System.out.println(Character.toChars(letterBytes[i]));
     }
-    // for (int i = 0; i < result.length; i++) {
-    //   for (int j = 0; j < result[i].length; j++) {
-    //     resultArray[i*j] = result[i][j];
-    //   }
-    // }
 
-    String res = new String();
+    String resultString = new String();
     for (char[] element : result) {
-      res.concat(new String(element));
+      resultString.concat(new String(element));
+      System.out.println(new String(element));
     }
 
-    System.out.println(res);
+    System.out.println(resultString);
     System.out.println(new String(result[1]));
     return new String();
   }
