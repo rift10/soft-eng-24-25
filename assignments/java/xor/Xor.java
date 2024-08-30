@@ -104,12 +104,13 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
+
     String res = new String();
     for (char[] element : result) {
       res.concat(new String(element));
     }
-    System.out.println(resultArray[0]);
-    System.out.println(result[1]);
+
+    System.out.println(res);
     return new String(resultArray);
   }
 
