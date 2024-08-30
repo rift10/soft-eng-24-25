@@ -111,13 +111,13 @@ public class Xor {
     return new String(xor(cipher), StandardCharsets.UTF_8);
   }
 
-  public String decodeWithUtf8(String cipher) {
-    return decodeOneByteToUtf8(new String("hello world").getBytes(StandardCharsets.UTF_8));
+  public String decodeWithUtf8(String text) {
+    return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
     // return decodeToUtf8(new String("(づ ◕‿◕ )づ").getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(new Xor(567231495).decodeWithUtf8(CIPHERTEXT));
+    System.out.println(new Xor(567231495).decodeWithUtf8(text));
   }
 }
