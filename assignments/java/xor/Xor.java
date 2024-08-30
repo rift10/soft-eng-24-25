@@ -104,6 +104,10 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
+    String res = new String();
+    for (element : result) {
+      res.concat(element);
+    }
     System.out.println(resultArray[0]);
     System.out.println(result[1]);
     return new String(resultArray);
