@@ -95,7 +95,7 @@ public class Xor {
 
     for (int i = 0; i < result.length; i++) {
       resultString.concat("a");
-      System.out.println(new String(element));
+      // System.out.println(new String(element));
     }
 
     System.out.println(new String(result[1]));
