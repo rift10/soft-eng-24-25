@@ -71,7 +71,7 @@ public class Xor {
 
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     char[][] result = new char[letterBytes.length][1];
-    String resultString = new String("");
+    String resultString = new String("a");
 
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars(letterBytes[i]);
