@@ -104,7 +104,7 @@ public class Xor {
         resultArray[i*j] = result[i][j];
       }
     }
-    System.out.println(new String(resultArray, StandardCharsets.UTF_8));
+    System.out.println(new String(resultArray));
     return new String(resultArray);
   }
 
