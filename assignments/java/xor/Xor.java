@@ -68,25 +68,6 @@ public class Xor {
     return result;
   }
 
-  public String decodeToUtf8(byte[] letterBytes) {
-    char[][] result = new char[letterBytes.length][4];
-    String resultString = new String("");
-    int numBytes = 0;
-
-    for (int i = 0; i < letterBytes.length; i += numBytes) {
-      while ((letterBytes[i] & (1 << 3)) == 0) {
-        System.out.println(letterBytes[i] + ", " + Integer.toBinaryString(1 << 3) + ", " + Integer.toBinaryString(letterBytes[i] & 1 << 3));
-        // result[i] = Character.toChars(letterBytes[i]);
-      }
-    }
-
-    for (int i = 0; i < result.length; i++) {
-      resultString += new String(result[i]);
-    }
-
-    return resultString;
-  }
-
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
 
@@ -97,17 +78,32 @@ public class Xor {
     return sb.toString();
   }
 
+  public String decodeToUtf8(byte[] letterBytes) {
+    StringBuilder sb = new StringBuilder();
+    int numBytes = 0;
+
+    for (int i = 0; i < letterBytes.length; i += numBytes) {
+      while ((letterBytes[i] & (1 << 3)) == 0) {
+        System.out.println(letterBytes[i] + ", " + Integer.toBinaryString(1 << 3) + ", " + Integer.toBinaryString(letterBytes[i] & 1 << 3));
+      }
+    }
+
+    return sb.toString();
+  }
+
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
   }
 
   public String decodeWithUtf8(String text) {
-    return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
-    // return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    // return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
     System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    // System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
+
   }
 }
