@@ -89,7 +89,7 @@ public class Xor {
 
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
-    
+
     for (int i = 0; i < letterBytes.length; i++) {
       sb.append(result[i]);
     }
@@ -102,8 +102,8 @@ public class Xor {
   }
 
   public String decodeWithUtf8(String text) {
-    // return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
-    return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    // return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
