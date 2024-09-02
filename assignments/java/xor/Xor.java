@@ -89,13 +89,8 @@ public class Xor {
 
   public String decodeOneByteToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
-    char[][] result = new char[letterBytes.length][1];
-
+    
     for (int i = 0; i < letterBytes.length; i++) {
-      result[i] = Character.toChars(letterBytes[i]);
-    }
-
-    for (int i = 0; i < result.length; i++) {
       sb.append(result[i]);
     }
 
@@ -107,12 +102,12 @@ public class Xor {
   }
 
   public String decodeWithUtf8(String text) {
-    return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
-    // return decodeToUtf8(new String("(づ ◕‿◕ )づ").getBytes(StandardCharsets.UTF_8));
+    // return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
   }
 }
