@@ -1,5 +1,6 @@
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.lang.StringBuilder;
 
 public class Xor {
 
@@ -87,18 +88,18 @@ public class Xor {
   }
 
   public String decodeOneByteToUtf8(byte[] letterBytes) {
+    StringBuilder sb = new StringBuilder();
     char[][] result = new char[letterBytes.length][1];
-    String resultString = new String("");
 
     for (int i = 0; i < letterBytes.length; i++) {
       result[i] = Character.toChars(letterBytes[i]);
     }
 
     for (int i = 0; i < result.length; i++) {
-      resultString += new String(result[i]);
+      sb.append(result[i]);
     }
 
-    return resultString;
+    return sb.toString();
   }
 
   public String decode(String cipher) {
@@ -112,6 +113,6 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
   }
 }
