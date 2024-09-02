@@ -91,7 +91,7 @@ public class Xor {
     StringBuilder sb = new StringBuilder();
 
     for (int i = 0; i < letterBytes.length; i++) {
-      sb.append(result[i]);
+      sb.append(Character.toChars(letterBytes[i]));
     }
 
     return sb.toString();
