@@ -82,7 +82,7 @@ public class Xor {
     StringBuilder sb = new StringBuilder();
     int numBytes = 0;
     for (int i = 0; i < letterBytes.length; i++) {
-    System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (1 << 3) + ", result: " +  (letterBytes[i] & (1 << 3)));
+    System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (1 << 3) + ", result: " +  (letterBytes[i] & (1 << 3)) + ", boolean: " + ((letterBytes[i] & (1 << 3)) == 0));
     }
 
     // for (int i = 0; i < letterBytes.length; i += numBytes) {
