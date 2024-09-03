@@ -90,7 +90,8 @@ public class Xor {
     //   }
     }
 
-    return sb.toString();
+    return new String();
+    // return sb.toString();
   }
 
   public String decode(String cipher) {
