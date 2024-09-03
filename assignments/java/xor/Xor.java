@@ -88,7 +88,7 @@ public class Xor {
     //     System.out.println(letterBytes[i] + ", " + Integer.toBinaryString(1 << 3) + ", " + Integer.toBinaryString(letterBytes[i] & 1 << 3));
     //     numBytes++;
     //   }
-    }
+    // }
 
     return new String();
     // return sb.toString();
