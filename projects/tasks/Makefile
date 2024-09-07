@@ -1,4 +1,4 @@
-MAIN_CLASS = $(error Need to set MAIN_CLASS to the name of a class)
+MAIN_CLASS = "Main"
 
 all: build run
 
