@@ -85,7 +85,7 @@ public class Xor {
       System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (1 << 3) + ", result: " +  (letterBytes[i] & (1 << 3)) + ", boolean: " + ((letterBytes[i] & (1 << 3)) == 0));
     }
 
-    int[] byteMasks = new int [0b10000000, 0b01000000, 0b00100000, 0b00010000];
+    int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000};
 
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       while ((~letterBytes[i] & byteMasks[i]) == 1) {
