@@ -84,7 +84,7 @@ public class Xor {
     int numBytes = 0;
     System.out.println(letterBytes.length);
     for (int i = 0; i < letterBytes.length; i++) {
-      for (int j = 0, j < byteMasks.length; j++)
+      for (int j = 0; j < byteMasks.length; j++)
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + Integer.toBinaryString(byteMasks[j]) + ", result: " +  (letterBytes[i] & (byteMasks[j])) + ", boolean: " + ((letterBytes[i] & (byteMasks[j])) == 1));
     }
 
