@@ -82,15 +82,17 @@ public class Xor {
     StringBuilder sb = new StringBuilder();
     int numBytes = 0;
     for (int i = 0; i < letterBytes.length; i++) {
-    System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (1 << 3) + ", result: " +  (letterBytes[i] & (1 << 3)) + ", boolean: " + ((letterBytes[i] & (1 << 3)) == 0));
+      System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (1 << 3) + ", result: " +  (letterBytes[i] & (1 << 3)) + ", boolean: " + ((letterBytes[i] & (1 << 3)) == 0));
     }
 
-    // for (int i = 0; i < letterBytes.length; i += numBytes) {
-    //   while ((letterBytes[i] & (1 << 3)) == 0) {
-    //     System.out.println(letterBytes[i] + ", " + Integer.toBinaryString(1 << 3) + ", " + Integer.toBinaryString(letterBytes[i] & 1 << 3));
-    //     numBytes++;
-    //   }
-    // }
+    int[] byteMasks = new int[4] {0b10000000, 0b01000000, 0b00100000, 0b00010000};
+
+    for (int i = 0; i < letterBytes.length; i += numBytes) {
+      while ((~letterBytes[i] & byteMasks[i]) == 1) {
+        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
+        numBytes++;
+      }
+    }
 
     return new String();
     // return sb.toString();
