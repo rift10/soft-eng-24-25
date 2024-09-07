@@ -82,21 +82,21 @@ public class Xor {
   public String decodeToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
     int numBytes = 0;
-    // for (int i = 0; i < letterBytes.length; i++) {
-    //   System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (1 << 3) + ", result: " +  (letterBytes[i] & (1 << 3)) + ", boolean: " + ((letterBytes[i] & (1 << 3)) == 0));
-    // }
-
-    for (int i = 0; i < letterBytes.length - 1; i += numBytes + 1) {
-      while ((~letterBytes[i] & byteMasks[i]) == 1) {
+    for (int i = 0; i < letterBytes.length; i++) {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
-        numBytes++;
-      }
-      // Characters.toChars();
     }
 
-    return new String();
-    // return sb.toString();
-  }
+  //   for (int i = 0; i < letterBytes.length - 1; i += numBytes + 1) {
+  //     while ((~letterBytes[i] & byteMasks[i]) == 1) {
+  //       System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
+  //       numBytes++;
+  //     }
+  //     // Characters.toChars();
+  //   }
+
+  //   return new String();
+  //   // return sb.toString();
+  // }
 
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
