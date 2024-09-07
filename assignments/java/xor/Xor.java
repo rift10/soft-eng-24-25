@@ -94,7 +94,7 @@ public class Xor {
   //     // Characters.toChars();
   //   }
 
-  //   return new String();
+    return new String();
   //   // return sb.toString();
   }
 
