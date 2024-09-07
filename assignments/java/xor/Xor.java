@@ -96,7 +96,7 @@ public class Xor {
 
   //   return new String();
   //   // return sb.toString();
-  // }
+  }
 
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
