@@ -125,6 +125,6 @@ public class Xor {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
     System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
     System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
-    System.out.println(new Xor(567231495).decodeWithUtf8("😁😱"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("😁😱😪🤩"));
   }
 }
