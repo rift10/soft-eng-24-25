@@ -93,21 +93,21 @@ public class Xor {
       }
     }
 
-    for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
-      while ((letterBytes[i] & byteMasks[numBytes]) == 1) {
-        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-        ", checker: " + Integer.toBinaryString(byteMasks[numBytes]) + 
-        ", result: " +  ((letterBytes[i] & (byteMasks[numBytes])) >>> numBytes) +
-         ", boolean: " + (((letterBytes[i] & (byteMasks[numBytes])) >>> numBytes) == 1));
-        numBytes++;
-      }
-      codePoint = 0;
-      for (int j = 0; j < numBytes - 1; j++) {
-        codePoint &= letterBytes[i + j];
-      }
-      // sb.append(Character.toChars(codePoint));
-      numBytes = 0;
-    }
+    // for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
+    //   while ((letterBytes[i] & byteMasks[numBytes]) == 1) {
+    //     System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
+    //     ", checker: " + Integer.toBinaryString(byteMasks[numBytes]) + 
+    //     ", result: " +  ((letterBytes[i] & (byteMasks[numBytes])) >>> numBytes) +
+    //      ", boolean: " + (((letterBytes[i] & (byteMasks[numBytes])) >>> numBytes) == 1));
+    //     numBytes++;
+    //   }
+    //   codePoint = 0;
+    //   for (int j = 0; j < numBytes - 1; j++) {
+    //     codePoint &= letterBytes[i + j];
+    //   }
+    //   // sb.append(Character.toChars(codePoint));
+    //   numBytes = 0;
+    // }
 
     return new String();
     // return sb.toString();
