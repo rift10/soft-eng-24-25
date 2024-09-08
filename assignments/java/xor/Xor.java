@@ -100,15 +100,12 @@ public class Xor {
       numBytes = 0;
       if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 0) {
         numBytes = 1;
-          // System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-          // ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
       } else {
         while (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
-          // System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-          // ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
           numBytes++;
         }
       }
+
       System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
       ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
       System.out.println("numBytes: " + numBytes + ", i: " + i);
@@ -154,8 +151,8 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    // System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
-    System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    // System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
 
   }
 }
