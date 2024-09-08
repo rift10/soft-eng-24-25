@@ -88,8 +88,8 @@ public class Xor {
       for (int j = 0; j < byteMasks.length; j++) {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
         ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
-        ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> j) +
-         ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> j) == 1));
+        ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> j+1) +
+         ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> j+1) == 1));
       }
     }
 
