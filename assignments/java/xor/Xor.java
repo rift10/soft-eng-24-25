@@ -89,6 +89,7 @@ public class Xor {
  
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
+      codePoint = 0;
       if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 0) {
         numBytes = 1;
       } else {
