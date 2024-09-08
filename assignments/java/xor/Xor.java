@@ -101,7 +101,7 @@ public class Xor {
     //   }
     //   // sb.append(Character.toChars(codePoint));
     //   numBytes = 0;
-    }
+    // }
 
     return new String();
     // return sb.toString();
