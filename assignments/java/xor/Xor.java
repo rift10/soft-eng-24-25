@@ -83,19 +83,10 @@ public class Xor {
 
   public String decodeToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
-    int numBytes = 1;
+    int numBytes = 0;
     int codePoint = 0;
     System.out.println(letterBytes.length);
-    
-    // for (int i = 0; i < letterBytes.length; i++) {
-    //   for (int j = 0; j < byteMasks.length; j++) {
-    //     System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-    //     ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
-    //     ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> 7 - j) +
-    //      ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> 7 - j) == 1));
-    //   }
-    // }
-
+ 
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
       if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 0) {
@@ -151,8 +142,8 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
-    // System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
+    // System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
 
   }
 }
