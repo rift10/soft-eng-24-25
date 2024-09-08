@@ -111,10 +111,12 @@ public class Xor {
       }
 
       System.out.println("numBytes: " + numBytes + ", i: " + i);
+
       codePoint = letterBytes[i] & firstByteMasks[numBytes - 1];
       for (int j = 0; j < numBytes - 1; j++) {
-        codePoint = (codePoint << 6 | (letterBytes[i++] & 0b00111111));
+        codePoint = (codePoint << 6 | (letterBytes[j] & 0b00111111));
       }
+
       sb.append(Character.toChars(codePoint));
     }
 
