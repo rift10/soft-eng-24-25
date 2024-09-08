@@ -42,7 +42,7 @@ public class Xor {
   // and decryption are the same process.)
 
   private int key;
-  private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000};
+  private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000, 0b00001000};
   private int[] firstByteMasks = {0b01111111, 0b00011111, 0b00001111, 0b00000111};
 
   public Xor(int key) {
@@ -125,6 +125,6 @@ public class Xor {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
     System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
     System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
-    System.out.println(new Xor(567231495).decodeWithUtf8("😁😱😪"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("😁😱"));
   }
 }
