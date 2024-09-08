@@ -93,15 +93,15 @@ public class Xor {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
         numBytes++;
       }
-      char[] codePoint = new char[numBytes];
+      byte[] codePoint = new byte[numBytes];
       for (int j = 0; j < numBytes - 1; j++) {
         codePoint[j] = letterBytes[i + j];
       }
-      Character.toChars(codePoint);
+      sb.append(Character.toChars(codePoint));
     }
 
-    return new String();
-    // return sb.toString();
+    // return new String();
+    return sb.toString();
   }
 
   public String decode(String cipher) {
