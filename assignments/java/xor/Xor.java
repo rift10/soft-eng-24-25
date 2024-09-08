@@ -97,7 +97,7 @@ public class Xor {
       for (int j = 0; j < numBytes - 1; j++) {
         codePoint[j] = letterBytes[i + j];
       }
-      sb.append(Character.toChars(codePoint));
+      sb.append(Character.toChars((int) codePoint));
     }
 
     // return new String();
