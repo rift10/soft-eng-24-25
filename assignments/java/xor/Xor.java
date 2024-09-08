@@ -85,30 +85,30 @@ public class Xor {
     byte codePoint = 0;
     System.out.println(letterBytes.length);
     
-    for (int i = 0; i < letterBytes.length; i++) {
-      for (int j = 0; j < byteMasks.length; j++) {
-        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-        ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
-        ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> 7 - j) +
-         ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> 7 - j) == 1));
-      }
-    }
-
-    // for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
-    //   while (((letterBytes[i] & (byteMasks[7 - numBytes])) >>> numBytes) == 1) {
+    // for (int i = 0; i < letterBytes.length; i++) {
+    //   for (int j = 0; j < byteMasks.length; j++) {
     //     System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-    //     ", checker: " + Integer.toBinaryString(byteMasks[numBytes]) + 
-    //     ", result: " +  ((letterBytes[i] & (byteMasks[7 - numBytes])) >>> numBytes) +
-    //      ", boolean: " + (((letterBytes[i] & (byteMasks[7 - numBytes])) >>> numBytes) == 1));
-    //     numBytes++;
+    //     ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
+    //     ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> 7 - j) +
+    //      ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> 7 - j) == 1));
     //   }
-    //   codePoint = 0;
-    //   for (int j = 0; j < numBytes - 1; j++) {
-    //     codePoint &= letterBytes[i + j];
-    //   }
-    //   // sb.append(Character.toChars(codePoint));
-    //   numBytes = 0;
     // }
+
+    for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
+      while (((letterBytes[i] & (byteMasks[numBytes])) >>> 7 - numBytes) == 1) {
+        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
+        ", checker: " + Integer.toBinaryString(byteMasks[numBytes]) + 
+        ", result: " +  ((letterBytes[i] & (byteMasks[numBytes])) >>> 7 - numBytes) +
+         ", boolean: " + (((letterBytes[i] & (byteMasks[numBytes])) >>> 7 - numBytes) == 1));
+        numBytes++;
+      }
+      codePoint = 0;
+      for (int j = 0; j < numBytes - 1; j++) {
+        codePoint &= letterBytes[i + j];
+      }
+      // sb.append(Character.toChars(codePoint));
+      numBytes = 0;
+    }
 
     return new String();
     // return sb.toString();
