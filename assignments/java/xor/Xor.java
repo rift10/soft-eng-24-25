@@ -41,7 +41,7 @@ public class Xor {
   // and decryption are the same process.)
 
   private int key;
-  private int[] byteMasks = {0b1000000, 0b0100000, 0b0010000, 0b0001000};
+  private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000};
 
   public Xor(int key) {
     this.key = key;
