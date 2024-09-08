@@ -89,7 +89,6 @@ public class Xor {
  
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
-      codePoint = 0;
       if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 0) {
         numBytes = 1;
       } else {
@@ -104,7 +103,7 @@ public class Xor {
 
       codePoint = letterBytes[i] & firstByteMasks[numBytes - 1];
       for (int j = 0; j < numBytes - 1; j++) {
-        codePoint = (codePoint << 6 | (letterBytes[i] & 0b00111111));
+        codePoint = (codePoint << 6 | (letterBytes[i + j + 1] & 0b00111111));
       }
 
       sb.append(Character.toChars(codePoint));
