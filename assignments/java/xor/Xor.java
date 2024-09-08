@@ -94,9 +94,9 @@ public class Xor {
     //   }
     // }
 
-    for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
+    for (int i = 0; i < letterBytes.length - 1; i += 1) {
       // numBytes = 0;
-      if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
+      while (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
         ", checker: " + Integer.toBinaryString(byteMasks[numBytes]) + 
         ", result: " +  ((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) +
