@@ -94,7 +94,7 @@ public class Xor {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
         numBytes++;
       }
-      int codePoint = 0;
+      byte codePoint = 0;
       for (int j = 0; j < numBytes - 1; j++) {
         codePoint &= letterBytes[i + j];
       }
@@ -117,8 +117,8 @@ public class Xor {
 
   public static void main(String[] argv) throws Exception {
     // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    // System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
-    System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    // System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
 
   }
 }
