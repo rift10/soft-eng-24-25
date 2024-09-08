@@ -116,7 +116,7 @@ public class Xor {
     // return sb.toString();
   }
 
-  private String decodeUtf(byte[] bytes) {
+  private String decodeUtf8(byte[] bytes) {
     var sb = new StringBuilder();
     var i = 0;
     while (i < bytes.length) {
