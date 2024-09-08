@@ -99,6 +99,7 @@ public class Xor {
         codePoint &= letterBytes[i + j];
       }
       sb.append(Character.toChars(codePoint));
+      numBytes = 1;
     }
 
     // return new String();
