@@ -101,11 +101,11 @@ public class Xor {
       if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 0) {
         numBytes = 1;
           System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-          ", checker: " + Integer.toBinaryString(byteMasks[numBytes]))
+          ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
       } else {
         while (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
           System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-          ", checker: " + Integer.toBinaryString(byteMasks[numBytes]))
+          ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
           numBytes++;
         }
       }
