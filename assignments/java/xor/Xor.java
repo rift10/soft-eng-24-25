@@ -85,7 +85,7 @@ public class Xor {
     StringBuilder sb = new StringBuilder();
     int numBytes = 0;
     int codePoint = 0;
-    System.out.println(letterBytes.length);
+    // System.out.println(letterBytes.length);
  
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
@@ -97,9 +97,9 @@ public class Xor {
         }
       }
 
-      System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-      ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
-      System.out.println("numBytes: " + numBytes + ", i: " + i);
+      // System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
+      // ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
+      // System.out.println("numBytes: " + numBytes + ", i: " + i);
 
       codePoint = letterBytes[i] & firstByteMasks[numBytes - 1];
       for (int j = 1; j < numBytes; j++) {
@@ -112,25 +112,6 @@ public class Xor {
     return sb.toString();
   }
 
-  // private String decodeUtf8(byte[] bytes) {
-  //   var sb = new StringBuilder();
-  //   var i = 0;
-  //   while (i < bytes.length) {
-  //     var n = numBytes(bytes[i]);
-  //     var codePoint = bytes[i++] & FIRST_BYTE_MASKS[n - 1];
-  //     for (var j = 0; j < n - 1; j++) {
-  //       codePoint = (codePoint << 6) | (bytes[i++] & 0b00111111);
-  //     }
-  //     sb.append(Character.toChars(codePoint));
-  //   }
-  //   return sb.toString();
-  // }
-
-  // private int numBytes(byte b) {
-  //   var n = Integer.numberOfLeadingZeros(~b & 0xff) - 24;
-  //   return n == 0 ? 1 : n;
-  // }
-
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
   }
@@ -141,9 +122,9 @@ public class Xor {
   }
 
   public static void main(String[] argv) throws Exception {
-    // System.out.println(new Xor(567231495).decode(CIPHERTEXT));
-    // System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
     System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
-
+    System.out.println(new Xor(567231495).decodeWithUtf8("😁😱😪🥸"));
   }
 }
