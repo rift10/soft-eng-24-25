@@ -130,7 +130,7 @@ public class Xor {
       for (var j = 0; j < n - 1; j++) {
         codePoint = (codePoint << 6) | (bytes[i++] & 0x3f);
       }
-      sb.append(encodeUTF16(codePoint));
+      sb.append(Character.toChars(codePoint));
     }
     return sb.toString();
   }
