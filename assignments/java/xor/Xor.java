@@ -93,7 +93,7 @@ public class Xor {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
         numBytes++;
       }
-      Characters.toChars();
+      Character.toChars();
     }
 
     return new String();
