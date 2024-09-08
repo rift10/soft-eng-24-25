@@ -93,11 +93,11 @@ public class Xor {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
         numBytes++;
       }
-      byte[] codePoint = new byte[numBytes];
+      int codePoint = 0;
       for (int j = 0; j < numBytes - 1; j++) {
-        codePoint[j] = letterBytes[i + j];
+        codePoint[j] &= letterBytes[i + j];
       }
-      sb.append(Character.toChars((int) codePoint));
+      sb.append(Character.toChars(codePoint));
     }
 
     // return new String();
