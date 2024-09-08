@@ -83,7 +83,7 @@ public class Xor {
 
   public String decodeToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
-    int numBytes = 0;
+    int numBytes = 1;
     byte codePoint = 0;
     System.out.println(letterBytes.length);
     
@@ -97,7 +97,7 @@ public class Xor {
     // }
 
     for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
-      // numBytes = 0;
+      numBytes = 0;
       while (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
         ", checker: " + Integer.toBinaryString(byteMasks[numBytes]) + 
