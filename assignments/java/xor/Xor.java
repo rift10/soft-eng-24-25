@@ -43,7 +43,7 @@ public class Xor {
 
   private int key;
   private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000};
-  private static final int[] FIRST_BYTE_MASKS = {0b01111111, 0b00011111, 0b00001111, 0b00000111};
+  private int[] firstByteMasks = {0b01111111, 0b00011111, 0b00001111, 0b00000111};
 
   public Xor(int key) {
     this.key = key;
@@ -110,9 +110,9 @@ public class Xor {
         }
       }
 
-      codePoint = letterBytes[i++] & ~byteMasks[numBytes - 1];
+      codePoint = letterBytes[i] & firstByteMasks[numBytes - 1];
       for (int j = 1; j < numBytes - 1; j++) {
-        codePoint = (codePoint << 6 | (letterBytes[i++] & 0b00111111));
+        codePoint = (codePoint << 6 | (letterBytes[i + j] & 0b00111111));
       }
       sb.append(Character.toChars(codePoint));
     }
