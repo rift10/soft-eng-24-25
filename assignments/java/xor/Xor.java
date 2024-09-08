@@ -43,7 +43,7 @@ public class Xor {
 
   private int key;
   private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000};
-  private static final int[] FIRST_BYTE_MASKS = { 0x7f, 0x1f, 0x0f, 0x07 };
+  private static final int[] FIRST_BYTE_MASKS = {0b01111111, 0b00011111, 0b00001111, 0b00000111};
 
   public Xor(int key) {
     this.key = key;
@@ -107,7 +107,7 @@ public class Xor {
       }
       // codePoint = 0;
       // for (int j = 0; j < numBytes - 1; j++) {
-      //   codePoint &= letterBytes[i + j];
+      //   codePoint |= letterBytes[i + j];
       // }
       // // sb.append(Character.toChars(codePoint));
     }
@@ -116,24 +116,24 @@ public class Xor {
     // return sb.toString();
   }
 
-  private String decodeUtf8(byte[] bytes) {
-    var sb = new StringBuilder();
-    var i = 0;
-    while (i < bytes.length) {
-      var n = numBytes(bytes[i]);
-      var codePoint = bytes[i++] & FIRST_BYTE_MASKS[n - 1];
-      for (var j = 0; j < n - 1; j++) {
-        codePoint = (codePoint << 6) | (bytes[i++] & 0x3f);
-      }
-      sb.append(Character.toChars(codePoint));
-    }
-    return sb.toString();
-  }
+  // private String decodeUtf8(byte[] bytes) {
+  //   var sb = new StringBuilder();
+  //   var i = 0;
+  //   while (i < bytes.length) {
+  //     var n = numBytes(bytes[i]);
+  //     var codePoint = bytes[i++] & FIRST_BYTE_MASKS[n - 1];
+  //     for (var j = 0; j < n - 1; j++) {
+  //       codePoint = (codePoint << 6) | (bytes[i++] & 0b00111111);
+  //     }
+  //     sb.append(Character.toChars(codePoint));
+  //   }
+  //   return sb.toString();
+  // }
 
-  private int numBytes(byte b) {
-    var n = Integer.numberOfLeadingZeros(~b & 0xff) - 24;
-    return n == 0 ? 1 : n;
-  }
+  // private int numBytes(byte b) {
+  //   var n = Integer.numberOfLeadingZeros(~b & 0xff) - 24;
+  //   return n == 0 ? 1 : n;
+  // }
 
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
@@ -141,7 +141,7 @@ public class Xor {
 
   public String decodeWithUtf8(String text) {
     // return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
-    return decodeUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
