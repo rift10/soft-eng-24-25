@@ -95,6 +95,7 @@ public class Xor {
     // }
 
     for (int i = 0; i < letterBytes.length - 1; i += 1) {
+      if (letterBytes[i] ==)
       // numBytes = 0;
       while (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
@@ -114,13 +115,41 @@ public class Xor {
     // return sb.toString();
   }
 
+    /*
+   * Decode UTF-8 bytes into a String.
+   *
+   * Needless replacement for String(byte[], Charset) constructor.
+   */
+  private String decodeUTF8(byte[] bytes) {
+    var sb = new StringBuilder();
+    var i = 0;
+    while (i < bytes.length) {
+      var n = numBytes(bytes[i]);
+      var codePoint = bytes[i++] & FIRST_BYTE_MASKS[n - 1];
+      for (var j = 0; j < n - 1; j++) {
+        codePoint = (codePoint << 6) | (bytes[i++] & 0x3f);
+      }
+      sb.append(encodeUTF16(codePoint));
+    }
+    return sb.toString();
+  }
+
+  /*
+   * From the first byte of a UTF-8 encoded code point,
+   * figure out how many bytes we need to decode.
+   */
+  private int numBytes(byte b) {
+    var n = numberOfLeadingZeros(~b & 0xff) - 24;
+    return n == 0 ? 1 : n;
+  }
+
   public String decode(String cipher) {
     return new String(xor(cipher), StandardCharsets.UTF_8);
   }
 
   public String decodeWithUtf8(String text) {
     // return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
-    return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+    return decodeUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
   }
 
   public static void main(String[] argv) throws Exception {
