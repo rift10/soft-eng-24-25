@@ -97,8 +97,8 @@ public class Xor {
       while ((letterBytes[i] & byteMasks[numBytes]) == 1) {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
         ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
-        ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> j) +
-         ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> j) == 1));
+        ", result: " +  ((letterBytes[i] & (byteMasks[numBytes])) >>> numBytes) +
+         ", boolean: " + (((letterBytes[i] & (byteMasks[numBytes])) >>> numBytes) == 1));
         numBytes++;
       }
       codePoint = 0;
