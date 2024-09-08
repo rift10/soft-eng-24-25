@@ -71,21 +71,10 @@ public class Xor {
     return result;
   }
 
-  public String decodeOneByteToUtf8(byte[] letterBytes) {
-    StringBuilder sb = new StringBuilder();
-
-    for (int i = 0; i < letterBytes.length; i++) {
-      sb.append(Character.toChars(letterBytes[i]));
-    }
-
-    return sb.toString();
-  }
-
   public String decodeToUtf8(byte[] letterBytes) {
     StringBuilder sb = new StringBuilder();
     int numBytes = 0;
     int codePoint = 0;
-    // System.out.println(letterBytes.length);
  
     for (int i = 0; i < letterBytes.length; i += numBytes) {
       numBytes = 0;
@@ -96,10 +85,6 @@ public class Xor {
           numBytes++;
         }
       }
-
-      // System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
-      // ", checker: " + Integer.toBinaryString(byteMasks[numBytes]));
-      // System.out.println("numBytes: " + numBytes + ", i: " + i);
 
       codePoint = letterBytes[i] & firstByteMasks[numBytes - 1];
       for (int j = 1; j < numBytes; j++) {
@@ -117,7 +102,6 @@ public class Xor {
   }
 
   public String decodeWithUtf8(String text) {
-    // return decodeOneByteToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
     return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
   }
 
