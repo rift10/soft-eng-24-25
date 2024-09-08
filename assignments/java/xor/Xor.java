@@ -109,7 +109,7 @@ public class Xor {
       int j = 0;
       while (j < 5) {
         System.out.println(j);
-        j++
+        j++;
       }
       // codePoint = 0;
       // for (int j = 0; j < numBytes - 1; j++) {
