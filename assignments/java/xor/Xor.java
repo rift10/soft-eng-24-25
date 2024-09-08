@@ -98,12 +98,12 @@ public class Xor {
       for (int j = 0; j < numBytes - 1; j++) {
         codePoint &= letterBytes[i + j];
       }
-      sb.append(Character.toChars(codePoint));
+      // sb.append(Character.toChars(codePoint));
       numBytes = 0;
     }
 
-    // return new String();
-    return sb.toString();
+    return new String();
+    // return sb.toString();
   }
 
   public String decode(String cipher) {
