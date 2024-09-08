@@ -1,6 +1,7 @@
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.lang.StringBuilder;
+import java.lang.Integer;
 
 public class Xor {
 
@@ -42,6 +43,7 @@ public class Xor {
 
   private int key;
   private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000};
+  private static final int[] FIRST_BYTE_MASKS = { 0x7f, 0x1f, 0x0f, 0x07 };
 
   public Xor(int key) {
     this.key = key;
@@ -138,7 +140,7 @@ public class Xor {
    * figure out how many bytes we need to decode.
    */
   private int numBytes(byte b) {
-    var n = numberOfLeadingZeros(~b & 0xff) - 24;
+    var n = Integer.numberOfLeadingZeros(~b & 0xff) - 24;
     return n == 0 ? 1 : n;
   }
 
