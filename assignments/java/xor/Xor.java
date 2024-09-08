@@ -88,16 +88,16 @@ public class Xor {
         System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + Integer.toBinaryString(byteMasks[j]) + ", result: " +  (letterBytes[i] & (byteMasks[j])) + ", boolean: " + ((letterBytes[i] & (byteMasks[j])) == 0b1000000));
     }
 
-  //   for (int i = 0; i < letterBytes.length - 1; i += numBytes + 1) {
-  //     while ((letterBytes[i] & byteMasks[i]) == 1) {
-  //       System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
-  //       numBytes++;
-  //     }
-  //     // Characters.toChars();
-  //   }
+    for (int i = 0; i < letterBytes.length - 1; i += numBytes + 1) {
+      while ((letterBytes[i] & byteMasks[i]) == 1) {
+        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
+        numBytes++;
+      }
+      Characters.toChars();
+    }
 
     return new String();
-  //   // return sb.toString();
+    // return sb.toString();
   }
 
   public String decode(String cipher) {
