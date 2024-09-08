@@ -102,12 +102,12 @@ public class Xor {
          ", boolean: " + (((letterBytes[i] & (byteMasks[numBytes])) >>> 7 - numBytes) == 1));
         numBytes++;
       }
-      codePoint = 0;
-      for (int j = 0; j < numBytes - 1; j++) {
-        codePoint &= letterBytes[i + j];
-      }
-      // sb.append(Character.toChars(codePoint));
-      numBytes = 0;
+      // codePoint = 0;
+      // for (int j = 0; j < numBytes - 1; j++) {
+      //   codePoint &= letterBytes[i + j];
+      // }
+      // // sb.append(Character.toChars(codePoint));
+      // numBytes = 0;
     }
 
     return new String();
