@@ -86,22 +86,28 @@ public class Xor {
     System.out.println(letterBytes.length);
     for (int i = 0; i < letterBytes.length; i++) {
       for (int j = 0; j < byteMasks.length; j++) {
-        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + Integer.toBinaryString(byteMasks[j]) + ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> 8-j) + ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> 8-j) == 0b1000000));
+        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
+        ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
+        ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> j) +
+         ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> j) == 1));
       }
     }
 
-    // for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
-    //   while ((letterBytes[i] & byteMasks[numBytes]) == 1) {
-    //     System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + ", checker: " + (byteMasks[i]) + ", result: " +  (letterBytes[i] & (byteMasks[i])) + ", boolean: " + ((~letterBytes[i] & (byteMasks[i])) == 1));
-    //     numBytes++;
-    //   }
-    //   codePoint = 0;
-    //   for (int j = 0; j < numBytes - 1; j++) {
-    //     codePoint &= letterBytes[i + j];
-    //   }
-    //   // sb.append(Character.toChars(codePoint));
-    //   numBytes = 0;
-    // }
+    for (int i = 0; i < letterBytes.length - 1; i += numBytes) {
+      while ((letterBytes[i] & byteMasks[numBytes]) == 1) {
+        System.out.println("byte: " + Integer.toBinaryString(letterBytes[i]) + 
+        ", checker: " + Integer.toBinaryString(byteMasks[j]) + 
+        ", result: " +  ((letterBytes[i] & (byteMasks[j])) >>> j) +
+         ", boolean: " + (((letterBytes[i] & (byteMasks[j])) >>> j) == 1));
+        numBytes++;
+      }
+      codePoint = 0;
+      for (int j = 0; j < numBytes - 1; j++) {
+        codePoint &= letterBytes[i + j];
+      }
+      // sb.append(Character.toChars(codePoint));
+      numBytes = 0;
+    }
 
     return new String();
     // return sb.toString();
