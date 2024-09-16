@@ -19,7 +19,7 @@ public class Input extends JFrame implements KeyListener, MouseListener {
 
     private int mCurrentKeyCode;
     private char mCurrentKeyChar;
-    private Direction mCurrentDirection = Direction.NONE;
+    private static Direction mCurrentDirection = Direction.NONE;
 
     private JLabel mLabel = new JLabel();
     private JTextArea mTextArea = new JTextArea();
@@ -41,13 +41,13 @@ public class Input extends JFrame implements KeyListener, MouseListener {
         mCurrentKeyCode = e.getKeyCode();
         mCurrentKeyChar = e.getKeyChar();
 
-        if (mCurrentKeyCode == KeyEvent.VK_LEFT) {
+        if (mCurrentKeyCode == KeyEvent.VK_A) {
             mCurrentDirection = Direction.LEFT;
-        } else if (mCurrentKeyCode == KeyEvent.VK_RIGHT) {
+        } else if (mCurrentKeyCode == KeyEvent.VK_D) {
             mCurrentDirection = Direction.RIGHT;
-        } else if (mCurrentKeyCode == KeyEvent.VK_UP) {
+        } else if (mCurrentKeyCode == KeyEvent.VK_W) {
             mCurrentDirection = Direction.UP;
-        } else if (mCurrentKeyCode == KeyEvent.VK_DOWN) {
+        } else if (mCurrentKeyCode == KeyEvent.VK_S) {
             mCurrentDirection = Direction.DOWN;
         } 
     }
@@ -81,7 +81,7 @@ public class Input extends JFrame implements KeyListener, MouseListener {
         return mCurrentKeyChar;
     }
 
-    public Direction getDirection() {
+    public static Direction getDirection() {
         return mCurrentDirection;
     }
 
