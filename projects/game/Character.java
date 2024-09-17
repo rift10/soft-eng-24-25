@@ -1,44 +1,43 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 
 public class Character implements KeyListener {
 
     public enum Direction {
         NONE,
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN
+        WEST,
+        NORTHWEST,
+        NORTH,
+        NORTHEAST,
+        EAST,
+        SOUTHEAST,
+        SOUTH,
+        SOUTHWEST
     }
 
-    private ImageIcon image;
-    private int x = 0;
-    private int y = 0;
-    private int dx;
-    private int dy;
+    private int x = 1;
+    private int y = 1;
 
+    private int dx, dy;
+
+    private int currentKeyChar;
     private int currentKeyCode;
-    private char currentKeyChar;
-    private static Direction direction = Direction.NONE;
+    private int previousKeyCode;
 
     private JFrame frame = new JFrame();
     private JLabel label = new JLabel();
-    private JTextArea textArea = new JTextArea();
+
+    private static Direction direction = Direction.NONE;
 
     public Character() {
-        image = new ImageIcon("..."); // TODO: get an image
-        textArea.addKeyListener(this);
-        label.setBounds(20, 50, 100, 50);
-        textArea.setBounds(20, 80, 300, 300);
+        // todo: get an image
+
+        frame.addKeyListener(this);
+        label.setBounds(20, 50, 300, 50);
         frame.add(label);
-        frame.add(textArea);
         frame.setSize(400, 400);
         frame.setLayout(null);
         frame.setVisible(true);
@@ -57,55 +56,95 @@ public class Character implements KeyListener {
                 dy = 0;
                 break;
 
-            case LEFT:
-                dx = -10;
+            case WEST:
+                dx = -1;
 
                 break;
 
-            case UP:
-                dy = 10;
+            case NORTHWEST:
                 break;
 
-            case RIGHT:
-                dx = 10;
+            case NORTH:
+                dy = 1;
                 break;
 
-            case DOWN:
-                dy = -10;
+            case NORTHEAST:
+                break;
+
+            case EAST:
+                dx = 1;
+                break;
+
+            case SOUTHEAST:
+                break;
+
+            case SOUTH:
+                dy = -1;
+                break;
+
+            case SOUTHWEST:
                 break;
                 
         }
 
         move();
-    }
 
-    // TODO: move keyboard logic here?
+        label.setText("key pressed: " + String.valueOf(currentKeyChar) + ", coordinate: " + x + ", " + y);
+
+        // todo: draw the character moving here
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        label.setText(String.valueOf(e.getKeyChar()));
-        currentKeyCode = e.getKeyCode();
+
         currentKeyChar = e.getKeyChar();
+        currentKeyCode = e.getKeyCode();
+
+        // TODO: fix this (also refactor to look nicer maybe)
 
         if (currentKeyCode == KeyEvent.VK_A) {
-            direction = Direction.LEFT;
+            direction = Direction.WEST;
         } else if (currentKeyCode == KeyEvent.VK_D) {
-            direction = Direction.RIGHT;
+            direction = Direction.EAST;
         } else if (currentKeyCode == KeyEvent.VK_W) {
-            direction = Direction.UP;
+            direction = Direction.NORTH;
         } else if (currentKeyCode == KeyEvent.VK_S) {
-            direction = Direction.DOWN;
+            direction = Direction.SOUTH;
         } 
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+        previousKeyCode = e.getKeyCode();
+
+        // TODO: change this (BANDAID FIX)
+        direction = Direction.NONE;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {}
 
+
+    /* ------------------ getters --------------------- */
+
     public Direction getDirection() {
         return direction;
+    }
+
+    public int getCurrentKeyCode() {
+        return currentKeyCode;
+    }
+
+    public int getReleasedKeyCode() {
+        return previousKeyCode;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
 }
