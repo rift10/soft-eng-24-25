@@ -1,14 +1,13 @@
 
 public class Main {
 
-    public static Input mInput = new Input();
-    public static Character mSprite = new Character();
+    public static Character character = new Character();
 
     public static void main(String[] args) {
         while (true) {
-            mSprite.periodic();
-            if (mInput.getDirection() != Input.Direction.NONE) {
-                System.out.println(mInput.getDirection());
+            character.periodic();
+            if (character.getDirection() != Character.Direction.NONE) {
+                System.out.println(character.getDirection());
             }
         }
     }

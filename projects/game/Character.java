@@ -1,20 +1,47 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class Character implements KeyListener {
 
-    private ImageIcon mImage;
+    public enum Direction {
+        NONE,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
+
+    private ImageIcon image;
     private int x = 0;
     private int y = 0;
     private int dx;
     private int dy;
 
-    private Input.Direction mDirection = Input.Direction.NONE;
+    private int currentKeyCode;
+    private char currentKeyChar;
+    private static Direction direction = Direction.NONE;
+
+    private JFrame frame = new JFrame();
+    private JLabel label = new JLabel();
+    private JTextArea textArea = new JTextArea();
 
     public Character() {
-        mImage = new ImageIcon("..."); // TODO: get an image
+        image = new ImageIcon("..."); // TODO: get an image
+        textArea.addKeyListener(this);
+        label.setBounds(20, 50, 100, 50);
+        textArea.setBounds(20, 80, 300, 300);
+        frame.add(label);
+        frame.add(textArea);
+        frame.setSize(400, 400);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     public void move() {
@@ -23,9 +50,8 @@ public class Character implements KeyListener {
     }
 
     public void periodic() {
-        mDirection = Input.getDirection();
 
-        switch (mDirection) {
+        switch (direction) {
             case NONE:
                 dx = 0;
                 dy = 0;
@@ -56,12 +82,30 @@ public class Character implements KeyListener {
     // TODO: move keyboard logic here?
 
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+        label.setText(String.valueOf(e.getKeyChar()));
+        currentKeyCode = e.getKeyCode();
+        currentKeyChar = e.getKeyChar();
+
+        if (currentKeyCode == KeyEvent.VK_A) {
+            direction = Direction.LEFT;
+        } else if (currentKeyCode == KeyEvent.VK_D) {
+            direction = Direction.RIGHT;
+        } else if (currentKeyCode == KeyEvent.VK_W) {
+            direction = Direction.UP;
+        } else if (currentKeyCode == KeyEvent.VK_S) {
+            direction = Direction.DOWN;
+        } 
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {}
 
     @Override
     public void keyTyped(KeyEvent e) {}
+
+    public Direction getDirection() {
+        return direction;
+    }
 
 }
