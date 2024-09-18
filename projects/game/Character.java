@@ -18,8 +18,8 @@ public class Character implements KeyListener {
         SOUTHWEST
     }
 
-    private int x = 1;
-    private int y = 1;
+    private int x = 0;
+    private int y = 0;
 
     private int dx, dy;
 
@@ -27,20 +27,28 @@ public class Character implements KeyListener {
     private int currentKeyCode;
     private int previousKeyCode;
 
-    private JFrame frame = new JFrame();
-    private JLabel label = new JLabel();
-
     private static Direction direction = Direction.NONE;
+
+    private static Character instance = null;
+
+    
+    // private JFrame frame = new JFrame();
+    // private JLabel label = new JLabel();
 
     public Character() {
         // todo: get an image
 
-        frame.addKeyListener(this);
-        label.setBounds(20, 50, 300, 50);
-        frame.add(label);
-        frame.setSize(400, 400);
-        frame.setLayout(null);
-        frame.setVisible(true);
+        // frame.addKeyListener(this);
+        // label.setBounds(20, 50, 300, 50);
+        // frame.add(label);
+        // frame.setSize(400, 400);
+        // frame.setLayout(null);
+        // frame.setVisible(true);
+    }
+
+    public static Character getInstance() {
+        if (instance == null) return new Character();
+        return instance;
     }
 
     public void move() {
@@ -50,46 +58,7 @@ public class Character implements KeyListener {
 
     public void periodic() {
 
-        switch (direction) {
-            case NONE:
-                dx = 0;
-                dy = 0;
-                break;
-
-            case WEST:
-                dx = -1;
-
-                break;
-
-            case NORTHWEST:
-                break;
-
-            case NORTH:
-                dy = 1;
-                break;
-
-            case NORTHEAST:
-                break;
-
-            case EAST:
-                dx = 1;
-                break;
-
-            case SOUTHEAST:
-                break;
-
-            case SOUTH:
-                dy = -1;
-                break;
-
-            case SOUTHWEST:
-                break;
-                
-        }
-
         move();
-
-        label.setText("key pressed: " + String.valueOf(currentKeyChar) + ", coordinate: " + x + ", " + y);
 
         // todo: draw the character moving here
     }
@@ -100,25 +69,20 @@ public class Character implements KeyListener {
         currentKeyChar = e.getKeyChar();
         currentKeyCode = e.getKeyCode();
 
-        // TODO: fix this (also refactor to look nicer maybe)
-
-        if (currentKeyCode == KeyEvent.VK_A) {
-            direction = Direction.WEST;
-        } else if (currentKeyCode == KeyEvent.VK_D) {
-            direction = Direction.EAST;
-        } else if (currentKeyCode == KeyEvent.VK_W) {
-            direction = Direction.NORTH;
-        } else if (currentKeyCode == KeyEvent.VK_S) {
-            direction = Direction.SOUTH;
-        } 
+        if (currentKeyCode == KeyEvent.VK_A) dx = -1;
+        if (currentKeyCode == KeyEvent.VK_D) dx =  1;
+        if (currentKeyCode == KeyEvent.VK_W) dy =  1;
+        if (currentKeyCode == KeyEvent.VK_S) dy = -1;
+        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         previousKeyCode = e.getKeyCode();
 
-        // TODO: change this (BANDAID FIX)
-        direction = Direction.NONE;
+        if (previousKeyCode == KeyEvent.VK_A || previousKeyCode == KeyEvent.VK_D) dx = 0;
+        if (previousKeyCode == KeyEvent.VK_W || previousKeyCode == KeyEvent.VK_S) dy = 0;
+
     }
 
     @Override
@@ -129,6 +93,10 @@ public class Character implements KeyListener {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public int getCurrentKeyChar() {
+        return currentKeyChar;
     }
 
     public int getCurrentKeyCode() {
@@ -148,3 +116,35 @@ public class Character implements KeyListener {
     }
 
 }
+
+// here so i dont have to type it all out again
+
+// switch (direction) {
+//     case NONE:
+//         break;
+
+//     case WEST:
+//         break;
+
+//     case NORTHWEST:
+//         break;
+
+//     case NORTH:
+//         break;
+
+//     case NORTHEAST:
+//         break;
+
+//     case EAST:
+//         break;
+
+//     case SOUTHEAST:
+//         break;
+
+//     case SOUTH:
+//         break;
+
+//     case SOUTHWEST:
+//         break;
+        
+// }

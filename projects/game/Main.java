@@ -1,16 +1,15 @@
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    public static Character character = new Character();
+    public static Character character = Character.getInstance();
+    public static Environment environment = Environment.getInstance();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         while (true) {
             character.periodic();
-            // if ((character.getDirection() != Character.Direction.NONE) &&
-            //         (character.getCurrentKeyCode() != character.getReleasedKeyCode())) {
-            //     System.out.println("direction: " + character.getDirection());
-            //     System.out.println("coordinate: " + character.getX() + ", " + character.getY());
-            // }
+            environment.periodic();
+            TimeUnit.MILLISECONDS.sleep(50);
         }
     }
 }
