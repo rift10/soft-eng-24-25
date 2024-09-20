@@ -1,4 +1,3 @@
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -6,10 +5,13 @@ public class Main {
     public static Environment environment = Environment.getInstance();
 
     public static void main(String[] args) throws InterruptedException {
+
+        character.start();
+
         while (true) {
-            character.periodic();
+            character.run();
             environment.periodic();
-            TimeUnit.MILLISECONDS.sleep(50);
+            System.out.println("character runs: " + character.getRunCounter() + ", environment runs: " + environment.getRunCounter());
         }
     }
 }

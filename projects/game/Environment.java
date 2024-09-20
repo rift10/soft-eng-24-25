@@ -12,6 +12,9 @@ public class Environment extends JFrame {
     private Character character;
     private static Environment instance = null;
 
+    // for thread debugging
+    private int runCounter = 0;
+
     public Environment() {
 
         character = Character.getInstance();
@@ -37,13 +40,17 @@ public class Environment extends JFrame {
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
         g2d.drawImage(character.getImage(), character.getX(), character.getY(), this);
     }
 
     public void periodic() {
         label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
         paintComponents(getGraphics());
+        runCounter++;
+    }
+
+    public int getRunCounter() {
+        return runCounter;
     }
 
 }
