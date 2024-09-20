@@ -22,6 +22,7 @@ public class Character implements KeyListener {
     private int y = 0;
 
     private int dx, dy;
+    // private int width, height;
 
     private int currentKeyChar;
     private int currentKeyCode;
@@ -37,6 +38,9 @@ public class Character implements KeyListener {
         // todo: get an image
         ImageIcon ii = new ImageIcon("projects/game/Image.png");
         image = ii.getImage();
+
+        // width = image.getWidth(null);
+        // height = image.getHeight(null);
     }
 
     public static Character getInstance() {

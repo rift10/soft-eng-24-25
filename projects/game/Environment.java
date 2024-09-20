@@ -43,6 +43,7 @@ public class Environment extends JFrame {
 
     public void periodic() {
         label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
+        paintComponents(getGraphics());
     }
 
 }
