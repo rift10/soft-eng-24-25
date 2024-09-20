@@ -1,8 +1,8 @@
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Character implements KeyListener {
 
@@ -27,23 +27,16 @@ public class Character implements KeyListener {
     private int currentKeyCode;
     private int previousKeyCode;
 
+    private Image image;
+
     private static Direction direction = Direction.NONE;
 
     private static Character instance = null;
 
-    
-    // private JFrame frame = new JFrame();
-    // private JLabel label = new JLabel();
-
     public Character() {
         // todo: get an image
-
-        // frame.addKeyListener(this);
-        // label.setBounds(20, 50, 300, 50);
-        // frame.add(label);
-        // frame.setSize(400, 400);
-        // frame.setLayout(null);
-        // frame.setVisible(true);
+        ImageIcon ii = new ImageIcon("projects/game/Image");
+        image = ii.getImage();
     }
 
     public static Character getInstance() {
@@ -113,6 +106,10 @@ public class Character implements KeyListener {
 
     public int getY() {
         return y;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
 }

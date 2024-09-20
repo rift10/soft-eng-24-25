@@ -1,29 +1,44 @@
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Environment {
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-    private JPanel panel = new JPanel();
+import javax.swing.JFrame;
+
+public class Environment extends JFrame {
+
     private JLabel label = new JLabel();
     private Character character;
     private static Environment instance = null;
 
     public Environment() {
 
-        character = Main.character;
-        panel.addKeyListener(character);
+        character = Character.getInstance();
+        addKeyListener(character);
 
         label.setBounds(20, 50, 300, 50);
-        panel.add(label);
-        panel.setSize(400, 400);
-        panel.setLayout(null);
-        panel.setVisible(true);
+        add(label);
+        setSize(400, 400);
+        setLayout(null);
+        setVisible(true);
     }
 
     public static Environment getInstance() {
         if (instance == null) return new Environment();
         return instance;
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+        super.paintComponents(g);
+        draw(g);
+    }
+
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.drawImage(character.getImage(), character.getX(), character.getY(), this);
     }
 
     public void periodic() {
