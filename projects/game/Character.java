@@ -35,7 +35,7 @@ public class Character implements KeyListener {
 
     public Character() {
         // todo: get an image
-        ImageIcon ii = new ImageIcon("projects/game/Image");
+        ImageIcon ii = new ImageIcon("projects/game/Image.png");
         image = ii.getImage();
     }
 
