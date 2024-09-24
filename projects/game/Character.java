@@ -1,11 +1,11 @@
+
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
-public class Character extends Thread implements KeyListener {
+public class Character implements KeyListener, Runnable {
 
     public enum Direction {
         NONE,
@@ -39,7 +39,6 @@ public class Character extends Thread implements KeyListener {
     private static Character instance = null;
 
     public Character() {
-        // todo: get an image
         ImageIcon ii = new ImageIcon("projects/game/Image.png");
         image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 
@@ -52,20 +51,17 @@ public class Character extends Thread implements KeyListener {
         return instance;
     }
 
-    public void move() {
-        x += dx;
-        y += dy;
-    }
-
+    @Override
     public void run() {
-        move();
-        runCounter++;
-        // try {
-        //     TimeUnit.MILLISECONDS.sleep(50);
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        // }
-
+        while (true) {
+            move();
+            runCounter++;
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }   
     }
 
     @Override
@@ -92,7 +88,11 @@ public class Character extends Thread implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {}
-
+    
+    public void move() {
+        x += dx;
+        y += dy;
+    }
 
     /* ------------------ getters --------------------- */
 

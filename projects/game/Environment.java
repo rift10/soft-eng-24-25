@@ -1,12 +1,11 @@
 
-import javax.swing.JLabel;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
-public class Environment extends JFrame {
+public class Environment extends JFrame implements Runnable {
 
     private JLabel label = new JLabel();
     private Character character;
@@ -33,6 +32,15 @@ public class Environment extends JFrame {
     }
 
     @Override
+    public void run() {
+        while (true) {
+            label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
+            paintComponents(getGraphics());
+            runCounter++;
+        }
+    }
+
+    @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
         draw(g);
@@ -43,11 +51,8 @@ public class Environment extends JFrame {
         g2d.drawImage(character.getImage(), character.getX(), character.getY(), this);
     }
 
-    public void periodic() {
-        label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
-        paintComponents(getGraphics());
-        runCounter++;
-    }
+
+    /* ------------------ getters --------------------- */
 
     public int getRunCounter() {
         return runCounter;
