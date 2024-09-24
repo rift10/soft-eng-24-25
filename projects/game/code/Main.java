@@ -1,4 +1,4 @@
-
+package code;
 public class Main {
 
     public static Character character = Character.getInstance();
