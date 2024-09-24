@@ -1,16 +1,18 @@
 package code;
 
+import code.Character;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
-public class Environment extends JFrame implements Runnable {
+public class Environment extends JFrame {
 
-    private JLabel label = new JLabel();
-    private Character character;
-    private static Environment instance = null;
+    private final JLabel label = new JLabel();
+    private final Character character;
+    private final static Environment instance = null;
 
     // for thread debugging
     private int runCounter = 0;
@@ -19,12 +21,18 @@ public class Environment extends JFrame implements Runnable {
 
         character = Character.getInstance();
         addKeyListener(character);
+        setFocusable(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        Timer timer = new Timer(17, (ActionEvent e) -> { repaint(); });
+        timer.start();
 
         label.setBounds(20, 50, 300, 50);
         add(label);
         setSize(400, 400);
         setLayout(null);
         setVisible(true);
+        
     }
 
     public static Environment getInstance() {
@@ -32,8 +40,7 @@ public class Environment extends JFrame implements Runnable {
         return instance;
     }
 
-    @Override
-    public void run() {
+    public void periodic() {
         while (true) {
             label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
             paintComponents(getGraphics());

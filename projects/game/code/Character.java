@@ -1,24 +1,12 @@
 package code;
 
+import code.Character;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.ImageIcon;
 
-public class Character implements KeyListener, Runnable {
-
-    public enum Direction {
-        NONE,
-        WEST,
-        NORTHWEST,
-        NORTH,
-        NORTHEAST,
-        EAST,
-        SOUTHEAST,
-        SOUTH,
-        SOUTHWEST
-    }
+public class Character implements KeyListener {
 
     private int x = 0;
     private int y = 0;
@@ -33,11 +21,9 @@ public class Character implements KeyListener, Runnable {
     private int currentKeyCode;
     private int previousKeyCode;
 
-    private Image image;
+    private final Image image;
 
-    private static Direction direction = Direction.NONE;
-
-    private static Character instance = null;
+    private final static Character instance = null;
 
     public Character() {
         ImageIcon ii = new ImageIcon("projects/game/Image.png");
@@ -52,16 +38,10 @@ public class Character implements KeyListener, Runnable {
         return instance;
     }
 
-    @Override
-    public void run() {
+    public void periodic() {
         while (true) {
             move();
             runCounter++;
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }   
     }
 
@@ -97,10 +77,6 @@ public class Character implements KeyListener, Runnable {
 
     /* ------------------ getters --------------------- */
 
-    public Direction getDirection() {
-        return direction;
-    }
-
     public int getCurrentKeyChar() {
         return currentKeyChar;
     }
@@ -130,35 +106,3 @@ public class Character implements KeyListener, Runnable {
     }
 
 }
-
-// here so i dont have to type it all out again
-
-// switch (direction) {
-//     case NONE:
-//         break;
-
-//     case WEST:
-//         break;
-
-//     case NORTHWEST:
-//         break;
-
-//     case NORTH:
-//         break;
-
-//     case NORTHEAST:
-//         break;
-
-//     case EAST:
-//         break;
-
-//     case SOUTHEAST:
-//         break;
-
-//     case SOUTH:
-//         break;
-
-//     case SOUTHWEST:
-//         break;
-        
-// }
