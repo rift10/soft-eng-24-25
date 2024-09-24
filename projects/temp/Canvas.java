@@ -8,6 +8,7 @@ public class Canvas extends JPanel {
     // 17 milliseconds is 60fps
     Timer timer = new Timer(17, (ActionEvent e) -> { repaint(); });
     timer.start();
+    setFocusable(true);
   }
 
   @Override
