@@ -2,9 +2,11 @@ package code;
 
 import code.Character;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class Character implements KeyListener {
 
@@ -29,6 +31,9 @@ public class Character implements KeyListener {
         ImageIcon ii = new ImageIcon("projects/game/Image.png");
         image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 
+        Timer timer = new Timer(8, (ActionEvent e) -> { periodic(); });
+        timer.start();
+
         // width = image.getWidth(null);
         // height = image.getHeight(null);
     }
@@ -39,10 +44,8 @@ public class Character implements KeyListener {
     }
 
     public void periodic() {
-        while (true) {
-            move();
-            runCounter++;
-        }   
+        move();
+        runCounter++;
     }
 
     @Override
@@ -53,8 +56,8 @@ public class Character implements KeyListener {
 
         if (currentKeyCode == KeyEvent.VK_A) dx = -1;
         if (currentKeyCode == KeyEvent.VK_D) dx =  1;
-        if (currentKeyCode == KeyEvent.VK_W) dy =  1;
-        if (currentKeyCode == KeyEvent.VK_S) dy = -1;
+        if (currentKeyCode == KeyEvent.VK_W) dy = -1;
+        if (currentKeyCode == KeyEvent.VK_S) dy =  1;
         
     }
 

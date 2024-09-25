@@ -3,14 +3,11 @@ package code;
 import code.Character;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.Timer;
 
 public class Environment extends JFrame {
 
-    private final JLabel label = new JLabel();
+    // private final JLabel label = new JLabel();
     private final Character character;
     private final static Environment instance = null;
 
@@ -24,12 +21,12 @@ public class Environment extends JFrame {
         setFocusable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Timer timer = new Timer(17, (ActionEvent e) -> { repaint(); });
-        timer.start();
+        // Timer timer = new Timer(17, (ActionEvent e) -> { periodic(); });
+        // timer.start();
 
-        label.setBounds(20, 50, 300, 50);
-        add(label);
-        setSize(400, 400);
+        // label.setBounds(20, 50, 300, 50);
+        // add(label);
+        setSize(1440, 800);
         setLayout(null);
         setVisible(true);
         
@@ -41,11 +38,10 @@ public class Environment extends JFrame {
     }
 
     public void periodic() {
-        while (true) {
-            label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
-            paintComponents(getGraphics());
-            runCounter++;
-        }
+        // label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
+        // repaint();
+        paintComponents(getGraphics());
+        runCounter++;
     }
 
     @Override
