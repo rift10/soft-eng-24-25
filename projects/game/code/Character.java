@@ -16,22 +16,18 @@ public class Character implements KeyListener {
     private int dx, dy;
     // private int width, height;
 
-    // for thread debugging
-    private int runCounter = 0;
-
     private int currentKeyChar;
     private int currentKeyCode;
     private int previousKeyCode;
 
-    private final Image image;
+    private static final ImageIcon ii = new ImageIcon("projects/game/GreenSquare.jpg");
+    private final Image image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 
-    private final static Character instance = null;
+    private static final Character instance = null;
 
     public Character() {
-        ImageIcon ii = new ImageIcon("projects/game/Image.png");
-        image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 
-        Timer timer = new Timer(8, (ActionEvent e) -> { periodic(); });
+        Timer timer = new Timer(1, (ActionEvent e) -> { periodic(); });
         timer.start();
 
         // width = image.getWidth(null);
@@ -45,7 +41,6 @@ public class Character implements KeyListener {
 
     public void periodic() {
         move();
-        runCounter++;
     }
 
     @Override
@@ -102,10 +97,6 @@ public class Character implements KeyListener {
 
     public Image getImage() {
         return image;
-    }
-
-    public int getRunCounter() {
-        return runCounter;
     }
 
 }
