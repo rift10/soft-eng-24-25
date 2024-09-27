@@ -14,11 +14,12 @@ public class Character implements KeyListener {
     private int y = 0;
 
     private int dx, dy;
-    // private int width, height;
 
     private int currentKeyChar;
     private int currentKeyCode;
     private int previousKeyCode;
+
+    private final int kMove = 3;
 
     private static final ImageIcon ii = new ImageIcon("projects/game/GreenSquare.jpg");
     private final Image image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
@@ -29,9 +30,6 @@ public class Character implements KeyListener {
 
         Timer timer = new Timer(1, (ActionEvent e) -> { periodic(); });
         timer.start();
-
-        // width = image.getWidth(null);
-        // height = image.getHeight(null);
     }
 
     public static Character getInstance() {
@@ -49,10 +47,10 @@ public class Character implements KeyListener {
         currentKeyChar = e.getKeyChar();
         currentKeyCode = e.getKeyCode();
 
-        if (currentKeyCode == KeyEvent.VK_A) dx = -1;
-        if (currentKeyCode == KeyEvent.VK_D) dx =  1;
-        if (currentKeyCode == KeyEvent.VK_W) dy = -1;
-        if (currentKeyCode == KeyEvent.VK_S) dy =  1;
+        if (currentKeyCode == KeyEvent.VK_A) dx = -kMove;
+        if (currentKeyCode == KeyEvent.VK_D) dx =  kMove;
+        if (currentKeyCode == KeyEvent.VK_W) dy = -kMove;
+        if (currentKeyCode == KeyEvent.VK_S) dy =  kMove;
         
     }
 
