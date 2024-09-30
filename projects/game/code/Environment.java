@@ -1,6 +1,5 @@
 package code;
 
-import code.Character;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -51,14 +50,12 @@ public class Environment extends JFrame {
     public void repaint() {
         super.repaint();
         draw(getGraphics());
-        // super.paintComponents(getGraphics());
     }
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(character.getImage(), character.getX(), character.getY(), this);
         g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), this);
-        // super.update(g); 
     }
 
     public void startTimer() {
