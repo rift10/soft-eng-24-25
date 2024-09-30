@@ -12,7 +12,7 @@ public class Environment extends JFrame {
 
     private final JLabel label = new JLabel();
     private final Character character;
-    private final Enemy enemy;
+    private final Food enemy;
     private final static Environment instance = null;
 
     private final Timer timer = new Timer(3, (ActionEvent e) -> { periodic(); });
@@ -20,7 +20,7 @@ public class Environment extends JFrame {
     public Environment() {
 
         character = Character.getInstance();
-        enemy = Enemy.getInstance();
+        enemy = Food.getInstance();
         addKeyListener(character);
         setFocusable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,17 +39,13 @@ public class Environment extends JFrame {
     }
 
     public void periodic() {
-        // label.setText("key pressed: " + String.valueOf(character.getCurrentKeyChar()) + ", coordinate: " + character.getX() + ", " + character.getY());
+        label.setText("is player touching food: " + character.isTouchingFood());
+        System.out.println("is player touching food: " + character.isTouchingFood());
+        System.out.println("score: " + character.getScore());
         // label.setText(enemy.getDX() + ", " + enemy.getDY());
         // TODO: fix flickering issue
         repaint();
     }
-
-    // @Override
-    // public void paintAll(Graphics g) {
-    //     super.paintComponents(g);
-    //     draw(g);
-    // }
 
     @Override
     public void repaint() {
@@ -62,8 +58,7 @@ public class Environment extends JFrame {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(character.getImage(), character.getX(), character.getY(), this);
         g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), this);
-        g2d.fillRect(100, 100, 100, 100);
-        super.update(g); 
+        // super.update(g); 
     }
 
     public void startTimer() {
