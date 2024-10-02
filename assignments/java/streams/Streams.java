@@ -27,10 +27,10 @@ public class Streams {
         .count();
   }
 
-  public int countVowels(String s) {
-    return (int) Arrays
-        .stream()
-        .
-  }
+  // public int countVowels(String s) {
+  //   return (int) Arrays
+  //       .stream()
+  //       .
+  // }
 
 }
