@@ -20,11 +20,17 @@ public class Streams {
     return n > 1;
   }
 
-  public int countPrimes(int[] intArray) {
+  public int countPrimes(int[] ii) {
     return (int) Arrays
-        .stream(intArray)
+        .stream(ii)
         .filter(n -> isPrime(n))
         .count();
+  }
+
+  public int countVowels(String s) {
+    return (int) Arrays
+        .stream()
+        .
   }
 
 }
