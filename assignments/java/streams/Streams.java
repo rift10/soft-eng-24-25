@@ -31,8 +31,8 @@ public class Streams {
     String[] ss = new String[s.length()];
     for (int i = 0; i < ss.length - 1; i++) {
       ss[i] = s.substring(i, i + 1);
+      System.err.println(ss[i]);
     }
-    System.err.println("hello world");
     return (int) Arrays
         .stream(ss)
         .filter(c -> isVowel(c))
