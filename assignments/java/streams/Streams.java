@@ -32,10 +32,21 @@ public class Streams {
     for (int i = 0; i < ss.length - 1; i++) {
       ss[i] = s.substring(i, i + 1);
     }
+    System.out.println(ss);
     return (int) Arrays
         .stream(ss)
         .filter(c -> isVowel(c))
         .count();
+  }
+
+  public int indexOfVowel(String s) {
+    String[] ss = new String[s.length()];
+    for (int i = 0; i < ss.length - 1; i++) {
+      ss[i] = s.substring(i, i + 1);
+    }
+    return Arrays
+        .stream(ss)
+        .;
   }
 
 }
