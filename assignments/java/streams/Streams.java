@@ -32,7 +32,7 @@ public class Streams {
     for (int i = 0; i < ss.length - 1; i++) {
       ss[i] = s.substring(i, i + 1);
     }
-    System.err.println(ss);
+    System.err.println("hello world");
     return (int) Arrays
         .stream(ss)
         .filter(c -> isVowel(c))
