@@ -23,7 +23,8 @@ public class Streams {
   public int countPrimes(int[] intArray) {
     return Arrays
         .stream(intArray)
-        .filter(x -> x.isPrime());
+        .filter(x -> x.isPrime())
+        .count();
   }
 
 }
