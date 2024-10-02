@@ -31,7 +31,6 @@ public class Streams {
     String[] ss = new String[s.length()];
     for (int i = 0; i < ss.length; i++) {
       ss[i] = s.substring(i, i + 1);
-      System.err.println(ss[i]);
     }
     return (int) Arrays
         .stream(ss)
@@ -39,14 +38,22 @@ public class Streams {
         .count();
   }
 
-  // public int indexOfVowel(String s) {
-  //   String[] ss = new String[s.length()];
-  //   for (int i = 0; i < ss.length - 1; i++) {
-  //     ss[i] = s.substring(i, i + 1);
-  //   }
-  //   return Arrays
-  //       .stream(ss)
-  //       .;
-  // }
+  public int indexOfVowel(String s) {
+    String[] ss = new String[s.length()];
+    for (int i = 0; i < ss.length; i++) {
+      ss[i] = s.substring(i, i + 1);
+    }
+    return Arrays
+        .stream(ss)
+        .map(c -> c.isVowel())
+        .findFirst();
+  }
+
+  public String disemvowel(String s) {
+    return Arrays
+        .stream()
+        .filter(c -> !isVowel(c))
+        .toList();
+  }
 
 }
