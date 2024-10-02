@@ -27,10 +27,15 @@ public class Streams {
         .count();
   }
 
-  // public int countVowels(String s) {
-  //   return (int) Arrays
-  //       .stream()
-  //       .
-  // }
+  public int countVowels(String s) {
+    String[] ss = new String[s.length()];
+    for (int i = 0; i < ss.length - 1; i++) {
+      ss[i] = s.substring(i, i+1);
+    }
+    return (int) Arrays
+        .stream(ss)
+        .filter(c -> isVowel(c))
+        .count();
+  }
 
 }
