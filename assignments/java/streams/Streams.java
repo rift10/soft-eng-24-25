@@ -49,11 +49,11 @@ public class Streams {
         .findFirst();
   }
 
-  public String disemvowel(String s) {
-    return Arrays
-        .stream()
-        .filter(c -> !isVowel(c))
-        .toList();
-  }
+  // public String disemvowel(String s) {
+  //   return Arrays
+  //       .stream()
+  //       .filter(c -> !isVowel(c))
+  //       .toList();
+  // }
 
 }
