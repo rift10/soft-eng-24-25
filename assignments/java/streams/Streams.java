@@ -28,12 +28,12 @@ public class Streams {
   }
 
   public int countVowels(String s) {
-    String[] ss = new String[s.length()];
-    for (int i = 0; i < ss.length; i++) {
-      ss[i] = s.substring(i, i + 1);
-    }
+    // String[] ss = new String[s.length()];
+    // for (int i = 0; i < ss.length; i++) {
+    //   ss[i] = s.substring(i, i + 1);
+    // }
     return (int) Arrays
-        .stream(ss)
+        .stream(s.split(""))
         .filter(c -> isVowel(c))
         .count();
   }
@@ -45,7 +45,8 @@ public class Streams {
     }
     return Arrays
         .stream(ss)
-        .map(c -> c.isVowel())
+        .reduce(c -> c.isVowel())
+        .map(c -> c.)
         .findFirst();
   }
 
