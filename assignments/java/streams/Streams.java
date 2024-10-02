@@ -28,10 +28,6 @@ public class Streams {
   }
 
   public int countVowels(String s) {
-    // String[] ss = new String[s.length()];
-    // for (int i = 0; i < ss.length; i++) {
-    //   ss[i] = s.substring(i, i + 1);
-    // }
     return (int) Arrays
         .stream(s.split(""))
         .filter(c -> isVowel(c))
