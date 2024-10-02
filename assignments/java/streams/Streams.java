@@ -30,7 +30,7 @@ public class Streams {
   public int countVowels(String s) {
     String[] ss = new String[s.length()];
     for (int i = 0; i < ss.length - 1; i++) {
-      ss[i] = s.substring(i, i+1);
+      ss[i] = s.substring(i, i + 1);
     }
     return (int) Arrays
         .stream(ss)
