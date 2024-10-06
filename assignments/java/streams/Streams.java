@@ -34,17 +34,13 @@ public class Streams {
         .count();
   }
 
-  // public int indexOfVowel(String s) {
-  //   String[] ss = new String[s.length()];
-  //   for (int i = 0; i < ss.length; i++) {
-  //     ss[i] = s.substring(i, i + 1);
-  //   }
-  //   return Arrays
-  //       .stream(ss)
-  //       .reduce(c -> c.isVowel())
-  //       .map(c -> c.)
-  //       .findFirst();
-  // }
+  public int indexOfVowel(String s) {
+    return Arrays
+        .stream(s.split(""))
+        .reduce(c -> c.isVowel())
+        .map(c -> c.)
+        .findFirst();
+  }
 
   // public String disemvowel(String s) {
   //   return Arrays
