@@ -52,7 +52,13 @@ public class Streams {
         .collect(Collectors.joining());
   }
 
-  // public int countStartsWithVowel() {}
+  public int countStartsWithVowel(String[] ss) {
+    return (int) Arrays
+        .stream(ss)
+        .map(s -> s.substring(0, 1))
+        .filter(c -> isVowel(c))
+        .count();
+  }
 
   // public int totalLength() {}
 
