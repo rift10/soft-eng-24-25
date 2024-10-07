@@ -80,14 +80,19 @@ public class Streams {
         .count();
   }
 
-  public String[] collectFourLetterWords(String[] ss) {
+  // public String[] collectFourLetterWords(String[] ss) {
+  //   return Arrays
+  //       .stream(ss)
+  //       .filter(s -> s.length() == 4)
+  //       .toArray();
+  // }
+
+  public String[] collectShouting(String[] ss) {
     return Arrays
         .stream(ss)
-        .filter(s -> s.length() == 4)
+        .map(s -> s.toUpperCase())
         .toArray();
   }
-
-  // public collectShouting() {}
 
   // public int hailstoneLength() {}
 
