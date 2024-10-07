@@ -41,7 +41,7 @@ public class Streams {
         .takeWhile(c -> !isVowel(c))
         .toArray()
         .length;
-    return (result > s.length()) ? -1 : result;
+    return (result >= s.length()) ? -1 : result;
   }
 
   // public String disemvowel(String s) {
