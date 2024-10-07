@@ -88,10 +88,12 @@ public class Streams {
   // }
 
   public Object[] collectShouting(String[] ss) {
-    return Arrays
+    result = Arrays
         .stream(ss)
         .map(s -> s.toUpperCase())
         .toArray();
+    System.err.println(result);
+    return result;
   }
 
   // public int hailstoneLength() {}
