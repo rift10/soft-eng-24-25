@@ -49,7 +49,6 @@ public class Streams {
     return Arrays
         .stream(s.split(""))
         .filter(c -> !isVowel(c))
-        .toArray()
         .collect(Collectors.joining());
   }
 
