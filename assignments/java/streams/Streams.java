@@ -88,7 +88,7 @@ public class Streams {
   // }
 
   public String[] collectShouting(String[] ss) {
-    String[] result = Arrays
+    Object[] result = Arrays
         .stream(ss)
         .map(s -> s.toUpperCase())
         .toArray();
