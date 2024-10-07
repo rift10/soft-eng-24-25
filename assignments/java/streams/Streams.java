@@ -93,7 +93,7 @@ public class Streams {
         .map(s -> s.toUpperCase())
         .toArray();
     System.err.println(result);
-    return new String[];
+    return new String[3];
   }
 
   // public int hailstoneLength() {}
