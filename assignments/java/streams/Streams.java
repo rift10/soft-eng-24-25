@@ -35,13 +35,13 @@ public class Streams {
   }
 
   public int indexOfVowel(String s) {
-    return 1 + Arrays
+    result = Arrays
         .stream(s.split(""))
         .map(c -> c.substring(0, 1))
-        .takeWhile(c -> isVowel(c))
+        .takeWhile(c -> !isVowel(c))
         .toArray()
-        .length
-        .orElse(-1);
+        .length;
+    return result;
   }
 
   // public String disemvowel(String s) {
