@@ -70,7 +70,7 @@ public class Streams {
     return Arrays
         .stream(ss)
         .map(s -> (s.indexOf("x"))  )
-        .toArray();
+        .toIntArray();
   }
 
   // public int countByLength() {}
