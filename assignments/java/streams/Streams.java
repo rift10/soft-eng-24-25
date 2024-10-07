@@ -47,7 +47,7 @@ public class Streams {
 
   public String disemvowel(String s) {
     return Arrays
-        .stream()
+        .stream(s.split(""))
         .filter(c -> !isVowel(c))
         .toArray()
         .collect(Collectors.joining());
