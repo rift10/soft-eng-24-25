@@ -91,7 +91,7 @@ public class Streams {
     Object[] result = Arrays
         .stream(ss)
         .map(s -> s.toUpperCase())
-        .toArray(s -> s.toString());
+        .toArray(s -> toString(s));
     System.err.println(result);
     return new String[3];
   }
