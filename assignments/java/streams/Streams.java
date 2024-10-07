@@ -37,9 +37,9 @@ public class Streams {
   public int indexOfVowel(String s) {
     return Arrays
         .stream(s.split(""))
-        .reduce(c -> c.isVowel())
-        .map(c -> c.)
-        .findFirst();
+        .takeWhile(c -> c.isVowel())
+        .toArray()
+        .length();
   }
 
   // public String disemvowel(String s) {
