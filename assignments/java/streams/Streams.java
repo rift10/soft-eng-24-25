@@ -60,7 +60,12 @@ public class Streams {
         .count();
   }
 
-  // public int totalLength() {}
+  public int totalLength(String[] ss) {
+    return (int) Arrays
+        .stream(ss)
+        .map(s -> s.length())
+        .collect(Collectors.summingInt());
+  }
 
   // public xs() {}
 
