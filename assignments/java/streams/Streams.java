@@ -73,7 +73,12 @@ public class Streams {
         .toArray();
   }
 
-  // public int countByLength() {}
+  public int countByLength(String[] ss, int i) {
+    return (int) Arrays
+        .stream(ss)
+        .filter(s -> s.length() == i)
+        .count();
+  }
 
   // public collectFourLetterWords() {}
 
