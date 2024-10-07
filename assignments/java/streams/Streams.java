@@ -63,8 +63,8 @@ public class Streams {
   public int totalLength(String[] ss) {
     return (int) Arrays
         .stream(ss)
-        .map(s -> s.length())
-        .collect(Collectors.summingInt());
+        // .map(s -> s.length())
+        .collect(Collectors.summingInt(s -> s.length()));
   }
 
   // public xs() {}
