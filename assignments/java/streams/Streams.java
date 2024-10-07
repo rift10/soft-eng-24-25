@@ -1,6 +1,6 @@
 
 import java.util.Arrays;
-import java.util.stream.Collectors
+import java.util.stream.Collectors;
 
 public class Streams {
 
@@ -53,24 +53,24 @@ public class Streams {
         .collect(Collectors.joining());
   }
 
-  public int countStartsWithVowel() {}
+  // public int countStartsWithVowel() {}
 
-  public int totalLength() {}
+  // public int totalLength() {}
 
-  public xs() {}
+  // public xs() {}
 
-  public int countByLength() {}
+  // public int countByLength() {}
 
-  public collectFourLetterWords() {}
+  // public collectFourLetterWords() {}
 
-  public collectShouting() {}
+  // public collectShouting() {}
 
-  public int hailstoneLength() {}
+  // public int hailstoneLength() {}
 
-  public int hailstoneMax() {}
+  // public int hailstoneMax() {}
 
-  public hailstone() {}
+  // public hailstone() {}
 
-  public lengthHistogram() {}
+  // public lengthHistogram() {}
 
 }
