@@ -1,5 +1,6 @@
 
 import java.util.Arrays;
+import java.util.stream.Collectors
 
 public class Streams {
 
@@ -44,11 +45,32 @@ public class Streams {
     return (result >= s.length()) ? -1 : result;
   }
 
-  // public String disemvowel(String s) {
-  //   return Arrays
-  //       .stream()
-  //       .filter(c -> !isVowel(c))
-  //       .toList();
-  // }
+  public String disemvowel(String s) {
+    return Arrays
+        .stream()
+        .filter(c -> !isVowel(c))
+        .toArray()
+        .collect(Collectors.joining());
+  }
+
+  public int countStartsWithVowel() {}
+
+  public int totalLength() {}
+
+  public xs() {}
+
+  public int countByLength() {}
+
+  public collectFourLetterWords() {}
+
+  public collectShouting() {}
+
+  public int hailstoneLength() {}
+
+  public int hailstoneMax() {}
+
+  public hailstone() {}
+
+  public lengthHistogram() {}
 
 }
