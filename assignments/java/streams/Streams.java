@@ -69,8 +69,8 @@ public class Streams {
   public int[] xs(String[] ss) {
     return Arrays
         .stream(ss)
-        .map(s -> (s.indexOf("x"))  )
-        .toIntArray();
+        .mapToInt(s -> s.indexOf("x"))
+        .toArray();
   }
 
   // public int countByLength() {}
