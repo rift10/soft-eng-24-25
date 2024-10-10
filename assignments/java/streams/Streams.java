@@ -80,12 +80,12 @@ public class Streams {
         .count();
   }
 
-  // public String[] collectFourLetterWords(String[] ss) {
-  //   return Arrays
-  //       .stream(ss)
-  //       .filter(s -> s.length() == 4)
-  //       .toArray();
-  // }
+  public String[] collectFourLetterWords(String[] ss) {
+    return Arrays
+        .stream(ss)
+        .filter(s -> s.length() == 4)
+        .toArray(String[]::new);
+  }
 
   public String[] collectShouting(String[] ss) {
     Object[] result = Arrays
