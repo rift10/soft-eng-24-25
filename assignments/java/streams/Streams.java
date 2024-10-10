@@ -87,14 +87,14 @@ public class Streams {
         .toArray(String[]::new);
   }
 
-  public String[] collectShouting(String[] ss) {
-    Object[] result = Arrays
-        .stream(ss)
-        .map(s -> s.toUpperCase())
-        .toArray(s -> toString(s));
-    System.err.println(result);
-    return new String[3];
-  }
+  // public String[] collectShouting(String[] ss) {
+  //   Object[] result = Arrays
+  //       .stream(ss)
+  //       .map(s -> s.toUpperCase())
+  //       .toArray(s -> toString(s));
+  //   System.err.println(result);
+  //   return new String[3];
+  // }
 
   // public int hailstoneLength() {}
 
