@@ -104,7 +104,7 @@ public class Streams {
   // public int hailstoneMax(int start) {}
 
   public int[] hailstone(int start) {
-    return new IntStream()
+    return IntStream
         .Builder.accept(start)
         .iterate(s -> nextHailstone(s));
   }
