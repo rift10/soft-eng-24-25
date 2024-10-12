@@ -104,7 +104,8 @@ public class Streams {
   // public int hailstoneMax(int start) {}
 
   public int[] hailstone(int start) {
-    return IntStream
+    return Arrays
+        .stream(new int[])
         .concat(start)
         .iterate(s -> nextHailstone(s));
   }
