@@ -105,7 +105,7 @@ public class Streams {
 
   public int[] hailstone(int start) {
     return Arrays
-        .stream(new int[])
+        .stream(new int[1])
         .concat(start)
         .iterate(s -> nextHailstone(s));
   }
