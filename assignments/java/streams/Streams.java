@@ -106,7 +106,7 @@ public class Streams {
     return new IntStream()
         .Builder.accept(start)
         .build();
-        .iterate(s -> nextHailstone(s))
+        .iterate(s -> nextHailstone(s));
   }
 
   // public int[] lengthHistogram(String[] ss) {
