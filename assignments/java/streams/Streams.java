@@ -105,7 +105,6 @@ public class Streams {
   public int[] hailstone(int start) {
     return new IntStream()
         .Builder.accept(start)
-        .build();
         .iterate(s -> nextHailstone(s));
   }
 
