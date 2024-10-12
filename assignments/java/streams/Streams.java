@@ -95,7 +95,7 @@ public class Streams {
   }
 
   private int nextHailstone(int start) {
-    return (n % 2 == 0) ? n/2 : 3n + 1;
+    return (n % 2 == 0) ? n/2 : 3 * n + 1;
   }
 
   // public int hailstoneLength() {}
