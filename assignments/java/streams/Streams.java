@@ -94,7 +94,7 @@ public class Streams {
         .toArray(String[]::new);
   }
 
-  private int nextHailstone(int start) {
+  private int nextHailstone(int n) {
     return (n % 2 == 0) ? n/2 : 3 * n + 1;
   }
 
