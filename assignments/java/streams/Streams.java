@@ -94,12 +94,25 @@ public class Streams {
         .toArray(String[]::new);
   }
 
+  private int nextHailstone(int start) {
+    return (n % 2 == 0) ? n/2 : 3n + 1;
+  }
+
   // public int hailstoneLength() {}
 
-  // public int hailstoneMax() {}
+  // public int hailstoneMax(int start) {}
 
-  // public hailstone() {}
+  public int[] hailstone(int start) {
+    return new IntStream()
+        .Builder.accept(start)
+        .build();
+        .iterate(this::nextHailstone())
+  }
 
-  // public lengthHistogram() {}
+  // public int[] lengthHistogram(String[] ss) {
+  //   return Arrays 
+  //       .stream(ss)
+  //       .collect(Collectors.)
+  // }
 
 }
