@@ -100,7 +100,7 @@ public class Streams {
   }
 
   public int hailstoneLength(int start) {
-    return Arrays
+    return (int) Arrays
         .stream(new int[1])
         .iterate(start, n ->nextHailstone(n))
         .count();
