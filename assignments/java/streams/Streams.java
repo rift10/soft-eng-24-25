@@ -107,7 +107,7 @@ public class Streams {
             .iterate(start, n -> nextHailstone(n))
             .takeWhile(n -> n != 1),
           IntStream.of(1)
-        )
+        );
   }
 
   public int hailstoneLength(int start) {
