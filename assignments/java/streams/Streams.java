@@ -123,8 +123,8 @@ public class Streams {
             .takeWhile(n -> n != 1),
           IntStream.of(1)
         )
-        .max()
-    return result.isPresent() : result ? -1;
+        .max();
+    return result.isPresent() ? result : -1;
   }
 
   public int[] hailstone(int start) {
