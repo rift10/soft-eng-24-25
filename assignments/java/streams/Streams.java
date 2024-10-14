@@ -101,7 +101,7 @@ public class Streams {
   }
 
   public int hailstoneLength(int start) {
-    return (int) Stream
+    return (int) IntStream
         .iterate(start, n -> nextHailstone(n))
         .count();
   }
