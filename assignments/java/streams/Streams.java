@@ -111,28 +111,11 @@ public class Streams {
   }
 
   public int hailstoneLength(int start) {
-    return (int) IntStream
-        .concat(
-          IntStream
-              .iterate(start, n -> nextHailstone(n))
-              .takeWhile(n -> n != 1),
-          IntStream.of(1)
-        )
+    return (int) hailstoneStream(start)
         .count();
   }
 
   // public int hailstoneMax(int start) {}
-
-  // public int[] hailstone(int start) {
-  //   return IntStream
-  //       .concat(
-  //         IntStream
-  //             .iterate(start, n -> nextHailstone(n))
-  //             .takeWhile(n -> n != 1),
-  //         IntStream.of(1)
-  //       )
-  //       .toArray();
-  // }
 
   public int[] hailstone(int start) {
     return hailstoneStream(start)
