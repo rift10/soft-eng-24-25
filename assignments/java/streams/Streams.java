@@ -116,15 +116,15 @@ public class Streams {
   }
 
   public int hailstoneMax(int start) {
-    return (int) IntStream
+    int result = (int) IntStream
         .concat(
           IntStream
             .iterate(start, n -> nextHailstone(n))
             .takeWhile(n -> n != 1),
           IntStream.of(1)
         )
-        .boxed()
-        .max(Integer::compareTo());
+        .max()
+    return result.isPresent() : result ? -1;
   }
 
   public int[] hailstone(int start) {
