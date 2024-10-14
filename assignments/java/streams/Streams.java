@@ -114,10 +114,11 @@ public class Streams {
 
   public int[] hailstone(int start) {
     return IntStream
-        .concat(IntStream.of(1),
+        .concat(
           IntStream
               .iterate(start, n -> nextHailstone(n))
-              .takeWhile(n -> n != 1)
+              .takeWhile(n -> n != 1),
+          IntStream.of(1)
         )
         .toArray();
   }
