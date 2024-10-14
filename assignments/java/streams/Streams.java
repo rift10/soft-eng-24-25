@@ -101,7 +101,7 @@ public class Streams {
   }
 
   private IntStream hailstoneStream(int start) {
-    return IntStream
+    return new IntStream
         .concat(
           IntStream
             .iterate(start, n -> nextHailstone(n))
