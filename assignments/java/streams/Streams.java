@@ -101,7 +101,7 @@ public class Streams {
   }
 
   private IntStream hailstoneStream(int start) {
-    return new IntStream
+    return IntStream
         .concat(
           IntStream
             .iterate(start, n -> nextHailstone(n))
@@ -123,10 +123,22 @@ public class Streams {
 
   // public int hailstoneMax(int start) {}
 
+  
   public int[] hailstone(int start) {
-    return hailstoneStream(start)
+    return IntStream
+        .concat(
+          IntStream
+              .iterate(start, n -> nextHailstone(n))
+              .takeWhile(n -> n != 1),
+          IntStream.of(1)
+        )
         .toArray();
   }
+
+  // public int[] hailstone(int start) {
+  //   return hailstoneStream(start)
+  //       .toArray();
+  // }
 
   // public int[] lengthHistogram(String[] ss) {
   //   return Arrays 
