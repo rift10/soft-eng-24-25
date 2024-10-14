@@ -123,7 +123,6 @@ public class Streams {
 
   // public int hailstoneMax(int start) {}
 
-  
   public int[] hailstone(int start) {
     return IntStream
         .concat(
