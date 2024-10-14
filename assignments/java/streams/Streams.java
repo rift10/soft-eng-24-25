@@ -102,9 +102,10 @@ public class Streams {
 
   public int hailstoneLength(int start) {
     return (int) IntStream
-        .iterate(start, n -> nextHailstone(n))
-        .takeWhile(n -> n != 1)
-        // .concat(1)
+        .concat(Stream.of(1),
+          .iterate(start, n -> nextHailstone(n))
+          .takeWhile(n -> n != 1)
+        )
         .count();
   }
 
