@@ -124,7 +124,7 @@ public class Streams {
           IntStream.of(1)
         )
         .max();
-    return result.isPresent() ? result.get() : -1;
+    return result.isPresent() : result.get() ? -1;
   }
 
   public int[] hailstone(int start) {
