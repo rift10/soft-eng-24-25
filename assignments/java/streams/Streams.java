@@ -123,6 +123,7 @@ public class Streams {
             .takeWhile(n -> n != 1),
           IntStream.of(1)
         )
+        .boxed()
         .max(Integer::compareTo());
   }
 
