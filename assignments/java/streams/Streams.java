@@ -116,13 +116,7 @@ public class Streams {
   }
 
   public int hailstoneMax(int start) {
-    var result = IntStream
-        .concat(
-          IntStream
-            .iterate(start, n -> nextHailstone(n))
-            .takeWhile(n -> n != 1),
-          IntStream.of(1)
-        )
+    var result = hailstoneStream(start)
         .max();
     return result.isPresent() ? result.getAsInt() : -1;
   }
