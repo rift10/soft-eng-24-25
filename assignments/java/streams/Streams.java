@@ -119,7 +119,7 @@ public class Streams {
               .iterate(start, n -> nextHailstone(n))
               .takeWhile(n -> n != 1)
         )
-        .toArray(int[]::new);
+        .toArray();
   }
 
   // public int[] lengthHistogram(String[] ss) {
