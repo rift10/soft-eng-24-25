@@ -100,12 +100,23 @@ public class Streams {
     return (n % 2 == 0) ? n/2 : 3 * n + 1;
   }
 
+  private IntStream hailstoneStream(int start) {
+    return IntStream
+        .concat(
+          IntStream
+            .iterate(start, n -> nextHailstone(n))
+            .takeWhile(n -> n != 1),
+          IntStream.of(1)
+        )
+  }
+
   public int hailstoneLength(int start) {
     return (int) IntStream
-        .concat(IntStream.of(1),
+        .concat(
           IntStream
               .iterate(start, n -> nextHailstone(n))
               .takeWhile(n -> n != 1)
+          IntStream.of(1),
         )
         .count();
   }
@@ -113,13 +124,7 @@ public class Streams {
   // public int hailstoneMax(int start) {}
 
   public int[] hailstone(int start) {
-    return IntStream
-        .concat(
-          IntStream
-              .iterate(start, n -> nextHailstone(n))
-              .takeWhile(n -> n != 1),
-          IntStream.of(1)
-        )
+    return hailstoneStream(start)
         .toArray();
   }
 
