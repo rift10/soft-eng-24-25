@@ -99,16 +99,21 @@ public class Streams {
     return (n % 2 == 0) ? n/2 : 3 * n + 1;
   }
 
-  // public int hailstoneLength() {}
+  public int hailstoneLength(int start) {
+    return Arrays
+        .stream(new int[] {start})
+        .iterate(n -> nextHailstone(n))
+        .count();
+  }
 
   // public int hailstoneMax(int start) {}
 
-  public int[] hailstone(int start) {
-    return Arrays
-        .stream(new int[1])
-        .concat(start)
-        .iterate(s -> nextHailstone(s));
-  }
+  // public int[] hailstone(int start) {
+  //   return Arrays
+  //       .stream(new int[1])
+  //       .concat(start)
+  //       .iterate(n -> nextHailstone(n));
+  // }
 
   // public int[] lengthHistogram(String[] ss) {
   //   return Arrays 
