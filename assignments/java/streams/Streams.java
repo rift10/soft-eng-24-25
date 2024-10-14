@@ -130,7 +130,7 @@ public class Streams {
     return Arrays 
         .stream(ss)
         .map(s -> Collectors.groupingBy(s -> s.length()))
-        .toArray(int[]::new)
+        .toArray(int[]::new);
   }
 
 }
