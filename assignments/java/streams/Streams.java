@@ -116,7 +116,7 @@ public class Streams {
   }
 
   public int hailstoneMax(int start) {
-    Optional<int> result = (int) IntStream
+    var result = (int) IntStream
         .concat(
           IntStream
             .iterate(start, n -> nextHailstone(n))
