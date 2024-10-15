@@ -127,11 +127,11 @@ public class Streams {
   }
 
   public int[] lengthHistogram(String[] ss) {
-    return Arrays 
+    return (int[]) Arrays 
         .stream(ss)
         // .map(s -> s.length())
         .collect(Collectors.groupingBy(s -> s.length()))
-        // .keySet()
+        .keySet()
         .toArray();
   }
 
