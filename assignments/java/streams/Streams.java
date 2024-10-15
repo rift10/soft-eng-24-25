@@ -129,8 +129,9 @@ public class Streams {
   public int[] lengthHistogram(String[] ss) {
     return Arrays 
         .stream(ss)
-        .map(n -> Collectors.groupingBy(s -> s.length()))
-        .toArray(int[]::new);
+        // .map(s -> s.length())
+        .collect(Collectors.groupingBy(s.length()))
+        .toArray();
   }
 
 }
