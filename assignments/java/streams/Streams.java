@@ -127,10 +127,11 @@ public class Streams {
   }
 
   public int[] lengthHistogram(String[] ss) {
-    return (int[]) Arrays 
+    return Arrays 
         .stream(ss)
-        .map(s -> (s.length() > 10 ? 10 : s.length()))
-        // .collect(Collectors.groupingBy(s -> s.length()))
+        // .map(s -> (s.length() > 10 ? 10 : s.length()))
+        .collect(Collectors.groupingBy(s.length() > 10 ? 10 : s.length()))
+        .collect(Collectors.toList())
         .toArray();
   }
 
