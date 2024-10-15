@@ -130,9 +130,13 @@ public class Streams {
     return Arrays 
         .stream(ss)
         .map(s -> (s.length() > 10 ? 10 : s.length()))
-        // .collect(Collectors.groupingBy(s.length() > 10 ? 10 : s.length()))
-        .collect(Collectors.toList())
+        .takeWhile(s == 0)
+        .collect(Collectors.summingInt())
         .toArray();
   }
+
+  // private  histogram() {
+
+  // }
 
 }
