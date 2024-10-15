@@ -131,6 +131,7 @@ public class Streams {
         .stream(ss)
         // .map(s -> s.length())
         .collect(Collectors.groupingBy(s -> s.length()))
+        .keySet()
         .toArray();
   }
 
