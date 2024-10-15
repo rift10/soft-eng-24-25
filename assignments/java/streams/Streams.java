@@ -129,14 +129,12 @@ public class Streams {
   public int[] lengthHistogram(String[] ss) {
     return Arrays 
         .stream(ss)
-        .map(s -> (s.length() > 10 ? 10 : s.length()))
+        .flatMapToInt(s -> (s.length() > 10 ? 10 : s.length()))
         .takeWhile(s -> s == 0)
         .collect(Collectors.summingInt())
         .toArray();
   }
 
-  // private  histogram() {
-
-  // }
+  // private histogram() {}
 
 }
