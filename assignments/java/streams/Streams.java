@@ -130,7 +130,8 @@ public class Streams {
     return Arrays 
         .stream(ss)
         // .map(s -> s.length())
-        .collect(Collectors.groupingBy(s -> s.length()))
+        .collect(Collectors.groupingBy(s -> s.length(),
+            Collectors.summingInt(s -> s.length())))
         .toArray();
   }
 
