@@ -130,7 +130,7 @@ public class Streams {
     return Arrays 
         .stream(ss)
         .map(s -> (s.length() > 10 ? 10 : s.length()))
-        .takeWhile(s == 0)
+        .takeWhile(s -> s == 0)
         .collect(Collectors.summingInt())
         .toArray();
   }
