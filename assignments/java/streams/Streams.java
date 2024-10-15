@@ -132,7 +132,7 @@ public class Streams {
         // .map(s -> s.length())
         .collect(Collectors.groupingBy(s -> s.length()))
         .keySet()
-        .toArray(int[]);
+        .toArray(int[].class);
   }
 
 }
