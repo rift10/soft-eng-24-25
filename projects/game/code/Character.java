@@ -1,5 +1,6 @@
 package code;
 
+import code.Character;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -10,8 +11,8 @@ import javax.swing.Timer;
 
 public class Character implements KeyListener {
 
-    private int x = 0;
-    private int y = 0;
+    private int x = Main.ENVIRONMENT_WIDTH / 2;
+    private int y = Main.ENVIRONMENT_HEIGHT / 2;
 
     private int dx, dy;
 
@@ -19,8 +20,9 @@ public class Character implements KeyListener {
     private int currentKeyCode;
     private int previousKeyCode;
 
-    private final int moveAmount = 3;
-    private final int width, height;
+    private final int kMoveAmount = 3;
+    private final int kWidth = 100;
+    private final int kHeight = 100;
     private int score = 0;
 
     private static final ImageIcon ii = new ImageIcon("projects/game/images/GreenSquare.jpg");
@@ -29,12 +31,8 @@ public class Character implements KeyListener {
     private static final Character instance = null;
 
     public Character() {
-
-        Timer timer = new Timer(20, (ActionEvent e) -> { periodic(); });
+        Timer timer = new Timer(17, (ActionEvent e) -> { periodic(); });
         timer.start();
-        
-        width = image.getWidth(null);
-        height = image.getHeight(null);
     }
 
     public static Character getInstance() {
@@ -46,7 +44,6 @@ public class Character implements KeyListener {
         move();
 
         if (isTouchingFood()) score++;
-
     }
 
     @Override
@@ -55,10 +52,13 @@ public class Character implements KeyListener {
         currentKeyChar = e.getKeyChar();
         currentKeyCode = e.getKeyCode();
 
-        if (currentKeyCode == KeyEvent.VK_A) dx = -moveAmount;
-        if (currentKeyCode == KeyEvent.VK_D) dx =  moveAmount;
-        if (currentKeyCode == KeyEvent.VK_W) dy = -moveAmount;
-        if (currentKeyCode == KeyEvent.VK_S) dy =  moveAmount;
+        // use WASD to move
+        if (currentKeyCode == KeyEvent.VK_A) dx = -kMoveAmount;
+        if (currentKeyCode == KeyEvent.VK_D) dx =  kMoveAmount;
+        if (currentKeyCode == KeyEvent.VK_W) dy = -kMoveAmount;
+        if (currentKeyCode == KeyEvent.VK_S) dy =  kMoveAmount;
+
+        System.out.println("key pressed");
         
     }
 
@@ -66,29 +66,43 @@ public class Character implements KeyListener {
     public void keyReleased(KeyEvent e) {
         previousKeyCode = e.getKeyCode();
 
+        // reset dx and dy when a key is released
         if (previousKeyCode == KeyEvent.VK_A || previousKeyCode == KeyEvent.VK_D) dx = 0;
         if (previousKeyCode == KeyEvent.VK_W || previousKeyCode == KeyEvent.VK_S) dy = 0;
-
     }
 
     @Override
     public void keyTyped(KeyEvent e) {}
     
     public void move() {
-        if (x <= -10 && dx <= 0)  dx = 0;
-        if (x >= 1340 && dx >= 0) dx = 0;
+        // if the sprite is out of bounds, set dx or dy to zero
+        if (x <= -10 && dx <= 0) dx = 0;
+        if (x >= Environment.getInstance().getWidth() && dx >= 0) dx = 0;
 
-        if (y >= 650 && dy >= 0)  dy = 0;
-        if (y <= -10 && dy <= 0)  dy = 0;
+        if (y >= Environment.getInstance().getHeight() && dy >= 0) dy = 0;
+        if (y <= -10 && dy <= 0) dy = 0;
 
+        // update coordinates with input from player
         x += dx;
         y += dy;
-
     }
 
     public boolean isTouchingFood() {
-        for (int i = 0; i < width; i++) {
-            if (getHitboxWidth().contains(Food.getInstance().getHitboxWidth().get(i))) return true;
+        // didnt have time to debug but this doesnt work
+        for (int i = 0; i < kWidth; i++) {
+            // if (getHitboxWidth().contains(Main.food.getHitboxWidth().get(i))) return true;
+            if (getHitboxWidth().contains(Food.getInstance().getHitboxWidth().get(i))) {
+                System.out.println("touching width: " + Food.getInstance().getHitboxWidth().get(i));
+                return true;
+            }
+        }
+
+        for (int i = 0; i < kHeight; i++) {
+            // if (getHitboxHeight().contains(Main.food.getHitboxHeight().get(i))) return true;
+            if (getHitboxHeight().contains(Food.getInstance().getHitboxHeight().get(i))) {
+                System.out.println("touching height: " + Food.getInstance().getHitboxHeight().get(i));
+                return true;
+            }
         }
         return false;
     }
@@ -116,11 +130,11 @@ public class Character implements KeyListener {
     }
 
     public int getWidth() {
-        return width;
+        return kWidth;
     }
 
     public int getHeight() {
-        return height;
+        return kHeight;
     }
 
     public int getScore() {
@@ -131,18 +145,22 @@ public class Character implements KeyListener {
         return image;
     }
 
+    /**
+     * Creates an arraylist of all the x coordinates
+     * encompassed by the character to find the hitbox
+     */
     public ArrayList<Integer> getHitboxWidth() {
         ArrayList<Integer> result = new ArrayList<>();
-        for (int i = 0; i < width; i++) {
-            result.add(y + i);
+        for (int i = 0; i < kWidth; i++) {
+            result.add(x + i);
         }
         return result;
     }
 
     public ArrayList<Integer> getHitboxHeight() {
         ArrayList<Integer> result = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            result.add(x + i);
+        for (int i = 0; i < kHeight; i++) {
+            result.add(y + i);
         }
         return result;
     }

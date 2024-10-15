@@ -9,6 +9,11 @@ public class Canvas extends JPanel {
     Timer timer = new Timer(17, (ActionEvent e) -> { repaint(); });
     timer.start();
     setFocusable(true);
+    addKeyListener(new KeyAdapter() {
+        public void keyPressed(KeyEvent e) {
+            System.out.println("sdfsdf");
+        }
+    });
   }
 
   @Override

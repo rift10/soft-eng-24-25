@@ -14,9 +14,10 @@ public class Food {
 
     private double dx, dy;
 
-    private int width, height;
+    private final int kWidth = 100;
+    private final int kHeight = 100;
 
-    private final int kMaxMove = 10;
+    private final int kMaxMoveAmount = 5;
 
     private static final ImageIcon ii = new ImageIcon("projects/game/images/RedSquare.png");
     private final Image image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
@@ -26,11 +27,11 @@ public class Food {
     private static final Food instance = null;
 
     public Food() {
-        Timer timer = new Timer(1, (ActionEvent e) -> { periodic(); });
+        Timer timer = new Timer(17, (ActionEvent e) -> { periodic(); });
         timer.start();
 
-        width = image.getWidth(null);
-        height = image.getHeight(null);
+        // kWidth = image.getWidth(null);
+        // kHeight = image.getHeight(null);
     }
 
     public static Food getInstance() {
@@ -39,16 +40,16 @@ public class Food {
     }
 
     public void periodic() {
-        dx = random.nextBoolean() ? random.nextInt(kMaxMove) : -random.nextInt(kMaxMove);
-        dy = random.nextBoolean() ? random.nextInt(kMaxMove) : -random.nextInt(kMaxMove);
+        // dx = random.nextBoolean() ? random.nextInt(kMaxMoveAmount) : -random.nextInt(kMaxMoveAmount);
+        // dy = random.nextBoolean() ? random.nextInt(kMaxMoveAmount) : -random.nextInt(kMaxMoveAmount);
         move();
     }
     
     public void move() {
         if (x <= -10)  dx =  Math.abs(dx);
-        if (x >= 1330) dx = -Math.abs(dx);
+        if (x >= Environment.getInstance().getWidth()) dx = -Math.abs(dx);
 
-        if (y >= 600)  dy = -Math.abs(dy);
+        if (y >= Environment.getInstance().getHeight())  dy = -Math.abs(dy);
         if (y <= -10)  dy =  Math.abs(dy);
 
         x += dx;
@@ -78,11 +79,11 @@ public class Food {
     }
 
     public int getWidth() {
-        return width;
+        return kWidth;
     }
 
     public int getHeight() {
-        return height;
+        return kHeight;
     }
 
     public Image getImage() {
@@ -91,16 +92,16 @@ public class Food {
 
     public ArrayList<Integer> getHitboxWidth() {
         ArrayList<Integer> result = new ArrayList<>();
-        for (int i = 0; i < width; i++) {
-            result.add(y + i);
+        for (int i = 0; i < kWidth; i++) {
+            result.add(x + i);
         }
         return result;
     }
 
     public ArrayList<Integer> getHitboxHeight() {
         ArrayList<Integer> result = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            result.add(x + i);
+        for (int i = 0; i < kHeight; i++) {
+            result.add(y + i);
         }
         return result;
     }
