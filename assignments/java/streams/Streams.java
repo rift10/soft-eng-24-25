@@ -133,7 +133,7 @@ public class Streams {
         .collect(Collectors.groupingBy(s -> s.length()))
         .keySet()
         .iterator()
-        .forEachRemaining(n -> n.get())
+        .forEachRemaining(n -> n.intValue())
         .toArray();
   }
 
