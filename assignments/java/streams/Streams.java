@@ -129,9 +129,8 @@ public class Streams {
   public int[] lengthHistogram(String[] ss) {
     return Arrays 
         .stream(ss)
-        // .flatMapToInt(s -> (s.length() > 10 ? 10 : s.length()))
-        // .takeWhile(s -> s == 0)
-        // .collect(Collectors.summingInt())
+        .takeWhile(s -> s == 0)
+        .collect(Collectors.summingInt())
         .toArray();
   }
 
