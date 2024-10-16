@@ -127,9 +127,10 @@ public class Streams {
   }
 
   public int[] lengthHistogram(String[] ss) {
-    return Arrays 
-        .stream(ss)
-        .toArray(int[]::new);
+    // return Arrays 
+    //     .stream(ss)
+    //     .toArray(int[]::new);
+    return new int[11];
   }
 
   // private histogram() {}
