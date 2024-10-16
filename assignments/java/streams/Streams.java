@@ -132,7 +132,8 @@ public class Streams {
         // .mapToInt(s -> s.length())
         // .takeWhile(s -> s == 0)
         .collect(Collectors.summingInt(s -> s.length()))
-        .toArray();
+        .toList()
+        .toArray(int[]::new);
   }
 
   // private histogram() {}
