@@ -131,7 +131,7 @@ public class Streams {
         .stream(ss)
         .mapToInt(s -> s.length())
         .takeWhile(s -> s == 0)
-        .collect(Collectors.summingInt(Integer.valueof()))
+        .collect(Collectors.summingInt(Integer.valueof(s)))
         .toArray();
   }
 
