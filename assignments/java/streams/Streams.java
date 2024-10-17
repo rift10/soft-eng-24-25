@@ -132,7 +132,8 @@ public class Streams {
         .iterate(0, i -> (Arrays 
           .stream(ss)
           .mapToInt(s -> s.length())
-          .count(i))
+          .reduce(s -> s == i)
+          .count())
         ) 
         .toArray();
   }
