@@ -129,11 +129,12 @@ public class Streams {
   public int[] lengthHistogram(String[] ss) {
     return IntStream
         .range(0, 10)
-        .forEach(i -> (int) (Arrays 
-          .stream(ss)
-          .mapToInt(s -> s.length())
-          .filter(s -> s == i)
-          .count())
+        .forEach(i -> 10
+        // (int) (Arrays 
+          // .stream(ss)
+          // .mapToInt(s -> s.length())
+          // .filter(s -> s == i)
+          // .count())
         ) 
         .toArray();
   }
