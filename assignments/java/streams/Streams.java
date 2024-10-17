@@ -130,7 +130,7 @@ public class Streams {
     return IntStream
         .iterate(0, i -> (int) (Arrays 
           .stream(ss)
-          .mapToInt(s -> s.length() < 11 : s.length() ? 10)
+          .mapToInt(s -> s.length() < 11 ? s.length() : 10)
           .filter(s -> s == i)
           .count()))
         .limit(11)
