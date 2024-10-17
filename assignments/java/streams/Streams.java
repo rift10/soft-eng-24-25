@@ -128,10 +128,10 @@ public class Streams {
 
   public int[] lengthHistogram(String[] ss) {
     return IntStream
-        .iterate(0, i -> (int) (Arrays 
+        .generate(i -> (int) (Arrays 
           .stream(ss)
           .mapToInt(s -> s.length() < 11 ? s.length() : 10)
-          .filter(s -> s == 1)
+          .filter(s -> s == i)
           .count()))
         .limit(11)
         .toArray();
