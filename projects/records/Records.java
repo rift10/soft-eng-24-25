@@ -7,6 +7,7 @@ public class Records {
     public record Album(String name, int numSongs) {
 
         private boolean isCreatedBy(Artist artist) {
+            // to avoid null errors
             if (artist.albums() == null) return false;
 
             for (String i : artist.albums()) {
@@ -19,6 +20,7 @@ public class Records {
 
     public record Artist(String stageName, String realName, String[] albums, int age) {}
 
+    // generic names for now, might fill out later
     private static final Album one = new Album("a", 10);
     private static final Album two = new Album("b", 11);
     private static final Album three = new Album("c", 12);
@@ -30,6 +32,7 @@ public class Records {
 
     private static final Album[] allAlbums = new Album[] {one, two, three, four, five};
     
+    // lists to contain albums created by a certain artist
     private static final ArrayList<Album> listByOne = new ArrayList<>();
     private static final ArrayList<Album> listByTwo= new ArrayList<>();
 
