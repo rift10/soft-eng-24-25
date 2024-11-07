@@ -10,6 +10,11 @@ public class Interval {
         this.lowerBound = min;
         this.upperBound = max;
     }
+    
+    @Override
+    public String toString() {
+        return "lower bound: "  + lowerBound + ", upper bound: " + upperBound;
+    }
 
     public double getLowerBound() {
         return lowerBound;
@@ -21,11 +26,6 @@ public class Interval {
 
     public double getRange() {
         return upperBound - lowerBound;
-    }
-
-    @Override
-    public String toString() {
-        return "lower bound: "  + lowerBound + ", upper bound: " + upperBound;
     }
 
     public static UniformRandomVariable uniformRandomWithInterval(Interval interval) {

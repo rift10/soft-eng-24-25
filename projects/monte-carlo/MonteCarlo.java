@@ -5,22 +5,26 @@ import java.util.stream.Collectors;
 
 
 public class MonteCarlo {
+
+    // constants
+    public static int times = 100000;
+    public static int uniformMin = 0;
+    public static int uniformMax = 100;
+    public static int normalMean = 7;
+    public static int normalStdev = 2;
+    public static int logMean = 5;
+    public static int logStdev = 1;
+    public static int intervalLowerBound = 5;
+    public static int intervalUpperBound = 95;
     
     public static void main(String[] args) {
-        int times = 100000;
-        System.out.println();
-
-        int min = 0;
-        int max = 100;
-        var uniformRandom = new UniformRandomVariable(min, max);
+        var uniformRandom = new UniformRandomVariable(uniformMin, uniformMax);
         var uniformList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) uniformList.add(uniformRandom.next());
         System.out.println("uniform actual mean: " + uniformList.stream().collect(Collectors.averagingDouble(x -> x)));
-        System.out.println("uniform expected mean: " + ((min + max) / 2));
+        System.out.println("uniform expected mean: " + ((uniformMin + uniformMax) / 2));
         System.out.println();
 
-        int normalMean = 7;
-        int normalStdev = 2;
         var normalRandom = new NormalRandomVariable(normalMean, normalStdev);
         var normalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) normalList.add(normalRandom.next());
@@ -32,8 +36,6 @@ public class MonteCarlo {
         System.out.println("normal expected standard deviation: " + normalStdev);
         System.out.println();
 
-        int logMean = 5;
-        int logStdev = 1;
         var logRandom = new LogNormalRandomVariable(logMean, logStdev);
         var logList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) logList.add(logRandom.next());
@@ -45,9 +47,7 @@ public class MonteCarlo {
         System.out.println("log expected standard deviation: " + logStdev);
         System.out.println();
 
-        int lowerBound = 5;
-        int upperBound = 95;
-        var uniformInterval = new Interval(lowerBound, upperBound);
+        var uniformInterval = new Interval(intervalLowerBound, intervalUpperBound);
         var uniformRandomInterval = Interval.uniformRandomWithInterval(uniformInterval);
         var uniformRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) uniformRandomIntervalList.add(uniformRandomInterval.next());
@@ -59,7 +59,7 @@ public class MonteCarlo {
         System.out.println("uniform expected 90% interval " + uniformInterval.toString());
         System.out.println();
 
-        var normalInterval = new Interval(lowerBound, upperBound);
+        var normalInterval = new Interval(intervalLowerBound, intervalUpperBound);
         var normalRandomInterval = Interval.normalRandomWithInterval(normalInterval);
         var normalRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) normalRandomIntervalList.add(normalRandomInterval.next());
@@ -71,7 +71,7 @@ public class MonteCarlo {
         System.out.println("normal expected 90% interval " + normalInterval.toString());
         System.out.println();
 
-        var logInterval = new Interval(lowerBound, upperBound);
+        var logInterval = new Interval(intervalLowerBound, intervalUpperBound);
         var logRandomInterval = Interval.normalRandomWithInterval(logInterval);
         var logRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) logRandomIntervalList.add(logRandomInterval.next());
