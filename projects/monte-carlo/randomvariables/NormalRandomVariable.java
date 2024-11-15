@@ -1,3 +1,4 @@
+package randomvariables;
 import java.util.random.RandomGenerator;
 
 public class NormalRandomVariable implements RandomVariable {
