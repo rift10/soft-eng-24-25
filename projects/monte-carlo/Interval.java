@@ -1,3 +1,6 @@
+import randomvariables.LogNormalRandomVariable;
+import randomvariables.NormalRandomVariable;
+import randomvariables.UniformRandomVariable;
 
 /**
  * represents 90% prediction interval
