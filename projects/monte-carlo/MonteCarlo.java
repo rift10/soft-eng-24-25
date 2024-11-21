@@ -2,10 +2,10 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
-
 import randomvariables.LogNormalRandomVariable;
 import randomvariables.NormalRandomVariable;
 import randomvariables.UniformRandomVariable;
+import work.ParallelWork;
 import work.SequentialWork;
 import work.Work;
 
@@ -28,7 +28,7 @@ public class MonteCarlo {
         var uniformList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) uniformList.add(uniformRandom.next());
         System.out.println("uniform actual mean: " + uniformList.stream().collect(Collectors.averagingDouble(x -> x)));
-        System.out.println("uniform expected mean: " + ((min + max) / 2));
+        System.out.println("uniform expected mean: " + (Util.mean(min, max)));
         System.out.println();
     }
 
@@ -37,10 +37,9 @@ public class MonteCarlo {
         var normalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) normalList.add(normalRandom.next());
         var normalActualMean = normalList.stream().collect(Collectors.averagingDouble(x -> x));
-        var normalActualStdev = Math.sqrt(normalList.stream().collect(Collectors.summingDouble(x -> Math.pow(x - normalActualMean, 2))) / times);
         System.out.println("normal actual mean: " + normalActualMean);
         System.out.println("normal expected mean: " + mean);
-        System.out.println("normal actual standard deviation: " + normalActualStdev);
+        System.out.println("normal actual standard deviation: " + Util.stdev(normalList, normalActualMean, times));
         System.out.println("normal expected standard deviation: " + stdev);
         System.out.println();
     }
@@ -50,10 +49,9 @@ public class MonteCarlo {
         var logList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) logList.add(logRandom.next());
         var logActualMean = logList.stream().collect(Collectors.averagingDouble(x -> Math.log(x)));
-        var logActualStdev = Math.sqrt(logList.stream().collect(Collectors.summingDouble(x -> Math.pow(Math.log(x) - logActualMean, 2))) / times);
         System.out.println("log actual mean: " + logActualMean);
         System.out.println("log expected mean: " + mean);
-        System.out.println("log actual standard deviation: " + logActualStdev);
+        System.out.println("log actual standard deviation: " + Util.logNormalStddev(logList, logActualMean, times));
         System.out.println("log expected standard deviation: " + stdev);
         System.out.println();
     }
@@ -63,7 +61,7 @@ public class MonteCarlo {
         var uniformRandomInterval = Interval.uniformRandomWithInterval(uniformInterval);
         var uniformRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) uniformRandomIntervalList.add(uniformRandomInterval.next());
-        uniformRandomIntervalList.sort(Comparator.comparingDouble(x -> x));
+        uniformRandomIntervalList.sort(Comparator.naturalOrder());
         var uniformFivePercent = (int) (times * 0.05);
         var uniformNinetyIntervalStart = uniformRandomIntervalList.get(uniformFivePercent);
         var uniformNinetyIntervalEnd = uniformRandomIntervalList.get(times - uniformFivePercent);
@@ -77,7 +75,7 @@ public class MonteCarlo {
         var normalRandomInterval = Interval.normalRandomWithInterval(normalInterval);
         var normalRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) normalRandomIntervalList.add(normalRandomInterval.next());
-        normalRandomIntervalList.sort(Comparator.comparingDouble(x -> x));
+        normalRandomIntervalList.sort(Comparator.naturalOrder());
         var normalFivePercent = (int) (times * 0.05);
         var normalNinetyIntervalStart = normalRandomIntervalList.get(normalFivePercent);
         var normalNinetyIntervalEnd = normalRandomIntervalList.get(times - normalFivePercent);
@@ -91,7 +89,7 @@ public class MonteCarlo {
         var logRandomInterval = Interval.normalRandomWithInterval(logInterval);
         var logRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) logRandomIntervalList.add(logRandomInterval.next());
-        logRandomIntervalList.sort(Comparator.comparingDouble(x -> x));
+        logRandomIntervalList.sort(Comparator.naturalOrder());
         var logFivePercent = (int) (times * 0.05);
         var logNinetyIntervalStart = logRandomIntervalList.get(logFivePercent);
         var logNinetyIntervalEnd = logRandomIntervalList.get(times - logFivePercent);
@@ -127,7 +125,7 @@ public class MonteCarlo {
         int totalDays = 42;
         int delayThresholdPercent = 100;
         for (int i = 0; i < 10; i++) list.add(getChanceWillFinish(estimatedDays, uncertainty, totalDays, delayThresholdPercent));
-        list.sort(Comparator.comparingDouble(x -> x));
+        list.sort(Comparator.naturalOrder());
         for (Double i : list) System.out.println(i + "% chance to finish");
     }
 
@@ -140,11 +138,16 @@ public class MonteCarlo {
         // normalInterval(intervalLowerBound, intervalUpperBound);
         // logInterval(intervalLowerBound, intervalUpperBound);
 
-        var work = new SequentialWork(0, new Work ());
-        // var work = new Work();
+        var sequentialWork = new SequentialWork(new Work(10, 0), new Work(9, 0));
+        var parallelWork = new ParallelWork(new Work(11, 0), sequentialWork);
+        
+        // var parallelWork = new ParallelWork(new Work(2, 0), new Work(7, 0));
+        // var sequentialWork = new SequentialWork(new Work(10, 0), new Work(5, 0), parallelWork);
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(work.generateEndTime(logMean, logStdev));
-        }
+        var result = new ArrayList<Double>();
+        for (int i = 0; i < 10; i++) result.add(parallelWork.generateEndTime());
+        result.sort(Comparator.naturalOrder());
+        for (double x : result) System.out.println(x);
+        System.out.println("actual stdev: " + Util.stdev(result, Util.mean(result), result.size()));
     }
 }
