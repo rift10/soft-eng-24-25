@@ -12,12 +12,21 @@ public class Util {
         return (int) list.stream().filter(x -> x == number).count();
     }
 
-    public static List<String> readFile(Path filePath) {
+    public static List<String> readFileToList(Path filePath) {
         try {
             return Files.readAllLines(filePath);
         } catch (IOException ex) {
             System.err.println(ex);
         }
         return new ArrayList<>();
+    }
+
+    public static String readFileToString(Path filePath) {
+        try {
+            return Files.readString(filePath);
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        return new String();
     }
 }

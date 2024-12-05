@@ -1,15 +1,14 @@
 package net.berkeley.students.rebeccafogartythomas;
 
-import net.berkeley.students.rebeccafogartythomas.day_one.DayOne;
-import net.berkeley.students.rebeccafogartythomas.day_two.DayTwo;
+import java.util.List;
+import net.berkeley.students.rebeccafogartythomas.day_three.DayThree;
 
 public class AdventOfCode {
 
-    private static final DayOne dayOne = new DayOne();
-    private static final DayTwo dayTwo = new DayTwo();
+    // private static final List<Day> days = List.of(new DayOne(), new DayTwo(), new DayThree(), new DayFour, new DayFive());
+    private static final List<Day> days = List.of(new DayThree());
 
     public static void main(String[] args) {
-        // dayOne.run();
-        dayTwo.run();
+        for (Day day : days) day.run();
     }
 }

@@ -3,9 +3,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
 
-public class DayOne {
+public class DayOne implements Day {
 
     private List<String> bigList = new ArrayList<>();
     private final List<Integer> listOne = new ArrayList<>();
@@ -14,8 +15,9 @@ public class DayOne {
     private int similarityScore = 0;
     private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day_one/Input.txt");
 
+    @Override
     public void run() {
-        bigList = Util.readFile(filePath);
+        bigList = Util.readFileToList(filePath);
 
         for (int i = 0; i < bigList.size(); i++) {
             listOne.add(Integer.valueOf(bigList.get(i).substring(0, 5)));

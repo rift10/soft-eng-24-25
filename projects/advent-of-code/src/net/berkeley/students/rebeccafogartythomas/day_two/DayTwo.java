@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
 
-public class DayTwo {
+public class DayTwo implements Day {
     private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day_two/Input.txt");
     private List<String> file = new ArrayList<>();
     private final List<List<String>> list = new ArrayList<>();
@@ -15,8 +17,9 @@ public class DayTwo {
     private int safeReportCount;
     private int problemDampenedSafeReportCount;    
 
+    @Override
     public void run() {
-        file = Util.readFile(filePath);
+        file = Util.readFileToList(filePath);
         for (int i = 0; i < file.size(); i++) {
             list.add(Arrays.asList(file.get(i).split("\\s+")));
         }
