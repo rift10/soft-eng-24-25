@@ -1,5 +1,5 @@
 SHELL		:= bash -O globstar
-USERNAME	:= $(error Set the USERNAME variable in the Makefile to the part of your student email before the @)
+USERNAME	:= rebeccafogartythomas
 MAIN_CLASS	:= net.berkeley.students.$(USERNAME).AdventOfCode
 
 all: build run
