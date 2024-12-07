@@ -1,4 +1,4 @@
-package net.berkeley.students.rebeccafogartythomas.day_three;
+package net.berkeley.students.rebeccafogartythomas.day3;
 
 /**
  * Record to represent a function

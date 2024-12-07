@@ -1,4 +1,4 @@
-package net.berkeley.students.rebeccafogartythomas.day_one;
+package net.berkeley.students.rebeccafogartythomas.day1;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;

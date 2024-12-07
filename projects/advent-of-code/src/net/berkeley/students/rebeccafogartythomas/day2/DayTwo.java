@@ -1,4 +1,4 @@
-package net.berkeley.students.rebeccafogartythomas.day_two;
+package net.berkeley.students.rebeccafogartythomas.day2;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
