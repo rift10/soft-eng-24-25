@@ -10,7 +10,7 @@ import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
 
 public class DayTwo implements Day {
-    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day_two/Input.txt");
+    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day2/Input.txt");
     private List<String> file = new ArrayList<>();
     private final List<List<String>> list = new ArrayList<>();
     private final List<List<String>> unsafe = new ArrayList<>();

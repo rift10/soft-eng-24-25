@@ -12,7 +12,7 @@ import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
 
 public class DayThree implements Day {
-    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day_three/Input.txt");
+    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day3/Input.txt");
     private final String input = Util.readFileToString(filePath);
     
     private final Pattern mulPattern = Pattern.compile("mul[(]\\d+,\\d+[)]");

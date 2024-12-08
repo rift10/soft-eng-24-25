@@ -13,7 +13,7 @@ public class DayOne implements Day {
     private final List<Integer> listTwo = new ArrayList<>();
     private int total = 0;
     private int similarityScore = 0;
-    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day_one/Input.txt");
+    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day1/Input.txt");
 
     @Override
     public void run() {
