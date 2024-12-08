@@ -7,8 +7,8 @@ import randomvariables.NormalRandomVariable;
 import randomvariables.UniformRandomVariable;
 import work.ParallelWork;
 import work.SequentialWork;
+import work.SimpleWork;
 import work.Work;
-
 
 public class MonteCarlo {
 
@@ -36,10 +36,10 @@ public class MonteCarlo {
         var normalRandom = new NormalRandomVariable(mean, stdev);
         var normalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) normalList.add(normalRandom.next());
-        var normalActualMean = normalList.stream().collect(Collectors.averagingDouble(x -> x));
+        var normalActualMean = Util.mean(normalList);
         System.out.println("normal actual mean: " + normalActualMean);
         System.out.println("normal expected mean: " + mean);
-        System.out.println("normal actual standard deviation: " + Util.stdev(normalList, normalActualMean, times));
+        System.out.println("normal actual standard deviation: " + Util.stdev(normalList));
         System.out.println("normal expected standard deviation: " + stdev);
         System.out.println();
     }
@@ -51,14 +51,14 @@ public class MonteCarlo {
         var logActualMean = logList.stream().collect(Collectors.averagingDouble(x -> Math.log(x)));
         System.out.println("log actual mean: " + logActualMean);
         System.out.println("log expected mean: " + mean);
-        System.out.println("log actual standard deviation: " + Util.logNormalStddev(logList, logActualMean, times));
+        System.out.println("log actual standard deviation: " + Util.stdev(logList));
         System.out.println("log expected standard deviation: " + stdev);
         System.out.println();
     }
 
     public static void uniformInterval(int lowerBound, int upperBound) {
         var uniformInterval = new Interval(lowerBound, upperBound);
-        var uniformRandomInterval = Interval.uniformRandomWithInterval(uniformInterval);
+        var uniformRandomInterval = uniformInterval.uniformRandomWithInterval();
         var uniformRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) uniformRandomIntervalList.add(uniformRandomInterval.next());
         uniformRandomIntervalList.sort(Comparator.naturalOrder());
@@ -72,7 +72,7 @@ public class MonteCarlo {
 
     public static void normalInterval(int lowerBound, int upperBound) {
         var normalInterval = new Interval(lowerBound, upperBound);
-        var normalRandomInterval = Interval.normalRandomWithInterval(normalInterval);
+        var normalRandomInterval = normalInterval.normalRandomWithInterval();
         var normalRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) normalRandomIntervalList.add(normalRandomInterval.next());
         normalRandomIntervalList.sort(Comparator.naturalOrder());
@@ -86,7 +86,7 @@ public class MonteCarlo {
 
     public static void logInterval(int lowerBound, int upperBound) {
         var logInterval = new Interval(lowerBound, upperBound);
-        var logRandomInterval = Interval.normalRandomWithInterval(logInterval);
+        var logRandomInterval = logInterval.normalRandomWithInterval();
         var logRandomIntervalList = new ArrayList<Double>();
         for (int i = 0; i < times; i++) logRandomIntervalList.add(logRandomInterval.next());
         logRandomIntervalList.sort(Comparator.naturalOrder());
@@ -138,16 +138,22 @@ public class MonteCarlo {
         // normalInterval(intervalLowerBound, intervalUpperBound);
         // logInterval(intervalLowerBound, intervalUpperBound);
 
-        var sequentialWork = new SequentialWork(new Work(10, 0), new Work(9, 0));
-        var parallelWork = new ParallelWork(new Work(11, 0), sequentialWork);
+        // var sequentialWork = new SequentialWork(new Work(10, 0), new Work(9, 0));
+        // var parallelWork = new ParallelWork(new Work(11, 0), sequentialWork);
         
         // var parallelWork = new ParallelWork(new Work(2, 0), new Work(7, 0));
         // var sequentialWork = new SequentialWork(new Work(10, 0), new Work(5, 0), parallelWork);
 
+        var partOne = new ParallelWork(new SimpleWork(1, 0.1), new SimpleWork(1, 0));
+        var partTwo = new ParallelWork(new SimpleWork(1, 0), new SimpleWork(1, 0));
+        var partThree = new ParallelWork(new SimpleWork(1, 0), new SimpleWork(1, 0));
+        var partFour = new ParallelWork(new SimpleWork(1, 0), new SimpleWork(1, 0));
+        var project = new SequentialWork(partOne, partTwo, partThree, partFour);
+
         var result = new ArrayList<Double>();
-        for (int i = 0; i < 10; i++) result.add(parallelWork.generateEndTime());
+        for (int i = 0; i < 10; i++) result.add(project.generateEndTime());
         result.sort(Comparator.naturalOrder());
         for (double x : result) System.out.println(x);
-        System.out.println("actual stdev: " + Util.stdev(result, Util.mean(result), result.size()));
+        System.out.println("actual stdev: " + Util.stdev(result));
     }
 }

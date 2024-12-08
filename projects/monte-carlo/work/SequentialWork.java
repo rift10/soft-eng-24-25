@@ -4,12 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SequentialWork extends Work {
+public class SequentialWork implements Work {
 
     private final List<Work> works;
 
     public SequentialWork(Work... works) {
-        super(0, 0);
         this.works = Arrays.stream(works).toList();
     }
 

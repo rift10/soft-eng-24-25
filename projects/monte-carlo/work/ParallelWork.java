@@ -3,12 +3,11 @@ package work;
 import java.util.Arrays;
 import java.util.List;
 
-public class ParallelWork extends Work {
+public class ParallelWork implements Work {
 
     private final List<Work> works;
 
     public ParallelWork(Work... works) {
-        super(0, 0);
         this.works = Arrays.stream(works).toList();
     }
 

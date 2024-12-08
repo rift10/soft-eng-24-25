@@ -31,17 +31,17 @@ public class Interval {
         return upperBound - lowerBound;
     }
 
-    public static UniformRandomVariable uniformRandomWithInterval(Interval interval) {
-        var x = (interval.getRange() / 0.9 - interval.getRange()) / 2;
-        return new UniformRandomVariable(interval.getLowerBound() - x, interval.getUpperBound() + x);
+    public UniformRandomVariable uniformRandomWithInterval() {
+        var x = (getRange() / 0.9 - getRange()) / 2;
+        return new UniformRandomVariable(getLowerBound() - x, getUpperBound() + x);
     }
 
-    public static NormalRandomVariable normalRandomWithInterval(Interval interval) {
-        return new NormalRandomVariable((interval.getLowerBound() + interval.getUpperBound()) / 2,
-                ((interval.getUpperBound() - interval.getLowerBound()) / 2) / 1.645);
+    public NormalRandomVariable normalRandomWithInterval() {
+        return new NormalRandomVariable((getLowerBound() + getUpperBound()) / 2,
+                ((getUpperBound() - getLowerBound()) / 2) / 1.645);
     }
 
-    public static LogNormalRandomVariable logNormalRandomWithInterval(Interval interval) {
-        return new LogNormalRandomVariable(interval.getLowerBound(), interval.getUpperBound());
+    public LogNormalRandomVariable logNormalRandomWithInterval() {
+        return new LogNormalRandomVariable(getLowerBound(), getUpperBound());
     }
 }
