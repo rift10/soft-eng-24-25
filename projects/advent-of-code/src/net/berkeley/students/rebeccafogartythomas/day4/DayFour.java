@@ -12,11 +12,13 @@ public class DayFour implements Day {
     private List<String> list = new ArrayList<>();
     private int xmasCount = 0;
     private final int xmasLength = 2;
+    private final boolean isPartTwo = false;
 
     @Override
     public void run() {
         list = Util.readFileToList(filePath);
-        findMasesInX();
+        if (!isPartTwo) findXmases();
+        else findMasesInX();
         System.out.println(xmasCount);
     }
 

@@ -7,24 +7,26 @@ import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
 
 public class DayOne implements Day {
-
+    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day1/Input.txt");
     private List<String> bigList = new ArrayList<>();
     private final List<Integer> listOne = new ArrayList<>();
     private final List<Integer> listTwo = new ArrayList<>();
+    private final boolean isTestCase = false;
     private int total = 0;
     private int similarityScore = 0;
-    private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day1/Input.txt");
-
+    
     @Override
     public void run() {
         bigList = Util.readFileToList(filePath);
 
         for (int i = 0; i < bigList.size(); i++) {
-            listOne.add(Integer.valueOf(bigList.get(i).substring(0, 5)));
-            listTwo.add(Integer.valueOf(bigList.get(i).substring(8, 13)));
-            // for test case
-            // listOne.add(Integer.valueOf(bigList.get(i).substring(0, 1)));
-            // listTwo.add(Integer.valueOf(bigList.get(i).substring(4, 5)));
+            if (!isTestCase) {
+                listOne.add(Integer.valueOf(bigList.get(i).substring(0, 5)));
+                listTwo.add(Integer.valueOf(bigList.get(i).substring(8, 13)));
+            } else {
+                listOne.add(Integer.valueOf(bigList.get(i).substring(0, 1)));
+                listTwo.add(Integer.valueOf(bigList.get(i).substring(4, 5)));
+            }
         }
         
         listOne.sort(Comparator.naturalOrder());
