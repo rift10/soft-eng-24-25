@@ -11,7 +11,7 @@ import net.berkeley.students.rebeccafogartythomas.Util;
 
 public class DayTwo implements Day {
     private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day2/Input.txt");
-    private List<String> file = new ArrayList<>();
+    private final List<String> file = Util.readFileToList(filePath);
     private final List<List<String>> list = new ArrayList<>();
     private final List<List<String>> unsafe = new ArrayList<>();
     private int safeReportCount;
@@ -19,7 +19,6 @@ public class DayTwo implements Day {
 
     @Override
     public void run() {
-        file = Util.readFileToList(filePath);
         for (int i = 0; i < file.size(); i++) {
             list.add(Arrays.asList(file.get(i).split("\\s+")));
         }

@@ -1,7 +1,6 @@
 package net.berkeley.students.rebeccafogartythomas.day4;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
@@ -9,14 +8,13 @@ import net.berkeley.students.rebeccafogartythomas.Util;
 public class DayFour implements Day {
 
     private final Path filePath = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day4/Input.txt");
-    private List<String> list = new ArrayList<>();
+    private final List<String> list = Util.readFileToList(filePath);
     private int xmasCount = 0;
     private final int xmasLength = 2;
     private final boolean isPartTwo = false;
 
     @Override
     public void run() {
-        list = Util.readFileToList(filePath);
         if (!isPartTwo) findXmases();
         else findMasesInX();
         System.out.println(xmasCount);
