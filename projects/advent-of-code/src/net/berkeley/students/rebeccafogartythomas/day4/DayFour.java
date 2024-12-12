@@ -117,4 +117,8 @@ public class DayFour implements Day {
         }
     }
 
+    @Override
+    public int getDayNumber() {
+        return 4;
+    }
 }

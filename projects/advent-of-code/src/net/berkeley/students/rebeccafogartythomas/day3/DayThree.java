@@ -61,4 +61,9 @@ public class DayThree implements Day {
 
         System.out.println(sum);
     }
+
+    @Override
+    public int getDayNumber() {
+        return 3;
+    }
 }

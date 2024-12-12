@@ -30,7 +30,7 @@ public class DaySix implements Day {
             }
         }
         
-        System.out.println(obstacles);
+        // System.out.println(obstacles);
 
         while (isInBounds(currentPos)) {
             if (!spotsVisited.contains(List.of(currentPos[0], currentPos[1])))
@@ -64,7 +64,7 @@ public class DaySix implements Day {
         if (obstacles.contains(List.of(currentPos[0], currentPos[1] + 1))) {
             direction = Direction.SOUTH;
             moveSouthLogic();
-            System.out.println("turning to direction: " + direction);
+            // System.out.println("turning to direction: " + direction);
         }
         else moveEast(); 
     }
@@ -73,7 +73,7 @@ public class DaySix implements Day {
         if (obstacles.contains(List.of(currentPos[0] - 1, currentPos[1]))) {
             direction = Direction.EAST;
             moveEastLogic();
-            System.out.println("turning to direction: " + direction);
+            // System.out.println("turning to direction: " + direction);
         }
         else moveNorth();
     }
@@ -82,7 +82,7 @@ public class DaySix implements Day {
         if (obstacles.contains(List.of(currentPos[0] + 1, currentPos[1]))) {
             direction = Direction.WEST;
             moveWestLogic();
-            System.out.println("turning to direction: " + direction);
+            // System.out.println("turning to direction: " + direction);
         }
         else moveSouth();
     }
@@ -91,7 +91,7 @@ public class DaySix implements Day {
         if (obstacles.contains(List.of(currentPos[0], currentPos[1] - 1))) {
             direction = Direction.NORTH;
             moveNorth();
-            System.out.println("turning to direction: " + direction);
+            // System.out.println("turning to direction: " + direction);
         }
         else moveWest();
     }
@@ -115,5 +115,10 @@ public class DaySix implements Day {
     private boolean isInBounds(int[] pos) {
         return pos[0] >= 0 && pos[0] < list.size()
                 && pos[1] >= 0 && pos[1] < list.get(0).length();
+    }
+
+    @Override
+    public int getDayNumber() {
+        return 6;
     }
 }

@@ -38,4 +38,9 @@ public class DayOne implements Day {
         System.out.println("total: " + total); // answer: 1879048
         System.out.println("similarity score: " + similarityScore); // answer: 21024792
     }
+
+    @Override
+    public int getDayNumber() {
+        return 1;
+    }
 }

@@ -64,4 +64,9 @@ public class DayTwo implements Day {
         }
         return false;
     }
+
+    @Override
+    public int getDayNumber() {
+        return 2;
+    }
 }
