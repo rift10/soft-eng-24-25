@@ -21,16 +21,12 @@ public class DayFive implements Day {
     @Override
     public void run() {
 
-        for (String rule: rulesInput) {
-            rules.add(List.of(Integer.valueOf(rule.substring(0, 2)), Integer.valueOf(rule.substring(3, 5))));
-        }
+        for (String rule: rulesInput) rules.add(List.of(Integer.valueOf(rule.substring(0, 2)), Integer.valueOf(rule.substring(3, 5))));
 
         for (List<Integer> update : updates) {
             boolean passesAllRules = checkUpdate(update);
             if (passesAllRules) correctUpdates.add(update);
-            else {
-                fixedUpdates.add(getFixedUpdate(update));
-            }
+            else fixedUpdates.add(getFixedUpdate(update));
         }
 
         if (partTwo) {
@@ -121,7 +117,7 @@ public class DayFive implements Day {
     private List<Integer> swap(List<Integer> input, int firstIndex, int secondIndex) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < input.size(); i++) {
-            if (i== firstIndex) {
+            if (i == firstIndex) {
                 result.add(input.get(secondIndex));
             } else if (i == secondIndex) {
                 result.add(input.get(firstIndex));
