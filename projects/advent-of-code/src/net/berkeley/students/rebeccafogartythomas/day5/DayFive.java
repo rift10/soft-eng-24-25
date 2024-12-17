@@ -54,6 +54,10 @@ public class DayFive implements Day {
         return isSecondPartOfRuleAfterIndex(update, page) && isFirstPartOfRuleBeforeIndex(update, page);
     }
 
+    /**
+     * loops through all the rules and checks if the first page in the rule is the current page,
+     * and if the index of the second page in the rule is after the index of the current page
+     */
     private boolean isSecondPartOfRuleAfterIndex(List<Integer> update, int page) {
         boolean result = true;
         for (List<Integer> rule : rules) {
@@ -64,6 +68,10 @@ public class DayFive implements Day {
         return result;
     }
 
+    /**
+     * loops through all the rules and checks if the seconf page in the rule is the current page,
+     * and if the index of the first page in the rule is before the index of the current page
+     */
     private boolean isFirstPartOfRuleBeforeIndex(List<Integer> update, int page) {
         boolean result = true;
         for (List<Integer> rule : rules) {
@@ -74,6 +82,12 @@ public class DayFive implements Day {
         return result;
     }
 
+    /**
+     * gets the index of the page that is in an incorrect position
+     * if that page is supposed to be before the current page
+     * @apiNote only works if we have already determined
+     * that there is a page not where it should be
+     */
     private int getFirstPartOfRuleIndex(List<Integer> update, int page) {
         boolean result = true;
         for (List<Integer> rule : rules) {
@@ -87,6 +101,12 @@ public class DayFive implements Day {
         return -1;
     }
 
+    /**
+     * gets the index of the page that is in an incorrect position
+     * if that page is supposed to be after the current page
+     * @apiNote only works if we have already determined
+     * that there is a page not where it should be
+     */
     private int getSecondPartOfRuleIndex(List<Integer> update, int page) {
         boolean result = true;
         for (List<Integer> rule : rules) {
