@@ -29,8 +29,8 @@ public class Util {
     public static String readFileToString(Path filePath) {
         try {
             return Files.readString(filePath);
-        } catch (IOException ex) {
-            System.err.println(ex);
+        } catch (IOException e) {
+            System.err.println(e);
         }
         return new String();
     }
@@ -39,7 +39,7 @@ public class Util {
         try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             return br.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
         return new String();
     }
@@ -57,6 +57,14 @@ public class Util {
         return List.of(string.split(splitter)).stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 
+    public static List<Integer> parseStringToIntList(String string) {
+        List<Integer> result = new ArrayList<>();
+        for (String ch : string.split("")) {
+            result.add(Integer.valueOf(ch));
+        }
+        return result;
+    }
+
     public static List<Long> intsToLongs(List<Integer> list) {
         return list.stream().map(Integer::longValue).collect(Collectors.toList());
     }
@@ -67,7 +75,7 @@ public class Util {
                 writer.println(x);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
 

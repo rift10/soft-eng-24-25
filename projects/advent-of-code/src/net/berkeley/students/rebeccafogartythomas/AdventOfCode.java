@@ -1,7 +1,7 @@
 package net.berkeley.students.rebeccafogartythomas;
 
 import java.util.List;
-import net.berkeley.students.rebeccafogartythomas.day6.DaySix;
+import net.berkeley.students.rebeccafogartythomas.day7.DaySeven;
 
 public class AdventOfCode {
 
@@ -11,12 +11,20 @@ public class AdventOfCode {
         // new DayThree(),
         // new DayFour(),
         // new DayFive(),
-        new DaySix()
-        // new DaySeven(),
+        // new DaySix()
+        new DaySeven()
         // new DayEight()
+        // new DayNine()
+        // new DayTen()
+        // new DayEleven()
+        // new DayTwelve()
         );
 
     public static void main(String[] args) { 
-        for (Day day : days) day.run();
+        for (Day day : days) {
+            System.out.println("day " + day.getDayNumber());
+            day.run();
+            System.out.println();
+        }
     }
 }
