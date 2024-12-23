@@ -7,12 +7,18 @@ import net.berkeley.students.rebeccafogartythomas.Day;
 import net.berkeley.students.rebeccafogartythomas.Util;
 
 public class DaySix implements Day {
+    // private final Path path = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day6/Test.txt");
     private final Path path = Path.of("/workspaces/rift10/projects/advent-of-code/src/net/berkeley/students/rebeccafogartythomas/day6/Input.txt");
     private final List<String> list = Util.readFileToList(path);
     private final List<List<Integer>> obstacles = new ArrayList<>();
     private final List<List<Integer>> spotsVisited = new ArrayList<>();
+    private final List<List<Integer>> originalSpotsVisited = new ArrayList<>();
     private final int[] currentPos = new int[2];
+    private final int[] initPos = new int[2];
     private Direction direction = Direction.NORTH;
+    private int repetition = 0;
+    private int possiblePositions = 0;
+    private boolean shouldContinue = false;
 
     @Override
     public void run() {
@@ -22,6 +28,10 @@ public class DaySix implements Day {
                 currentPos[1] = list.get(i).indexOf("^");
             }
         }
+        
+        initPos[0] = currentPos[0];
+        initPos[1] = currentPos[1];
+
         for (int i = 0; i < list.size(); i++) {
             for (int j = 0; j < list.get(0).length(); j++) {
                 if (list.get(i).charAt(j) == '#') {
@@ -29,16 +39,10 @@ public class DaySix implements Day {
                 }
             }
         }
-        
-        // System.out.println(obstacles);
 
         while (isInBounds(currentPos)) {
-            if (!spotsVisited.contains(List.of(currentPos[0], currentPos[1])))
-                spotsVisited.add(List.of(currentPos[0], currentPos[1]));
-
-            // else System.out.println("already visited " + currentPos[0] + ", " + currentPos[1]);
-    
-            // System.out.println("current pos: " + currentPos[0] + ", " + currentPos[1]);
+            if (!originalSpotsVisited.contains(List.of(currentPos[0], currentPos[1])))
+                originalSpotsVisited.add(List.of(currentPos[0], currentPos[1]));
     
             switch (direction) {
                 case EAST -> {
@@ -56,8 +60,68 @@ public class DaySix implements Day {
             }
         }
 
-        // System.out.println(spotsVisited);
-        System.out.println(spotsVisited.size());
+        resetPos();
+
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.get(i).length(); j++) {
+                if (!originalSpotsVisited.contains(List.of(i, j)) || obstacles.contains(List.of(i, j))) continue;
+                obstacles.add(List.of(i, j));
+                System.out.println("current obstacle: " + List.of(i, j));
+                while (isInBounds(currentPos)) { 
+                    move();
+                    if (shouldContinue) {
+                        possiblePositions++;
+                        break;
+                    }
+                }
+                shouldContinue = false;
+                repetition = 0;
+                obstacles.remove(obstacles.size() - 1);
+                spotsVisited.clear();
+                resetPos();
+            }
+        }
+
+        // 1690 is too low
+        System.out.println(possiblePositions);
+    }
+
+    private void move() {
+        if (spotsVisited.contains(List.of(currentPos[0], currentPos[1]))) {
+            repetition++;
+            if (repetition > spotsVisited.size()) {
+                shouldContinue = true;
+                possiblePositions++;
+                return;
+            }
+            // System.out.println("already visited " + currentPos[0] + ", " + currentPos[1] + ", with obs " + obstacles.get(obstacles.size() - 1));
+            // System.out.println(repetition);
+        } else if (!spotsVisited.contains(List.of(currentPos[0], currentPos[1]))) {
+            spotsVisited.add(List.of(currentPos[0], currentPos[1]));
+            // System.out.println("current pos: " + currentPos[0] + ", " + currentPos[1]);
+            repetition = 0;
+        }
+    
+        switch (direction) {
+            case EAST -> {
+                moveEastLogic();
+            }
+            case NORTH -> {
+                moveNorthLogic();
+            }
+            case SOUTH -> {
+                moveSouthLogic();
+            }
+            case WEST -> {
+                moveWestLogic();
+            }
+        }
+    }
+
+    private void resetPos() {
+        currentPos[0] = initPos[0];
+        currentPos[1] = initPos[1];
+        direction = Direction.NORTH;
     }
 
     private void moveEastLogic() {
