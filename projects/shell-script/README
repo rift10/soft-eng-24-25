@@ -1,0 +1,9 @@
+Write whatever shell script you want in here.
+
+Remeber a bash script should start with:
+
+   #!/usr/bin/env bash
+
+   set -euo pipefail
+
+The rest is up to you.
