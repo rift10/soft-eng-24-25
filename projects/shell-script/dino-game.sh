@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+jcount="0"
 up="0"
 dead="0"
 dino="P"
@@ -26,13 +27,13 @@ printdino() {
 }
 
 while [ "$dead" -eq 0 ]; do
-    printf "%s" "$score"
+    printf "%s" "$(( $score / 121))" # one obstacle passes every 121 frames
     echo ""
     getkey
 
     case $keypress in
-        m) up="1" ;; # press m to jump
-        *) up="0" ;;
+        m)  up="1" # press m to jump
+            jcount="1" ;; # we start jumping so up jcount
     esac
 
     if [ "$up" -eq 0 ]; then # if player hasnt jumped
@@ -59,8 +60,14 @@ while [ "$dead" -eq 0 ]; do
     echo "$obs"
     echo "$ground"
 
-    # update spacing, score, and jump boolean
+    # update spacing, score, and jumping
     ((cur_space--))
     ((score+=1))
-    up="0"
+    if [ "$jcount" -ge 1 ]; then
+        ((jcount+=1))
+    fi
+    if [ "$jcount" -eq 8 ]; then # stop jumping after set amount of frames
+        up="0"
+        jcount="0"
+    fi
 done
