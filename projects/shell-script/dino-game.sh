@@ -27,7 +27,7 @@ printdino() {
 }
 
 while [ "$dead" -eq 0 ]; do
-    printf "%s" "$(( $score / 121))" # one obstacle passes every 121 frames
+    printf "%s" "$(( score / 121))" # one obstacle passes every 121 frames
     echo ""
     getkey
 
@@ -42,10 +42,11 @@ while [ "$dead" -eq 0 ]; do
     else # if player has jumped
         printdino
         echo ""
-        printf "%0.s " $(seq 1 "$(( $dino_pos + 1 ))") # compensate for space
+        printf "%0.s " $(seq 1 "$(( dino_pos + 1 ))") # compensate for space
     fi
 
     # print space before obstacle
+    # shellcheck disable=SC2034
     for i in $(seq 1 "$cur_space"); do
         printf " "
     done
