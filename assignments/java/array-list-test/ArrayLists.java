@@ -59,4 +59,12 @@ public class ArrayLists {
     }
     return result;
   }
+
+  public void chickenFirst(ArrayList<String> ss) {
+    for (int i = 0; i < ss.size(); i++) {
+      if (ss.get(i) == "egg") {
+        ss.add(i-1, "chicken");
+      }
+    }
+  }
 }
