@@ -98,12 +98,12 @@ public class ArrayLists {
     } else return two;
   }
 
-  public int mean(ArrayList<Integer> list) {
+  public int sum(ArrayList<Integer> list) {
     if (list.size() == 0) return 0;
     int result = 0;
     for (Integer x : list) {
       result+=x;
     }
-    return result/list.size();
+    return result;
   }
 }
