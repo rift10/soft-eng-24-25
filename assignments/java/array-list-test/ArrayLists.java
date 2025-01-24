@@ -61,7 +61,7 @@ public class ArrayLists {
   }
 
   public void chickenFirst(ArrayList<String> ss) {
-    for (int i = 0; i < ss.size(); i++) {
+    for (int i = 1; i < ss.size(); i++) {
       if (ss.get(i) == "egg") {
         ss.add(i-1, "chicken");
       }
