@@ -93,7 +93,7 @@ public class ArrayLists {
   }
 
   public ArrayList<Integer> biggerSum(ArrayList<Integer> one, ArrayList<Integer> two) {
-    if (mean(one) > mean(two)) {
+    if (sum(one) >= sum(two)) {
       return one;
     } else return two;
   }
