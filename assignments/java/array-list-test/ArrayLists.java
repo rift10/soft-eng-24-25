@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Math;
 
 public class ArrayLists {
 
@@ -103,6 +104,6 @@ public class ArrayLists {
     for (Integer x : list) {
       result+=x;
     }
-    return result/list.size();
+    return Math.abs(result/list.size());
   }
 }
