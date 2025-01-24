@@ -35,4 +35,12 @@ public class ArrayLists {
       }
     }
   }
+
+  public int countCapitalized(ArrayList<String> ss) {
+    int result = 0;
+    for (int i = 0; i < ss.size(); i++) {
+      if (isCapitalized(ss.get(i))) result++;
+    }
+    return result;
+  }
 }
