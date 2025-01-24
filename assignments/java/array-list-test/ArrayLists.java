@@ -69,7 +69,7 @@ public class ArrayLists {
   // }
 
   public void actuallyEggFirst(ArrayList<String> ss) {
-    for (int i = 0; i < ss.size() - 1; i++) {
+    for (int i = 0; i < ss.size() - 2; i++) {
       if (ss.get(i) == "chicken" && ss.get(i+1) == "egg") {
         ss.remove(i);
         ss.remove(i+1);
