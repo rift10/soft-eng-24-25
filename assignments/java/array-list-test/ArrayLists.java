@@ -19,7 +19,7 @@ public class ArrayLists {
     return list;
   }
 
-  public ArrayList<String> shouty(List<String> ss) {
+  public ArrayList<String> shouty(ArrayList<String> ss) {
     var list = new ArrayList<String>();
     for (int i = 0; i < ss.size(); i++) {
       list.add(ss.get(i).toUpperCase());
