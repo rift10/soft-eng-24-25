@@ -79,7 +79,7 @@ public class ArrayLists {
   //   }
   // }
 
-  public void replaceEmpty(ArrayList<String> ss) {
+  public void removeEggs(ArrayList<String> ss) {
     for (int i = 0; i < ss.size(); i++) {
       if (ss.get(i) == "egg") {
         ss.remove(i);
