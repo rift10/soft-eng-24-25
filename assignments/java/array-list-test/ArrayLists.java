@@ -81,11 +81,23 @@ public class ArrayLists {
 
   public void removeEggs(ArrayList<String> ss) {
     for (int j = 0; j < 3; j++) {
-    for (int i = 0; i < ss.size(); i++) {
-      if (ss.get(i) == "egg") {
-        ss.remove(i);
+      for (int i = 0; i < ss.size(); i++) {
+        if (ss.get(i) == "egg") {
+          ss.remove(i);
+        }
       }
     }
-    }
+  }
+
+  public ArrayList<Integer> biggerSum(ArrayList<Integer> one, ArrayList<Integer> two) {
+    if (mean(one) > mean(two)) {
+      return one;
+    } else return two;
+  }
+
+  public int mean(ArrayList<Integer> list) {
+    int result = 0;
+    list.forEach(x -> result+=x);
+    return result;
   }
 }
