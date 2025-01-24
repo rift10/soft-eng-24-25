@@ -11,7 +11,7 @@ public class ArrayLists {
   }
 
   public int yummy(int x) {
-    ArrayList<>() list = new ArrayList<String>();
+    ArrayList() list = new ArrayList<String>();
     for (int i = 0; i < x; i++) {
       list.add("yum");
     }
