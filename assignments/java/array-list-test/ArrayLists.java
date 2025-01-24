@@ -21,7 +21,7 @@ public class ArrayLists {
 
   public ArrayList<String> shouty(List<String> ss) {
     var list = new ArrayList<String>();
-    for (int i = 0; i < ss.length(); i++) {
+    for (int i = 0; i < ss.size(); i++) {
       list.add(ss.get(i).toUpperCase());
     }
     return list;
