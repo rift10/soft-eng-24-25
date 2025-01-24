@@ -30,8 +30,8 @@ public class ArrayLists {
   public void replaceEmpty(ArrayList<String> ss) {
     for (int i = 0; i < ss.size(); i++) {
       if (ss.get(i).length() == 0) {
-        ss.add(i, "EMPTY");
-        ss.remove(i-1);
+        ss.add(i+1, "EMPTY");
+        ss.remove(i);
       }
     }
   }
