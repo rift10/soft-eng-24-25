@@ -62,13 +62,11 @@ public class ArrayLists {
   }
 
   public void chickenFirst(ArrayList<String> ss) {
-    var result = ss;
-      for (int i = 1; i < ss.size(); i++) {
-        if (ss.get(i) == "egg") {
-          result.add(i-1, "chicken");
-        }
+    for (int i = 1; i < ss.size(); i++) {
+      if (ss.get(i) == "egg") {
+        System.err.println("egg");
+      }
     }
-    ss = result;
   }
 
   public void actuallyEggFirst(ArrayList<String> ss) {
