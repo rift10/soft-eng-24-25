@@ -26,4 +26,10 @@ public class ArrayLists {
     }
     return list;
   }
+
+  public void replaceEmpty(ArrayList<String> ss) {
+    for (int i = 0; i < ss.size(); i++) {
+      ss.get(i) = "EMPTY";
+    }
+  }
 }
