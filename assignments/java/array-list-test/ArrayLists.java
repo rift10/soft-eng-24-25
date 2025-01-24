@@ -61,15 +61,15 @@ public class ArrayLists {
     return result;
   }
 
-  // public void chickenFirst(ArrayList<String> ss) {
-  //   // for (int j = 0; j < 3; j++) {
-  //     for (int i = 1; i < ss.size(); i++) {
-  //       if (ss.get(i) == "egg") {
-  //         ss.add(i-1, "chicken");
-  //       }
-  //     // }
-  //   }
-  // }
+  public void chickenFirst(ArrayList<String> ss) {
+    var result = ss;
+      for (int i = 1; i < ss.size(); i++) {
+        if (ss.get(i) == "egg") {
+          result.add(i-1, "chicken");
+        }
+    }
+    ss = result;
+  }
 
   public void actuallyEggFirst(ArrayList<String> ss) {
     for (int i = 0; i < ss.size() - 1; i++) {
