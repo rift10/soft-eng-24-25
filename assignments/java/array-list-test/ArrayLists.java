@@ -60,10 +60,21 @@ public class ArrayLists {
     return result;
   }
 
-  public void chickenFirst(ArrayList<String> ss) {
-    for (int i = 1; i < ss.size(); i++) {
-      if (ss.get(i) == "egg") {
-        ss.add(i-1, "chicken");
+  // public void chickenFirst(ArrayList<String> ss) {
+  //   for (int i = 1; i < ss.size(); i++) {
+  //     if (ss.get(i) == "egg") {
+  //       ss.add(i-1, "chicken");
+  //     }
+  //   }
+  // }
+
+  public void actuallyEggFirst(ArrayList<String> ss) {
+    for (int i = 0; i < ss.size(); i++) {
+      if (ss.get(i) == "chicken" && ss.get(i+1) == "egg") {
+        ss.remove(i);
+        ss.remove(i+1);
+        ss.add(i, "egg");
+        ss.add(i+1, "chicken");
       }
     }
   }
