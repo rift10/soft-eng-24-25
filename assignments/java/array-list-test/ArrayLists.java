@@ -68,13 +68,21 @@ public class ArrayLists {
   //   }
   // }
 
-  public void actuallyEggFirst(ArrayList<String> ss) {
-    for (int i = 0; i < ss.size() - 2; i++) {
-      if (ss.get(i) == "chicken" && ss.get(i+1) == "egg") {
+  // public void actuallyEggFirst(ArrayList<String> ss) {
+  //   for (int i = 0; i < ss.size() - 2; i++) {
+  //     if (ss.get(i) == "chicken" && ss.get(i+1) == "egg") {
+  //       ss.remove(i);
+  //       ss.remove(i+1);
+  //       ss.add(i, "egg");
+  //       ss.add(i+1, "chicken");
+  //     }
+  //   }
+  // }
+
+  public void replaceEmpty(ArrayList<String> ss) {
+    for (int i = 0; i < ss.size(); i++) {
+      if (ss.get(i) == "egg") {
         ss.remove(i);
-        ss.remove(i+1);
-        ss.add(i, "egg");
-        ss.add(i+1, "chicken");
       }
     }
   }
