@@ -10,7 +10,7 @@ public class ArrayLists {
     return s.equals(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase());
   }
 
-  public int yummy(int x) {
+  public ArrayList<String> yummy(int x) {
     var list = new ArrayList<String>();
     for (int i = 0; i < x; i++) {
       list.add("yum");
