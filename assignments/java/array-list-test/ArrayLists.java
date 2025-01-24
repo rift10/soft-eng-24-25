@@ -80,10 +80,12 @@ public class ArrayLists {
   // }
 
   public void removeEggs(ArrayList<String> ss) {
+    for (int j = 0; j < 3; j++) {
     for (int i = 0; i < ss.size(); i++) {
       if (ss.get(i) == "egg") {
         ss.remove(i);
       }
+    }
     }
   }
 }
