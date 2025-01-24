@@ -43,4 +43,12 @@ public class ArrayLists {
     }
     return result;
   }
+
+  public String findLastCapitalized(ArrayList<String> ss) {
+    String result = null;
+    for (int i = 0; i < ss.size(); i++) {
+      if (isCapitalized(ss.get(i))) result = ss.get(i);
+    }
+    return result;
+  }
 }
