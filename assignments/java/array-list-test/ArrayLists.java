@@ -97,8 +97,8 @@ public class ArrayLists {
 
   public int mean(ArrayList<Integer> list) {
     int result = 0;
-    for (x : list) {
-      result+=x
+    for (Integer x : list) {
+      result+=x;
     }
     return result/list.size();
   }
