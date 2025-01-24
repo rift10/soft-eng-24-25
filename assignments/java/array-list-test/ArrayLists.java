@@ -10,4 +10,11 @@ public class ArrayLists {
     return s.equals(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase());
   }
 
+  public int yummy(int x) {
+    ArrayList<>() list = new ArrayList<String>();
+    for (int i = 0; i < x; i++) {
+      list.add("yum");
+    }
+    return list;
+  }
 }
