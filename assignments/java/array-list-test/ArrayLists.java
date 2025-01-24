@@ -104,6 +104,6 @@ public class ArrayLists {
     for (Integer x : list) {
       result+=x;
     }
-    return Math.abs(result/list.size());
+    return result/list.size();
   }
 }
