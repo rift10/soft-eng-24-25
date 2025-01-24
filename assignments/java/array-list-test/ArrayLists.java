@@ -51,4 +51,12 @@ public class ArrayLists {
     }
     return result;
   }
+
+  public ArrayList<String> justCapitalized(ArrayList<String> ss) {
+    var result = new ArrayList<String>();
+    for (int i = 0; i < ss.size(); i++) {
+      if (isCapitalized(ss.get(i))) result.add(ss.get(i));
+    }
+    return result;
+  }
 }
