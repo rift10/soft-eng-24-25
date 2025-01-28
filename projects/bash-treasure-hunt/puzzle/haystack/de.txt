@@ -1,0 +1,2 @@
+just hay here
+3c844e59: Secret is in puzzle/base64.txt. Can you decode it?
