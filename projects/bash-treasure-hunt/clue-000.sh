@@ -8,3 +8,5 @@ set -euo pipefail
 # some cases you will be able to find the secret by hand but don't then write a
 # script that just prints out the secret because that won't work if the secret
 # changes.
+
+head -n1 "puzzle/FIRST_SECRET"
