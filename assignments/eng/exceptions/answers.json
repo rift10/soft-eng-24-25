@@ -11,5 +11,6 @@
   "\n                  In the caller of the method where the violated invariant is\n                  discovered.\n                ",
   "Postcondition",
   "In the method itself.",
-  "Class invariant"
+  "Class invariant",
+  "In the class’s constructor."
 ]
