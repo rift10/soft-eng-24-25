@@ -6,5 +6,6 @@
     "Exception",
     "catch",
     "throw"
-  ]
+  ],
+  "Precondition"
 ]
