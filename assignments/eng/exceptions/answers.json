@@ -2,7 +2,6 @@
   [
     "finally",
     "try",
-    "new",
     "Exception",
     "catch",
     "throw"
