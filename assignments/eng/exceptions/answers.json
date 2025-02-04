@@ -2,6 +2,7 @@
   [
     "finally",
     "try",
-    "Exception"
+    "Exception",
+    "catch"
   ]
 ]
