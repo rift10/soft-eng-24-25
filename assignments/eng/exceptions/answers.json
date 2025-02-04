@@ -15,5 +15,5 @@
   "In the class’s constructor.",
   "You can throw new exceptions for each function that fails, each taking in the lower level exception in the constructor",
   "1. To figure out which method is buggy & debug it more accurately (instead of the program crashing and you don't know why)\n2. To help other higher level methods find a way around the issue, instead of taking in a buggy value they can just catch the exception and return some sort of fallback default value",
-  "Runtime exceptions don't need to put in the code with a throws Exception at the end of a method or surrounded by a try catch, they are usually more common issues like array out of bounds. Other exceptions do need to be surrounded by a try catch or thrown."
+  "Runtime exceptions don't need to put in the code with a throws Exception at the end of a method or surrounded by a try catch, they are usually more common issues like array out of bounds (and they are still recorded in System.err). Other exceptions do need to be surrounded by a try catch or thrown."
 ]
