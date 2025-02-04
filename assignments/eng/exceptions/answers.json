@@ -13,5 +13,5 @@
   "In the method itself.",
   "Class invariant",
   "In the class’s constructor.",
-  "You can make new exceptions for each error you throw, taking in the lower level exception in the constructor"
+  "You can throw new exceptions for each function that fails, taking in the lower level exception in the constructor"
 ]
