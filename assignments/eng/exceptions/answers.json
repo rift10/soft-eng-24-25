@@ -12,5 +12,6 @@
   "Postcondition",
   "In the method itself.",
   "Class invariant",
-  "In the class’s constructor."
+  "In the class’s constructor.",
+  "You can make new exceptions for each error you throw, taking in the lower level exception in the constructor"
 ]
