@@ -7,5 +7,6 @@
   "*",
   "The tables where the data we want comes from.",
   "\n                  The condition that decides whether a row is included in the\n                  results\n                ",
-  "Distill multiple values into a single value."
+  "Distill multiple values into a single value.",
+  "JOIN"
 ]
