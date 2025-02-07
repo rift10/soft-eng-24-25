@@ -3,5 +3,6 @@
     "Structured Query Language"
   ],
   "LIMIT",
-  "The columns and computed values you want in the results"
+  "The columns and computed values you want in the results",
+  "*"
 ]
