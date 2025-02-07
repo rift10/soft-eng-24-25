@@ -5,5 +5,6 @@
   "LIMIT",
   "The columns and computed values you want in the results",
   "*",
-  "The tables where the data we want comes from."
+  "The tables where the data we want comes from.",
+  "\n                  The condition that decides whether a row is included in the\n                  results\n                "
 ]
