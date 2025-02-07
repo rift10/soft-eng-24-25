@@ -4,5 +4,6 @@
   ],
   "LIMIT",
   "The columns and computed values you want in the results",
-  "*"
+  "*",
+  "The database containing the tables we want to query."
 ]
