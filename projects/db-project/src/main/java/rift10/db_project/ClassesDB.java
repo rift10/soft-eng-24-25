@@ -17,8 +17,6 @@ public class ClassesDB {
         ) {
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
         
-        statement.executeUpdate("drop table if exists classes");
-        statement.executeUpdate("create table if not exists classes (classID integer, name string, AG string, grades integer, slc string, prereq string)");
         statement.executeUpdate("insert into classes values(12345, 'Anna Ray', 9, 'U9')");
         statement.executeUpdate("insert into classes values(23456, 'Bob Peters', 10, 'AMPS')");
         ResultSet rs = statement.executeQuery("select * from classes");

@@ -9,21 +9,6 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "rift10.db_project.Main",
-            "projectName": "db-project"
-        },
-        {
-            "type": "java",
-            "name": "ScheduleDB",
-            "request": "launch",
-            "mainClass": "rift10.db_project.ScheduleDB",
-            "projectName": "db-project",
-            "cwd": "${workspaceFolder}/projects/db-project"
-        },
-        {
-            "type": "java",
-            "name": "StudentDB",
-            "request": "launch",
-            "mainClass": "rift10.db_project.StudentDB",
             "projectName": "db-project",
             "cwd": "${workspaceFolder}/projects/db-project"
         },

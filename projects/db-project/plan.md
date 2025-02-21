@@ -13,7 +13,8 @@
 - [X] Create test student cases
 - [X] Make a java file for handling classes database
 - [X] Create test class cases
-- [ ] Try to make DB code nicer
+- [ ] Refactor DB code
+- [ ] Create functions to translate values from sql database to strings
 - [ ] Figure out how to get classes from a student's stats
 - [ ] Create a connection to a port and test simple user interface
 

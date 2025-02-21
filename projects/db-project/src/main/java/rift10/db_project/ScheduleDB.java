@@ -17,9 +17,6 @@ public class ScheduleDB {
         ) {
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
         
-        statement.executeUpdate("drop table if exists schedule");
-        statement.executeUpdate(
-            "create table if not exists schedule(studentID integer, zeroID string, firstID string, secondID string, thirdID string, fourthID string, fifthID string, sixthID string, seventhID string, extID string)");
         statement.executeUpdate("insert into schedule values(12345, '.', '1876bh', 'asiub', '1872h', '12876b', '12igvy1', '1279yb', '.', '.')");
         statement.executeUpdate("insert into schedule values(23456, '.', '128736', 'wdwiy', '12873', '1287gd', 'sdiy712', '12iuiy', '.', '.')");
         ResultSet rs = statement.executeQuery("select * from schedule");
@@ -36,6 +33,4 @@ public class ScheduleDB {
         e.printStackTrace(System.err);
         }
     }
-
-    public void run() {}
 }

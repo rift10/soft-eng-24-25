@@ -17,8 +17,6 @@ public class StudentDB {
         ) {
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
         
-        statement.executeUpdate("drop table if exists student");
-        statement.executeUpdate("create table if not exists student (id integer, name string, grade integer, slc string)");
         statement.executeUpdate("insert into student values(12345, 'Anna Ray', 9, 'U9')");
         statement.executeUpdate("insert into student values(23456, 'Bob Peters', 10, 'AMPS')");
         ResultSet rs = statement.executeQuery("select * from student");
