@@ -13,7 +13,8 @@
 - [X] Create test student cases
 - [X] Make a java file for handling classes database
 - [X] Create test class cases
-- [ ] Refactor DB code
+- [X] Refactor DB code
+- [ ] Rerefactor DB code
 - [ ] Create functions to translate values from sql database to strings
 - [ ] Figure out how to get classes from a student's stats
 - [ ] Create a connection to a port and test simple user interface
@@ -22,3 +23,4 @@
 ## Notes
 - There should be a schedule DB for each year, I'll add that later
 - Separate sql into its own file instead of java?
+- Holy shit I messed up the DB classes so much they're hella bad now

@@ -1,18 +1,20 @@
-.mode tabs;
+.mode tabs
 
 drop table if exists classes;
 create table if not exists classes(
-    classID integer,
+    classID string,
     name string,
     AG string,
     grades integer,
     slc string,
-    prereq string
+    prereq string,
+    primary key (classID)
     );
 
 drop table if exists schedule;
 create table if not exists schedule(
     studentID integer,
+    grade integer,
     zeroID string,
     firstID string, 
     secondID string,
@@ -21,13 +23,25 @@ create table if not exists schedule(
     fifthID string,
     sixthID string,
     seventhID string,
-    extID string
+    extID string,
+    foreign key (zeroID) references classes(classID),
+    foreign key (firstID) references classes(classID),
+    foreign key (secondID) references classes(classID),
+    foreign key (thirdID) references classes(classID),
+    foreign key (fourthID) references classes(classID),
+    foreign key (fifthID) references classes(classID),
+    foreign key (sixthID) references classes(classID),
+    foreign key (seventhID) references classes(classID),
+    foreign key (extID) references classes(classID),
+    foreign key (studentID) references student(studentID)
     );
 
 drop table if exists student;
 create table if not exists student(
-    id integer,
+    studentID integer,
     name string,
-    grade integer,
-    slc string
+    DOB string,
+    classOf string,
+    slc string,
+    primary key (studentID)
     );
