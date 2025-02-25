@@ -1,4 +1,4 @@
-package rift10.db_project;
+package rift10.db_project.reference;
 
 import java.awt.Color;
 import java.awt.Graphics;

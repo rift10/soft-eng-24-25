@@ -10,22 +10,23 @@ public class StudentDB {
     private final Connection connection;
     private final Statement statement;
     public StudentDB() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:classes.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:db.db");
         statement = connection.createStatement();
 
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
     }
 
     public void test() throws SQLException {
+        // TODO: fix these inserts to match classesDB
         statement.executeUpdate("insert into student values(12345, 'Anna Ray', 9, 'U9')");
         statement.executeUpdate("insert into student values(23456, 'Bob Peters', 10, 'AMPS')");
         ResultSet rs = statement.executeQuery("select * from student");
         while(rs.next()) {
             // read the result set
-            System.out.println("name = " + rs.getString("name"));
-            System.out.println("id = " + rs.getInt("id"));
-            System.out.println("grade = " + rs.getInt("grade"));
-            System.out.println("slc = " + rs.getString("slc"));
+            System.out.println("name = " + rs.getString("name") + "\n");
+            System.out.println("id = " + rs.getInt("id") + "\n");
+            System.out.println("grade = " + rs.getInt("grade") + "\n");
+            System.out.println("slc = " + rs.getString("slc") + "\n");
         }
     }
 }

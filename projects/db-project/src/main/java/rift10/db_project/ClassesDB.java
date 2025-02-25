@@ -10,21 +10,23 @@ public class ClassesDB {
     private final Connection connection;
     private final Statement statement;
     public ClassesDB() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:classes.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:db.db");
         statement = connection.createStatement();
 
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
     }
 
-    public void test() throws SQLException {
-        statement.executeUpdate("insert into classes values(12345, 'Anna Ray', 9, 'U9')");
-        statement.executeUpdate("insert into classes values(23456, 'Bob Peters', 10, 'AMPS')");
+    public String test() throws SQLException {
+        String string = new String();
+        statement.executeUpdate("insert or ignore into classes values('aisb1', 'Advanced Math 3', 'C', 'Advanced Math 2')");
+        statement.executeUpdate("insert or ignore into classes values('ao5bm', 'Software Engineering', 'G', 'AP CSA')");
         ResultSet rs = statement.executeQuery("select * from classes");
         while(rs.next()) {
-            System.out.println("name = " + rs.getString("name"));
-            System.out.println("id = " + rs.getInt("id"));
-            System.out.println("grade = " + rs.getInt("grade"));
-            System.out.println("slc = " + rs.getString("slc"));
+            string = string.concat("id = " + rs.getString("classID") + "\n");
+            string = string.concat("name = " + rs.getString("name") + "\n");
+            string = string.concat("AG credits = " + rs.getString("AG") + "\n");
+            string = string.concat("prerequistite = " + rs.getString("prereq") + "\n");
         }
+        return string;
     }
 }
