@@ -13,7 +13,6 @@ import rift10.db_project.reference.Canvas;
 
 public class Main {
     private static ClassesDB classesDB;
-    private static StudentDB studentDB;
 
     public static final String TITLE = "Course Selector";
 
@@ -21,7 +20,6 @@ public class Main {
         // this is hella cooked but whatever
         // im pretty sure these shouldn't be static
         classesDB = new ClassesDB();
-        studentDB = new StudentDB();
 
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +30,7 @@ public class Main {
         JTextArea textArea = new JTextArea(100, 50);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setText(classesDB.test());
+        textArea.setText(classesDB.classesTest() + classesDB.studentTest());
 
         JScrollPane scrollPane = new JScrollPane(textArea); // Add scroll bars if needed
 

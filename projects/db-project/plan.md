@@ -15,12 +15,12 @@
 - [X] Create test class cases
 - [X] Refactor DB code
 - [X] Create a connection to a port and test simple user interface
+- [X] Rerefactor DB code
+- [ ] Rererefactor DB code
 - [ ] Log more data in the gui
 - [ ] Make functions to get classes from students and stuff like that
 - [ ] Add buttons in the gui
-- [ ] Rerefactor DB code
 - [ ] Create functions to translate values from sql database to useful data
-- [ ] Figure out how to get classes from a student's stats
 
 
 ## Notes

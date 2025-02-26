@@ -26,7 +26,7 @@ create table if not exists student(
     studentID integer,
     name string,
     DOB string,
-    classOf string,
+    classOf integer,
     slc string,
     primary key (studentID)
 );
