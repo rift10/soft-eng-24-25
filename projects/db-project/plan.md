@@ -16,14 +16,11 @@
 - [X] Refactor DB code
 - [X] Create a connection to a port and test simple user interface
 - [X] Rerefactor DB code
+- [X] Log more data in the gui
+- [X] Refactor gui code to be in its own class
+- [X] Add a button in the gui
+- [ ] Add a function for getting the classes a student is currently in
+- [ ] Add a function for getting the classes that provide a certain credit type
 - [ ] Rererefactor DB code
-- [ ] Log more data in the gui
-- [ ] Make functions to get classes from students and stuff like that
-- [ ] Add buttons in the gui
+- [ ] Figure out exactly how the user will interact with the selector
 - [ ] Create functions to translate values from sql database to useful data
-
-
-## Notes
-- There should be a schedule DB for each year, I'll add that later
-- Separate sql into its own file instead of java?
-- Holy shit I messed up the DB classes so much they're hella bad now

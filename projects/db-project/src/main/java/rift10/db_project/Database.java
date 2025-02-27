@@ -7,14 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ClassesDB {
+public class Database {
     private final Connection connection;
     private final Statement statement;
 
     private final PreparedStatement insertToClasses;
     private final PreparedStatement insertToStudent;
+    private final PreparedStatement selectFromClasses;
+    private final PreparedStatement selectFromStudent;
 
-    public ClassesDB() throws SQLException {
+    public Database() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:db.db");
         statement = connection.createStatement();
         statement.setQueryTimeout(30);
@@ -23,18 +25,28 @@ public class ClassesDB {
         );
         insertToStudent = connection.prepareStatement(
             "insert or ignore into student values(?, ?, ?, ?, ?)"
-        );    }
+        );
+        selectFromClasses = connection.prepareStatement(
+            "select * from classes"
+        );
+        selectFromStudent = connection.prepareStatement(
+            "select * from student"
+        );
+    }
 
     public String classesTest() throws SQLException {
         String string = new String();
-        // statement.executeUpdate("insert or ignore into classes values('aisb1', 'Advanced Math 3', 'C', 'Advanced Math 2')");
-        // statement.executeUpdate("insert or ignore into classes values('ao5bm', 'Software Engineering', 'G', 'AP CSA')");
         insertToClasses.setString(1, "aisb1");
         insertToClasses.setString(2, "Advanced Math 3");
         insertToClasses.setString(3, "C");
         insertToClasses.setString(4, "Advanced Math 2");
-        // TODO: fix this line it is broken
-        ResultSet rs = insertToClasses.executeQuery("select * from classes");
+        insertToClasses.execute();
+        insertToClasses.setString(1, "ao5bm");
+        insertToClasses.setString(2, "Software Engineering");
+        insertToClasses.setString(3, "G");
+        insertToClasses.setString(4, "AP CSA");
+        insertToClasses.execute();
+        ResultSet rs = selectFromClasses.executeQuery();
         while(rs.next()) {
             string = string.concat("id = " + rs.getString("classID") + "\n");
             string = string.concat("name = " + rs.getString("name") + "\n");
@@ -46,22 +58,27 @@ public class ClassesDB {
 
     public String studentTest() throws SQLException {
         String string = new String();
-        // statement.executeUpdate("insert or ignore into student values(12345, 'Anna Ray', '2/13/10', 2028, 'U9')");
-        // statement.executeUpdate("insert or ignore into student values(23456, 'Bob Peters', '6/25/08', 2026, 'AMPS')");
         insertToStudent.setInt(1, 12345);
         insertToStudent.setString(2, "Anna Ray");
         insertToStudent.setString(3, "2/13/10");
         insertToStudent.setInt(4, 2028);
         insertToStudent.setString(5, "U9");
-        // TODO: fix this line it is broken
-        ResultSet rs = statement.executeQuery("select * from student");
+        insertToStudent.execute();
+
+        insertToStudent.setInt(1, 23456);
+        insertToStudent.setString(2, "Bob Peters");
+        insertToStudent.setString(3, "6/25/08");
+        insertToStudent.setInt(4, 2026);
+        insertToStudent.setString(5, "AMPS");
+        insertToStudent.execute();
+        ResultSet rs = selectFromStudent.executeQuery();
         while(rs.next()) {
             // read the result set
-            System.out.println("id = " + rs.getInt("studentId") + "\n");
-            System.out.println("name = " + rs.getString("name") + "\n");
-            System.out.println("DOB = " + rs.getInt("DOB") + "\n");
-            System.out.println("class of = " + rs.getInt("classOf") + "\n");
-            System.out.println("slc = " + rs.getString("slc") + "\n");
+            string = string.concat("id = " + rs.getInt("studentId") + "\n");
+            string = string.concat("name = " + rs.getString("name") + "\n");
+            string = string.concat("DOB = " + rs.getString("DOB") + "\n");
+            string = string.concat("class of = " + rs.getInt("classOf") + "\n");
+            string = string.concat("slc = " + rs.getString("slc") + "\n");
         }
         return string;
     }
