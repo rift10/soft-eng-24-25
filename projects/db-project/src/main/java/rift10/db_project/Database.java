@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     private final Connection connection;
@@ -15,6 +17,8 @@ public class Database {
     private final PreparedStatement insertToStudent;
     private final PreparedStatement selectFromClasses;
     private final PreparedStatement selectFromStudent;
+    private final PreparedStatement selectUniqueStudent;
+    private final PreparedStatement selectClassesWithCredits;
 
     public Database() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:db.db");
@@ -32,6 +36,36 @@ public class Database {
         selectFromStudent = connection.prepareStatement(
             "select * from student"
         );
+        selectUniqueStudent = connection.prepareStatement(
+            "select * from student where studentID like (?)"
+        );
+        selectClassesWithCredits = connection.prepareStatement(
+            "select * from classes join course on classes.classID = course.classID where classes.AG like (?)"
+        );
+    }
+
+    /** Returns a student's small learning community */
+    public String getSLC(int studentID) throws SQLException {
+        selectUniqueStudent.setInt(1, studentID);
+        return selectUniqueStudent.executeQuery().getString("slc");
+    }
+
+    /** Returns the amount of credits a student has of a specific type */
+    public String getStudentCredits(String ag, int studentID) throws SQLException {
+        // TODO
+        return "";
+    }
+
+    /** Returns the possible classes a student can take that fulfill a certain credit type */
+    public List<String> getPossibleClasses(String ag) throws SQLException {
+        // TODO: test
+        var result = new ArrayList<String>();
+        selectClassesWithCredits.setString(1, ag);
+        ResultSet rs = selectClassesWithCredits.executeQuery();
+        while (rs.next()) {
+            result.add(rs.getString("className"));
+        }
+        return result;
     }
 
     public String classesTest() throws SQLException {
@@ -49,7 +83,7 @@ public class Database {
         ResultSet rs = selectFromClasses.executeQuery();
         while(rs.next()) {
             string = string.concat("id = " + rs.getString("classID") + "\n");
-            string = string.concat("name = " + rs.getString("name") + "\n");
+            string = string.concat("name = " + rs.getString("className") + "\n");
             string = string.concat("AG credits = " + rs.getString("AG") + "\n");
             string = string.concat("prerequistite = " + rs.getString("prereq") + "\n");
         }

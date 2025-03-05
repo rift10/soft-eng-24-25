@@ -4,11 +4,21 @@
 drop table if exists classes;
 create table if not exists classes(
     classID string,
-    name string,
+    className string,
     AG string,
     prereq string,
     primary key (classID)
 );
+
+-- A-G requirements:
+-- A: Social science
+-- B: English
+-- C: Math
+-- D: Lab science
+-- E: Foreign language
+-- F: Visual/performing arts
+-- G: Elective
+-- H: Physical education
 
 -- represents a single class period for a single person
 drop table if exists course;

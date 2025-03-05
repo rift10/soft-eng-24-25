@@ -2,9 +2,10 @@
 
 ## Big picture
 
-- [ ] Database of possible classes at bhs
-- [ ] Database of student's slc & current credits
-- [ ] Users can enter their name and database will find their current stats & what classes they need to take
+- Database of possible classes at bhs
+- Database of student's slc & current credits
+- Users can enter their name and database will find their current stats & what classes they need to take
+- Provides possible classes to take to fulfill requirements to graduate
 
 
 ## Next steps
@@ -19,8 +20,9 @@
 - [X] Log more data in the gui
 - [X] Refactor gui code to be in its own class
 - [X] Add a button in the gui
+- [X] Create a function to return a student's slc
+- [ ] Let the user input their name and search for their current classes/credits
 - [ ] Add a function for getting the classes a student is currently in
 - [ ] Add a function for getting the classes that provide a certain credit type
 - [ ] Rererefactor DB code
 - [ ] Figure out exactly how the user will interact with the selector
-- [ ] Create functions to translate values from sql database to useful data
