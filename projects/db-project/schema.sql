@@ -1,11 +1,12 @@
 .mode tabs
 
--- database of all available classes & extra info
+-- database of all available classes & detailed info
 drop table if exists classes;
 create table if not exists classes(
     classID string,
     className string,
     AG string,
+    credits integer,
     prereq string,
     primary key (classID)
 );

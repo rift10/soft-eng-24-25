@@ -21,8 +21,8 @@
 - [X] Refactor gui code to be in its own class
 - [X] Add a button in the gui
 - [X] Create a function to return a student's slc
+- [X] Add a function for getting the classes a student is currently in
+- [X] Add a function for getting the classes that provide a certain credit type
+- [ ] Add a function for getting the credits a student has
+- [ ] Display the student's current classes and possible classes
 - [ ] Let the user input their name and search for their current classes/credits
-- [ ] Add a function for getting the classes a student is currently in
-- [ ] Add a function for getting the classes that provide a certain credit type
-- [ ] Rererefactor DB code
-- [ ] Figure out exactly how the user will interact with the selector

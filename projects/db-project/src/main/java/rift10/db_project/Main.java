@@ -9,7 +9,10 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         database = new Database();
         gui = new GUI();
-        gui.setText(database.classesTest() + database.studentTest());
+        database.initializeDatabase();
+        // gui.setText(database.classesTest() + database.studentTest());
+        // gui.setText(database.getPossibleClasses("G").toString());
+        gui.setText(database.getClassesTaken(12345).toString());
         // gui.setText(database.getSLC(23456));
     }
 }
