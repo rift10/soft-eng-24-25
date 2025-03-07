@@ -1,8 +1,8 @@
 .mode tabs
 
 -- database of all available classes & detailed info
-drop table if exists classes;
-create table if not exists classes(
+drop table if exists class;
+create table if not exists class(
     classID string,
     className string,
     AG string,
@@ -27,7 +27,7 @@ create table if not exists course(
     classID string,
     studentID integer,
     period integer,
-    foreign key (classID) references classes(classID),
+    foreign key (classID) references class(classID),
     foreign key (studentID) references student(studentID)
 );
 
