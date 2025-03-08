@@ -6,8 +6,10 @@ create table if not exists class(
     classID string,
     className string,
     AG string,
+    level string,
     credits integer,
     prereq string,
+    description string,
     primary key (classID)
 );
 
@@ -27,6 +29,7 @@ create table if not exists course(
     classID string,
     studentID integer,
     period integer,
+    primary key (classID),
     foreign key (classID) references class(classID),
     foreign key (studentID) references student(studentID)
 );

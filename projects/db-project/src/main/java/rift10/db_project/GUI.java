@@ -15,6 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import rift10.db_project.records.Class;
 
 public class GUI extends JFrame {
     
@@ -33,9 +37,12 @@ public class GUI extends JFrame {
     private final JButton searchButton = new JButton("Search");
 
     private final JLabel infoLabel = new JLabel("Student info will be displayed here");
+    private final JLabel currentCreditsLabel = new JLabel();
     private final JLabel searchLabel = new JLabel("Search results will be displayed here");
 
     private final JScrollPane scrollPane = new JScrollPane(resultsPanel);
+
+    private Integer studentID;
 
     public GUI() {
         super("Course Selector");
@@ -43,6 +50,12 @@ public class GUI extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            System.err.println(e);
+        }
+        
         topPanel.setLayout(new FlowLayout());
         topPanel.add(idLabel);
         topPanel.add(idField);
@@ -54,6 +67,7 @@ public class GUI extends JFrame {
 
         infoPanel.setLayout(new FlowLayout());
         infoPanel.add(infoLabel);
+        infoPanel.add(currentCreditsLabel);
 
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
         resultsPanel.add(searchLabel);
@@ -66,33 +80,38 @@ public class GUI extends JFrame {
         add(infoPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
         setVisible(true);
+        addSearchResults();
     }
     
     private void addStudentInfo() {
         String result = idField.getText().trim();
-        if (!result.isEmpty()) {
-            Integer id = Integer.valueOf(result);
-            infoLabel.setText("Student ID: " + result + "    Student name: " + db.getName(id) + "    SLC: " + db.getSLC(id));
-        }
+        if (result.isEmpty()) return;
+        studentID = Integer.valueOf(result);
+        infoLabel.setText("Student ID: " + studentID + "    Student name: " + db.getName(studentID) + "    SLC: " + db.getSLC(studentID));
     }
 
     private void addSearchResults() {
         resultsPanel.removeAll();
         String credit = creditField.getText().trim();
-        if (credit.isEmpty()) {
-            searchLabel.setText("Please enter a name to search.");
-            return;
-        }
+        if (credit.isEmpty()) addResults(db.getAllClasses());
         searchLabel.setText("Searching for: " + credit);
-        List<String> results = db.getPossibleClasses(credit);
-        for (String s : results) {
-            JPanel result = new JPanel();
-            result.setLayout(new BorderLayout());
-            result.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            result.add(new JLabel(s));
-            resultsPanel.add(result);
-        }
+        addResults(db.getPossibleAGClasses(credit));
+
+        currentCreditsLabel.setText("     Current " + credit.toUpperCase() + " credits: " + db.getStudentCredits(credit, studentID));
         resultsPanel.revalidate();
         resultsPanel.repaint();
+    }
+
+    private void addResults(List<Class> results) {
+        for (Class s : results) {
+            JPanel result = new JPanel();
+            result.setLayout(new FlowLayout());
+            result.setBorder(BorderFactory.createLineBorder(Color.gray));
+            JLabel title = new JLabel(s.className());
+            JLabel desc = new JLabel(s.description());
+            result.add(title);
+            result.add(desc);
+            resultsPanel.add(result);
+        }
     }
 }

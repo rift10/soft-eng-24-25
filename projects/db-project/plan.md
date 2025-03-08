@@ -23,6 +23,7 @@
 - [X] Create a function to return a student's slc
 - [X] Add a function for getting the classes a student is currently in
 - [X] Add a function for getting the classes that provide a certain credit type
-- [ ] Add a function for getting the credits a student has
-- [ ] Display the student's current classes and possible classes
-- [ ] Let the user input their name and search for their current classes/credits
+- [X] Add a function for getting the credits a student has
+- [X] Display information about the student once they've inputted id
+- [X] Let the user input their name and search for their current classes/credits
+- [X] Display the student's current classes and possible classes
