@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -105,13 +107,19 @@ public class GUI extends JFrame {
     private void addResults(List<Class> results) {
         for (Class s : results) {
             JPanel result = new JPanel();
-            result.setLayout(new FlowLayout());
+            result.setLayout(new GridLayout(2, 1));
             result.setBorder(BorderFactory.createLineBorder(Color.gray));
-            JLabel title = new JLabel(s.className());
+            JLabel title = new JLabel(s.className() + parenthesize(s.level()) + parenthesize(s.AG()));
+            title.setFont(new Font("Arial", Font.BOLD, 16));
             JLabel desc = new JLabel(s.description());
+            desc.setFont(new Font("Arial", Font.PLAIN, 12));
             result.add(title);
             result.add(desc);
             resultsPanel.add(result);
         }
+    }
+
+    private String parenthesize(String text) {
+        return " (" + text + ")";
     }
 }
