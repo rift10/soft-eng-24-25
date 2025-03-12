@@ -1,5 +1,8 @@
 package rift10.db_project;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -150,14 +153,19 @@ public class Database {
     }
 
     public void initializeDatabase() {
-        insertClass("AC96Y", "Advanced Math 3", "C", "H", 10, "Advanced Math 2", "Covers pre calculus topics such as polar graphing, conic sections, and advanced trigonometry");
-        insertClass("AD20Y", "AP Biology", "D", "AP", 10, "Chemistry", "This class prepares students for the AP Biology test and explores topics surrounding cellular processes and genetic adaptations");
-        insertClass("AJ50Y", "Chorus", "F", "P", 10, "", "Students learn many different songs over the course of the year in preparation for a concert at the end of the semester to showcase their skills");
-        insertClass("IA15Y", "IB-HL-English 1", "B", "IB", 10, "IHS Global Literature", "This class covers how to analyze different forms of media, including novels, poetry, and films");
-        insertClass("IB09S", "IHS-Theory of Knowledge", "A", "IB", 5, "", "Teaches students how to think critically about the world around them");
-        insertClass("AS54Y", "Robotics Build Advanced", "G", "P", 10, "", "Students learn how to design, fabricate, wire, and code a robot");
-        insertClass("AS46Y", "Software Engineering: Advanced Topic CS", "G", "P", 10, "AP CSA", "This class teaches advanced software engineering topics that prepare students for careers in computer science");
-        insertClass("WE84Y", "Spanish IV", "E", "P", 10, "Spanish III", "This class reviews all tenses of Spanish in preparation for AP Spanish");
+        // insertClass("AC96Y", "Advanced Math 3", "C", "H", 10, "Advanced Math 2", "Covers pre calculus topics such as polar graphing, conic sections, and advanced trigonometry");
+        // insertClass("AD20Y", "AP Biology", "D", "AP", 10, "Chemistry", "This class prepares students for the AP Biology test and explores topics surrounding cellular processes and genetic adaptations");
+        // insertClass("AJ50Y", "Chorus", "F", "P", 10, "", "Students learn many different songs over the course of the year in preparation for a concert at the end of the semester to showcase their skills");
+        // insertClass("IA15Y", "IB-HL-English 1", "B", "HL", 10, "IHS Global Literature", "This class covers how to analyze different forms of media, including novels, poetry, and films");
+        // insertClass("IB09S", "IHS-Theory of Knowledge", "A", "P", 5, "", "Teaches students how to think critically about the world around them");
+        // insertClass("AS54Y", "Robotics Build Advanced", "G", "P", 10, "", "Students learn how to design, fabricate, wire, and code a robot");
+        // insertClass("AS46Y", "Software Engineering: Advanced Topic CS", "G", "P", 10, "AP CSA", "This class teaches advanced software engineering topics that prepare students for careers in computer science");
+        // insertClass("WE84Y", "Spanish IV", "E", "P", 10, "Spanish III", "This class reviews all tenses of Spanish in preparation for AP Spanish");
+        List<String> codes = parseFileToList("/workspaces/rift10/projects/db-project/src/main/java/rift10/db_project/data/codes.txt");
+        List<String> courses = parseFileToList("/workspaces/rift10/projects/db-project/src/main/java/rift10/db_project/data/courses.txt");
+        for (int i = 0; i < codes.size(); i++) {
+            insertClass(codes.get(i), courses.get(i), getAG(codes.get(i)), getLevel(courses.get(i)), getCredits(codes.get(i)), "", "");
+        }
 
         insertStudent(12345, "Anna Ray", "2/13/10", 2028, "U9");
         insertStudent(23456, "Bob Peters", "6/25/08", 2026, "AMPS");
@@ -213,6 +221,34 @@ public class Database {
             System.err.println(e);
         }
         return null;
+    }
+
+    private String getAG(String classCode) {
+        if (classCode.substring(0, 1).equals("W")) return "E";
+        if (classCode.substring(1, 2).equals("J") || classCode.substring(0, 1).equals("H")) return "F";
+        if (List.of("S", "N", "L").contains(classCode.substring(1, 2))) return "G";
+        if (classCode.substring(1, 2).equals("M")) return "H";
+        return classCode.substring(1, 2);
+    }
+
+    private String getLevel(String className) {
+        if (className.contains("AP")) return "AP";
+        if (className.contains("HL")) return "HL";
+        if (className.contains("SL")) return "SL";
+        return "P";
+    }
+
+    private int getCredits(String classCode) {
+        return classCode.substring(classCode.length() - 1).equals("Y") ? 10 : 5;
+    }
+
+    private static List<String> parseFileToList(String filePath) {
+        try {
+            return Files.readAllLines(Paths.get(filePath));
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        return List.of("");
     }
 
     // public record Course(String classID, int studentID, int period) {}

@@ -74,6 +74,7 @@ public class GUI extends JFrame {
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
         resultsPanel.add(searchLabel);
         scrollPane.setPreferredSize(new Dimension(400, 600));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(14);
 
         idButton.addActionListener((ActionEvent e) -> addStudentInfo());
         searchButton.addActionListener((ActionEvent e) -> addSearchResults());
@@ -99,7 +100,7 @@ public class GUI extends JFrame {
         searchLabel.setText("Searching for: " + credit);
         addResults(db.getPossibleAGClasses(credit));
 
-        currentCreditsLabel.setText("     Current " + credit.toUpperCase() + " credits: " + db.getStudentCredits(credit, studentID));
+        if (studentID != null) currentCreditsLabel.setText("     Current " + credit.toUpperCase() + " credits: " + db.getStudentCredits(credit, studentID));
         resultsPanel.revalidate();
         resultsPanel.repaint();
     }
@@ -109,9 +110,9 @@ public class GUI extends JFrame {
             JPanel result = new JPanel();
             result.setLayout(new GridLayout(2, 1));
             result.setBorder(BorderFactory.createLineBorder(Color.gray));
-            JLabel title = new JLabel(s.className() + parenthesize(s.level()) + parenthesize(s.AG()));
+            JLabel title = new JLabel(s.classID() + " " + s.className() + parenthesize(s.level()) + parenthesize(s.AG()));
             title.setFont(new Font("Arial", Font.BOLD, 16));
-            JLabel desc = new JLabel(s.description());
+            JLabel desc = new JLabel(s.description() + " Credits: " + s.credits());
             desc.setFont(new Font("Arial", Font.PLAIN, 12));
             result.add(title);
             result.add(desc);
