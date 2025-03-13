@@ -15,8 +15,6 @@ import java.util.Random;
 
 import com.github.javafaker.Faker;
 
-import rift10.db_project.records.Class;
-
 public class Database {
     private static Database instance = null;
     public static Database getInstance() {
@@ -33,8 +31,10 @@ public class Database {
     private PreparedStatement selectFromClasses;
     private PreparedStatement selectUniqueStudent;
     private PreparedStatement selectClassesWithCredits;
+    private PreparedStatement selectClassesWithLevel;
     private PreparedStatement selectClassesTaken;
     private PreparedStatement selectClassesTakenWithAG;
+    private PreparedStatement searchClass;
     private PreparedStatement selectFromCourse;
 
     private Faker faker = new Faker();
@@ -65,6 +65,12 @@ public class Database {
             );
             selectClassesWithCredits = connection.prepareStatement(
                 "select * from class where AG like (?)"
+            );
+            selectClassesWithLevel = connection.prepareStatement(
+                "select * from class where level like (?)"
+            );
+            searchClass = connection.prepareStatement(
+                "select * from class where classID like (?) or className like (?) or description like (?)"
             );
             selectClassesTaken = connection.prepareStatement(
                 "select * from class join course on class.classID = course.classID where course.studentID = (?)"
@@ -110,12 +116,61 @@ public class Database {
         return null;
     }
 
+    /** Returns a list of Class records of all the classes in the database */
+    public List<Class> getAllClasses() {
+        try {
+            var result = new ArrayList<Class>();
+            ResultSet rs = selectFromClasses.executeQuery();
+            while (rs.next()) {
+                result.add(sqlToClassRecord(rs));
+            }
+            return result;
+        } catch(SQLException e) {
+            System.err.println(e);
+        }
+        return null;
+    }
+
     /** Returns the possible classes a student can take that fulfill a certain credit type */
-    public List<Class> getPossibleAGClasses(String agType) {
+    public List<Class> getClassesByAG(String agType) {
         try {
             var result = new ArrayList<Class>();
             selectClassesWithCredits.setString(1, agType);
             ResultSet rs = selectClassesWithCredits.executeQuery();
+            while (rs.next()) {
+                result.add(sqlToClassRecord(rs));
+            }
+            return result;
+        } catch(SQLException e) {
+            System.err.println(e);
+        }
+        return null;
+    }
+
+    /** Returns the classes of a certain level */
+    public List<Class> getClassesByLevel(String level) {
+        try {
+            var result = new ArrayList<Class>();
+            selectClassesWithLevel.setString(1, level);
+            ResultSet rs = selectClassesWithLevel.executeQuery();
+            while (rs.next()) {
+                result.add(sqlToClassRecord(rs));
+            }
+            return result;
+        } catch(SQLException e) {
+            System.err.println(e);
+        }
+        return null;
+    }
+
+    /** Returns the possible classes a student can take that fulfill a certain credit type */
+    public List<Class> getClasses(String searchTerm) {
+        try {
+            var result = new ArrayList<Class>();
+            searchClass.setString(1, "%" + searchTerm + "%");
+            searchClass.setString(2, "%" + searchTerm + "%");
+            searchClass.setString(3, "%" + searchTerm + "%");
+            ResultSet rs = searchClass.executeQuery();
             while (rs.next()) {
                 result.add(sqlToClassRecord(rs));
             }
@@ -146,20 +201,6 @@ public class Database {
             System.err.println(e);
         }
         return "";
-    }
-
-    public List<Class> getAllClasses() {
-        try {
-            var result = new ArrayList<Class>();
-            ResultSet rs = selectFromClasses.executeQuery();
-            while (rs.next()) {
-                result.add(sqlToClassRecord(rs));
-            }
-            return result;
-        } catch(SQLException e) {
-            System.err.println(e);
-        }
-        return null;
     }
 
     public void initializeDatabase() {
@@ -259,14 +300,14 @@ public class Database {
 
     private String getAG(String classCode) {
         if (classCode.substring(0, 1).equals("W")) return "E";
-        if (classCode.substring(1, 2).equals("J") || classCode.substring(0, 1).equals("H")) return "F";
+        if (classCode.substring(1, 2).equals("J") || classCode.substring(0, 2).equals("HG")) return "F";
         if (List.of("S", "N", "L").contains(classCode.substring(1, 2))) return "G";
         if (classCode.substring(1, 2).equals("M")) return "H";
         return classCode.substring(1, 2);
     }
 
     private String getLevel(String className) {
-        if (className.contains("AP")) return "AP";
+        if (className.substring(0, 2).equals("AP") || className.contains("AP-")) return "AP";
         if (className.contains("HL")) return "HL";
         if (className.contains("SL")) return "SL";
         return "P";

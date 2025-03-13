@@ -20,8 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import rift10.db_project.records.Class;
-
 public class GUI extends JFrame {
     
     private final Database db = Database.getInstance();
@@ -34,13 +32,12 @@ public class GUI extends JFrame {
     private final JTextField idField = new JTextField(20);
     private final JButton idButton = new JButton("Set ID");
 
-    private final JLabel creditLabel = new JLabel("Enter the A-G credit type to search for: ");
-    private final JTextField creditField = new JTextField(20);
+    private final JLabel searchLabel = new JLabel("Enter search term: ");
+    private final JTextField searchField = new JTextField(20);
     private final JButton searchButton = new JButton("Search");
 
     private final JLabel infoLabel = new JLabel("Student info will be displayed here");
     private final JLabel currentCreditsLabel = new JLabel();
-    private final JLabel searchLabel = new JLabel("Search results will be displayed here");
 
     private final JScrollPane scrollPane = new JScrollPane(resultsPanel);
 
@@ -63,8 +60,8 @@ public class GUI extends JFrame {
         topPanel.add(idField);
         topPanel.add(idButton);
 
-        topPanel.add(creditLabel);
-        topPanel.add(creditField);
+        topPanel.add(searchLabel);
+        topPanel.add(searchField);
         topPanel.add(searchButton);
 
         infoPanel.setLayout(new FlowLayout());
@@ -72,9 +69,11 @@ public class GUI extends JFrame {
         infoPanel.add(currentCreditsLabel);
 
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-        resultsPanel.add(searchLabel);
-        scrollPane.setPreferredSize(new Dimension(400, 600));
+        scrollPane.setPreferredSize(new Dimension(500, 600));
         scrollPane.getVerticalScrollBar().setUnitIncrement(14);
+
+        idField.addActionListener((ActionEvent e)  -> addStudentInfo());
+        searchField.addActionListener((ActionEvent e)  -> addClassResults());
 
         idButton.addActionListener((ActionEvent e) -> addStudentInfo());
         searchButton.addActionListener((ActionEvent e) -> addClassResults());
@@ -88,19 +87,30 @@ public class GUI extends JFrame {
     
     private void addStudentInfo() {
         String result = idField.getText().trim();
-        if (result.isEmpty()) return;
         studentID = Integer.valueOf(result);
-        infoLabel.setText("Student ID: " + studentID + "    Student name: " + db.getName(studentID) + "    SLC: " + db.getSLC(studentID));
+        if (result.isEmpty() || db.getName(studentID) == null) {
+            studentID = null;
+            infoLabel.setText("Student info will be displayed here");
+            addClassResults();
+            return;
+        }
+        infoLabel.setText("Student ID: " + studentID + "       Student name: " + db.getName(studentID) + "       SLC: " + db.getSLC(studentID));
+        addClassResults();
     }
 
     private void addClassResults() {
         resultsPanel.removeAll();
-        String credit = creditField.getText().trim();
-        if (credit.isEmpty()) addResults(db.getAllClasses());
-        searchLabel.setText("Searching for: " + credit);
-        addResults(db.getPossibleAGClasses(credit));
+        String search = searchField.getText().trim();
+        boolean credits = false;
+        if (search.isEmpty()) addResults(db.getAllClasses());
+        if (List.of("A", "B", "C", "D", "E", "F", "G", "H", "Z").contains(search.toUpperCase())) {
+            addResults(db.getClassesByAG(search));
+            credits = true;
+        } else if (List.of("AP", "HL", "SL", "P").contains(search.toUpperCase())) {
+            addResults(db.getClassesByLevel(search));
+        } else addResults(db.getClasses(search));
 
-        if (studentID != null) currentCreditsLabel.setText("     Current " + credit.toUpperCase() + " credits: " + db.getStudentCredits(credit, studentID));
+        if (studentID != null && credits) currentCreditsLabel.setText("       Current " + search.toUpperCase() + " credits: " + db.getStudentCredits(search, studentID));
         else currentCreditsLabel.setText("");
         resultsPanel.revalidate();
         resultsPanel.repaint();
@@ -118,7 +128,7 @@ public class GUI extends JFrame {
                 hasTaken.setText("<html><font size='4' color=red>Already took this class!</font></html>");
             } else hasTaken.setText("");
             hasTaken.setFont(new Font("Arial", Font.BOLD, 16));
-            JLabel desc = new JLabel(s.description() + " Credits: " + s.credits());
+            JLabel desc = new JLabel(s.description() + "  Credits: " + s.credits());
             desc.setFont(new Font("Arial", Font.PLAIN, 12));
             result.add(title);
             result.add(hasTaken);
