@@ -77,13 +77,13 @@ public class GUI extends JFrame {
         scrollPane.getVerticalScrollBar().setUnitIncrement(14);
 
         idButton.addActionListener((ActionEvent e) -> addStudentInfo());
-        searchButton.addActionListener((ActionEvent e) -> addSearchResults());
+        searchButton.addActionListener((ActionEvent e) -> addClassResults());
 
         add(topPanel, BorderLayout.NORTH);
         add(infoPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
         setVisible(true);
-        addSearchResults();
+        addClassResults();
     }
     
     private void addStudentInfo() {
@@ -93,7 +93,7 @@ public class GUI extends JFrame {
         infoLabel.setText("Student ID: " + studentID + "    Student name: " + db.getName(studentID) + "    SLC: " + db.getSLC(studentID));
     }
 
-    private void addSearchResults() {
+    private void addClassResults() {
         resultsPanel.removeAll();
         String credit = creditField.getText().trim();
         if (credit.isEmpty()) addResults(db.getAllClasses());
@@ -101,6 +101,7 @@ public class GUI extends JFrame {
         addResults(db.getPossibleAGClasses(credit));
 
         if (studentID != null) currentCreditsLabel.setText("     Current " + credit.toUpperCase() + " credits: " + db.getStudentCredits(credit, studentID));
+        else currentCreditsLabel.setText("");
         resultsPanel.revalidate();
         resultsPanel.repaint();
     }
@@ -112,9 +113,15 @@ public class GUI extends JFrame {
             result.setBorder(BorderFactory.createLineBorder(Color.gray));
             JLabel title = new JLabel(s.classID() + " " + s.className() + parenthesize(s.level()) + parenthesize(s.AG()));
             title.setFont(new Font("Arial", Font.BOLD, 16));
+            JLabel hasTaken = new JLabel();
+            if (studentID != null && db.getClassesTaken(studentID).contains(s)) {
+                hasTaken.setText("<html><font size='4' color=red>Already took this class!</font></html>");
+            } else hasTaken.setText("");
+            hasTaken.setFont(new Font("Arial", Font.BOLD, 16));
             JLabel desc = new JLabel(s.description() + " Credits: " + s.credits());
             desc.setFont(new Font("Arial", Font.PLAIN, 12));
             result.add(title);
+            result.add(hasTaken);
             result.add(desc);
             resultsPanel.add(result);
         }

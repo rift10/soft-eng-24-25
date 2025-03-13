@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import com.github.javafaker.Faker;
 
 import rift10.db_project.records.Class;
 
@@ -32,6 +35,10 @@ public class Database {
     private PreparedStatement selectClassesWithCredits;
     private PreparedStatement selectClassesTaken;
     private PreparedStatement selectClassesTakenWithAG;
+    private PreparedStatement selectFromCourse;
+
+    private Faker faker = new Faker();
+    private Random random = new Random();
 
     private Database() {
         try {
@@ -52,6 +59,9 @@ public class Database {
             );
             selectUniqueStudent = connection.prepareStatement(
                 "select * from student where studentID like (?)"
+            );
+            selectFromCourse = connection.prepareStatement(
+                "select * from course"
             );
             selectClassesWithCredits = connection.prepareStatement(
                 "select * from class where AG like (?)"
@@ -153,26 +163,30 @@ public class Database {
     }
 
     public void initializeDatabase() {
-        // insertClass("AC96Y", "Advanced Math 3", "C", "H", 10, "Advanced Math 2", "Covers pre calculus topics such as polar graphing, conic sections, and advanced trigonometry");
-        // insertClass("AD20Y", "AP Biology", "D", "AP", 10, "Chemistry", "This class prepares students for the AP Biology test and explores topics surrounding cellular processes and genetic adaptations");
-        // insertClass("AJ50Y", "Chorus", "F", "P", 10, "", "Students learn many different songs over the course of the year in preparation for a concert at the end of the semester to showcase their skills");
-        // insertClass("IA15Y", "IB-HL-English 1", "B", "HL", 10, "IHS Global Literature", "This class covers how to analyze different forms of media, including novels, poetry, and films");
-        // insertClass("IB09S", "IHS-Theory of Knowledge", "A", "P", 5, "", "Teaches students how to think critically about the world around them");
-        // insertClass("AS54Y", "Robotics Build Advanced", "G", "P", 10, "", "Students learn how to design, fabricate, wire, and code a robot");
-        // insertClass("AS46Y", "Software Engineering: Advanced Topic CS", "G", "P", 10, "AP CSA", "This class teaches advanced software engineering topics that prepare students for careers in computer science");
-        // insertClass("WE84Y", "Spanish IV", "E", "P", 10, "Spanish III", "This class reviews all tenses of Spanish in preparation for AP Spanish");
         List<String> codes = parseFileToList("/workspaces/rift10/projects/db-project/src/main/java/rift10/db_project/data/codes.txt");
         List<String> courses = parseFileToList("/workspaces/rift10/projects/db-project/src/main/java/rift10/db_project/data/courses.txt");
         for (int i = 0; i < codes.size(); i++) {
-            insertClass(codes.get(i), courses.get(i), getAG(codes.get(i)), getLevel(courses.get(i)), getCredits(codes.get(i)), "", "");
+            insertClass(codes.get(i), courses.get(i), getAG(codes.get(i)), getLevel(courses.get(i)), getCredits(codes.get(i)), "", faker.lorem().sentence());
         }
 
-        insertStudent(12345, "Anna Ray", "2/13/10", 2028, "U9");
-        insertStudent(23456, "Bob Peters", "6/25/08", 2026, "AMPS");
-        insertStudent(34567, "Caitlin Hughes", "7/18/09", 2027, "AC");
+        for (int i = 1; i < 100; i++) {
+            int birthYear = random(2005, 2010);
+            insertStudent(
+                i,
+                faker.name().firstName() + " " + faker.name().lastName(),
+                randomBirthday(birthYear),
+                birthYear + 18,
+                randomSLC()
+            );
+        }
 
-        insertCourse("AS46Y", 12345, 6);
-        insertCourse("AC96Y", 23456, 3);
+        List<Class> allClasses = getAllClasses();
+
+        for (int j = 1; j < 100; j++) {
+            for (int i = 1; i < 7; i++) {
+                insertCourse(allClasses.get(random(0, allClasses.size() - 1)).classID(), j, i);
+            }
+        }
     }
 
     public void insertClass(String classCode, String className, String agType, String level, int creditAmount, String prereq, String desc) {
@@ -223,6 +237,26 @@ public class Database {
         return null;
     }
 
+    private int random(int start, int end) {
+        return random.nextInt(end - start + 1) + start;
+    }
+
+    private String randomBirthday(int birthday) {
+        return random(1, 31) + "/" + random(1, 12) + "/" + birthday;
+    }
+
+    private String randomSLC() {
+        return switch(random(1, 10)) {
+            case 1 -> "AHA";
+            case 2 -> "AMPS";
+            case 3, 4 -> "BIHS";
+            case 5 -> "CAS";
+            case 6 -> "IS";
+            case 7 -> "U9";
+            default -> "AC";
+        };
+    }
+
     private String getAG(String classCode) {
         if (classCode.substring(0, 1).equals("W")) return "E";
         if (classCode.substring(1, 2).equals("J") || classCode.substring(0, 1).equals("H")) return "F";
@@ -251,6 +285,20 @@ public class Database {
         return List.of("");
     }
 
-    // public record Course(String classID, int studentID, int period) {}
-    // public record Student(int studentID, String name, String DOB, int classOf, String SLC) {}
+    public String courseTest() {
+        try {
+            String string = new String();
+            ResultSet rs = selectFromCourse.executeQuery();
+            while(rs.next()) {
+                // read the result set
+                string = string.concat("class id = " + rs.getString("classID") + "\n");
+                string = string.concat("student id = " + rs.getInt("studentID") + "\n");
+                string = string.concat("period = " + rs.getInt("period") + "\n");
+            }
+            return string;
+        } catch(SQLException e) {
+            System.err.println(e);
+        }
+        return "";
+    }
 }
