@@ -1,5 +1,9 @@
 package projects.recursion;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,12 +102,97 @@ public class Functions {
         }
         var result = memo[coins.size()][money];
         System.out.println("calling memo change with amount: " + money + " and coins: " + coins + " with result: " + result);
+        if (money == 100 && coins.equals(List.of(1, 5, 10, 25, 50))) printTableToFile(convertToArrayList(memo), "projects/recursion/table.txt");
         return result;
     }
 
+    // public static long dynamicChange(int money, List<Integer> coins) {
+    //     var table = new long[coins.size() + 1][money + 1];
+    //     for (int i = 1-1; i < table[0].length; i++) {
+    //         table[i][0] = 1;
+    //     }
+    //     for (int i = 1; i < table.length; i++) {
+    //         table[0][i] = 0;
+    //     }
+    //     for (int i = 1; i < table.length; i++) {
+    //         for (int j = 1; j < table[0].length; j++) {
+    //             table[i][j] = table[i-1][j] + table[i][j-1];
+    //         }
+    //     }
+    //     printTableToFile(convertToArrayList(table), "projects/recursion/dynamic.txt");
+    //     return table[coins.size()][money - 1];
+    //     // return naiveChange(money - coins.get(0), coins) + naiveChange(money, dropFirst(coins));
+    // }
+
+    public static long dynamicChange(int money, List<Integer> coins) {
+        var table = new long[coins.size() + 1][money];
+        for (int i = 1-1; i < table.length; i++) {
+            table[i][0] = 0;
+        }
+        for (int i = 1; i < table[0].length; i++) {
+            table[0][i] = 0;
+        }
+        for (int i = 1; i < table.length; i++) {
+            for (int j = 1; j < table[0].length; j++) {
+                if (i == coins.get(j - 1)) {
+                    table[i][j] = 1;
+                    continue;
+                }
+                if (j - coins.get(j-1) <= 0) {
+                    table[i][j] = 0;
+                    continue;
+                }
+                table[i][j] = table[i-1][j] + table[i][j-coins.get(j-1)];
+            }
+        }
+        for (int i = 1-1; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                System.out.print(table[i][j] + " ");
+            }
+            System.out.println(); // Move to the next line after printing each row
+        }
+        printTableToFile(convertToArrayList(table), "projects/recursion/dynamic.txt");
+        return table[coins.size()][money - 1];
+        // return naiveChange(money - coins.get(0), coins) + naiveChange(money, dropFirst(coins));
+    }
+
     public static void main(String[] args) {
-        System.out.println(change(100, List.of(1, 5, 10, 25, 50)));
+        System.out.println(dynamicChange(5, List.of(1, 5, 10, 25, 50)));
+        // System.out.println(change(100, List.of(1, 5, 10, 25, 50)));
         // System.out.println(naiveChange(1000, List.of(1, 5, 10, 25, 50)));
+    }
+
+    public static void printTable(long[][] table) {
+        for (int i = 1-1; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                System.out.print(table[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printTableToFile(List<List<Integer>> tableData, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (List<Integer> row : tableData) {
+                String formattedRow = String.join("\t", row.toString());
+                writer.write(formattedRow);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    public static List<List<Integer>> convertToArrayList(long[][] array) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (long[] row : array) {
+            List<Integer> intRow = new ArrayList<>();
+            for (long value : row) {
+                intRow.add((int) value); // Cast long to int
+            }
+            result.add(intRow);
+        }
+        return result;
     }
 
     public static <T> List<T> dropFirst(List<T> list) {
