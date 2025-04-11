@@ -1,13 +1,15 @@
-MAIN_CLASS = $(error Need to set MAIN_CLASS to the name of a class)
+MAIN_CLASS = "Main.java"
+BIN_DIR = classes
 
 all: build run
 
 build:
-	javac -Xlint:all -Xlint:-serial -Xlint:-this-escape *.java
+	mkdir -p $(BIN_DIR)
+	javac -d $(BIN_DIR) -Xlint:all -Xlint:-serial -Xlint:-this-escape ./*.java
 
 run:
-	java $(MAIN_CLASS)
+	java -cp $(BIN_DIR) $(MAIN_CLASS)
 
 clean:
-	rm -f *.class
+	rm -rf $(BIN_DIR)
 	rm -f *~
