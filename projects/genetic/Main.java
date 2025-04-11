@@ -1,6 +1,6 @@
 
 public class Main {
     public static void main(String[] args) {
-        new Algorithm("To be or not to be").run();
+        new TextAlgorithm("To be or not to be, that is the question.").run();
     }
 }

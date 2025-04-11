@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Algorithm {
+public class TextAlgorithm {
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789., ";
     private static final Random random = new Random();
@@ -15,7 +15,7 @@ public class Algorithm {
     private final String desiredText;
     private String outputText = new String();
 
-    public Algorithm(String text) {
+    public TextAlgorithm(String text) {
         desiredText = text;
     }
 
