@@ -1,6 +1,6 @@
 
 public class Main {
     public static void main(String[] args) {
-        new Algorithm("Unicorn").run();
+        new Algorithm("To be or not to be").run();
     }
 }
