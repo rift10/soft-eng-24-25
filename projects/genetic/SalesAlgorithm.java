@@ -5,55 +5,65 @@ import java.util.Random;
 
 public class SalesAlgorithm {
 
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789., ";
     private static final Random random = new Random();
     private static final int GEN_SIZE = 1000;
+    private static final int NUM_GENS = 100;
     private static final double MUTATE_RATE = 0.02;
 
-    private static int bestFitness = 0;
-    private final List<List<String>> allGens = new ArrayList<>();
-    private final String desiredText;
-    private String outputText = new String();
+    private static double currentFitness = Integer.MAX_VALUE;
+    private static double bestFitness = Integer.MAX_VALUE;
+    private final List<List<List<City>>> allGens = new ArrayList<>();
+    private final List<City> cities;
+    private List<City> outputPath = new ArrayList<>();
 
-    public SalesAlgorithm(String text) {
-        desiredText = text;
+    public SalesAlgorithm(List<City> cities) {
+        this.cities = cities;
     }
 
     public void run() {
         allGens.add(generateFirstGen());
-        printList(allGens.get(0));
-        for (String s : allGens.get(0)) {
-            if (getFitness(s) > bestFitness) bestFitness = getFitness(s);
-        }
-        System.out.println("Best fitness: " + bestFitness);
-        System.out.println("Gen 0 Result: " + getBestFitness(0));
+        // allGens.get(0).forEach((path) -> printCities(path));
+        currentFitness = getBestFitness(0);
+        bestFitness = getBestFitness(0);
+        System.out.println("Gen 0 Fitness: " + getBestFitness(0));
+        System.out.print("Gen 0 Result: ");
+        printCities(getBestPath(0));
         int index = 1;
-        while (!outputText.equals(desiredText)) {
+        boolean improving = false;
+        while (improving ? index <= NUM_GENS : true) {
             allGens.add(generateNextGen(allGens.get(index-1)));
-            outputText = getBestFitness(index);
-            printList(allGens.get(index));
-            System.out.println("Gen " + index + " Result: " + outputText);
+            currentFitness = getBestFitness(index);
+            outputPath = getBestPath(index);
+            // allGens.get(index).forEach((path) -> printCities(path));
+            bestFitness = Math.min(bestFitness, currentFitness);
+            improving = bestFitness == currentFitness;
+            System.out.println("Gen " + index + " Fitness: " + currentFitness);
+            System.out.print("Gen " + index + " Result: ");
+            printCities(outputPath);
             index++;
         }
     }
 
     /** Generates the next generation from the previous one */
-    private List<String> generateNextGen(List<String> previousGen) {
-        List<String> result = new ArrayList<>();
+    private List<List<City>> generateNextGen(List<List<City>> previousGen) {
+        List<List<City>> result = new ArrayList<>();
         for (int i = 0; i < previousGen.size()/2; i++) {
-            String parentOne = previousGen.get(i);
-            String parentTwo = previousGen.get(i + previousGen.size()/2);
+            List<City> parentOne = previousGen.get(i);
+            List<City> parentTwo = previousGen.get(i + previousGen.size()/2);
             for (int j = 0; j < 2; j++) {
-                String child = new String();
-                for (int k = 0; k < parentOne.length(); k++) {
+                List<City> child = new ArrayList<>();
+                child.add(getDistance(parentOne.get(0), parentOne.get(1)) < getDistance(parentTwo.get(0), parentTwo.get(1))
+                                ? parentOne.get(0) : parentTwo.get(0));
+                for (int k = 1; k < parentOne.size(); k++) {
                     if (random.nextDouble() < MUTATE_RATE) {
-                        child += randomChar();
-                    } else if (parentOne.charAt(k) == desiredText.charAt(k)) {
-                        child += parentOne.charAt(k);
-                    } else if (parentTwo.charAt(k) == desiredText.charAt(k)) {
-                        child += parentTwo.charAt(k);
+                        child.add(randomCity(child));
+                    } else if (getDistance(parentOne.get(k - 1), parentOne.get(k)) < getDistance(parentTwo.get(k), parentTwo.get(k - 1))
+                            && !child.contains(parentOne.get(k))) {
+                        child.add(parentOne.get(k));
+                    } else if (!child.contains(parentTwo.get(k))) {
+                        child.add(parentTwo.get(k));
                     } else {
-                        child += random.nextDouble() < 0.5 ? parentOne.charAt(k) : parentTwo.charAt(k); 
+                        child.add(randomCity(child));
                     }
                 }
                 result.add(child);
@@ -62,51 +72,68 @@ public class SalesAlgorithm {
         return result;
     }
 
-    /** Returns the String with the highest fitness in a specified generation */
-    private String getBestFitness(int gen) {
-        int fitness = 0;
-        String result = new String();
+    /** Returns the fitness of the best path in a specified generation */
+    private double getBestFitness(int gen) {
+        return fitness(getBestPath(gen));
+    }
+
+    /** Returns the path with the highest fitness in a specified generation */
+    private List<City> getBestPath(int gen) {
+        double fitness = Integer.MAX_VALUE;
+        List<City> result = new ArrayList<>();
         for (int i = 0; i < allGens.get(gen).size(); i++) {
-            if (getFitness(allGens.get(gen).get(i)) > fitness) {
-                fitness = getFitness(allGens.get(gen).get(i));
+            if (fitness(allGens.get(gen).get(i)) < fitness) {
+                fitness = fitness(allGens.get(gen).get(i));
                 result = allGens.get(gen).get(i);
             }
         }
         return result;
     }
 
-    private int getFitness(String text) {
-        int fitness = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == desiredText.charAt(i)) fitness++;
+    /** Returns the fitness of the specified path */
+    private double fitness(List<City> path) {
+        double fitness = 0;
+        for (int i = 0; i < path.size() -1; i++) {
+            fitness += getDistance(path.get(i), path.get(i + 1));
         }
         return fitness;
     }
 
-    /** Generates a list of random Strings to fill the first generation */
-    private List<String> generateFirstGen() {
-        List<String> result = new ArrayList<>();
+    /** Generates a list of lists of random Cities to fill the first generation */
+    private List<List<City>> generateFirstGen() {
+        List<List<City>> result = new ArrayList<>();
         for (int i = 0; i < GEN_SIZE; i++) {
-            result.add(getRandomString(desiredText.length()));
+            List<City> path = new ArrayList<>();
+            for (int j = 0; j < cities.size(); j++) {
+                path.add(randomCity(path));
+            }
+            result.add(path);
         }
         return result;
     }
 
-    private String getRandomString(int size) {
-        String result = new String();
-        for (int i = 0; i < size; i++) {
-            result += randomChar();
+    private double getDistance(City a, City b) {
+        return Math.hypot((a.x() - b.x()), (a.y() - b.y()));
+    }
+
+    private City randomCity(List<City> otherCities) {
+        City result = randomCity();
+        while (otherCities.contains(result)) {
+            result = randomCity();
         }
         return result;
     }
 
-    private char randomChar() {
-        return CHARACTERS.charAt(random.nextInt(CHARACTERS.length()));
+    private City randomCity() {
+        return cities.get((int) Math.round(random.nextDouble() * (cities.size() - 1)));
     }
 
-    private <E> void printList(List<E> list) {
+    public void printCities(List<City> list) {
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+            System.out.print(list.get(i).name() + ((i == list.size() - 1) ? "" : ", "));
         }
+        System.out.println();
     }
+
+    public record City(String name, int x, int y) {}
 }

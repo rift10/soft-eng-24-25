@@ -21,9 +21,9 @@ public class TextAlgorithm {
 
     public void run() {
         allGens.add(generateFirstGen());
-        printList(allGens.get(0));
+        // allGens.get(0).forEach((s) -> System.out.println(s));
         for (String s : allGens.get(0)) {
-            if (getFitness(s) > bestFitness) bestFitness = getFitness(s);
+            if (fitness(s) > bestFitness) bestFitness = fitness(s);
         }
         System.out.println("Best fitness: " + bestFitness);
         System.out.println("Gen 0 Result: " + getBestFitness(0));
@@ -31,7 +31,7 @@ public class TextAlgorithm {
         while (!outputText.equals(desiredText)) {
             allGens.add(generateNextGen(allGens.get(index-1)));
             outputText = getBestFitness(index);
-            printList(allGens.get(index));
+            // allGens.get(index).forEach((s) -> System.out.println(s));
             System.out.println("Gen " + index + " Result: " + outputText);
             index++;
         }
@@ -67,15 +67,15 @@ public class TextAlgorithm {
         int fitness = 0;
         String result = new String();
         for (int i = 0; i < allGens.get(gen).size(); i++) {
-            if (getFitness(allGens.get(gen).get(i)) > fitness) {
-                fitness = getFitness(allGens.get(gen).get(i));
+            if (fitness(allGens.get(gen).get(i)) > fitness) {
+                fitness = fitness(allGens.get(gen).get(i));
                 result = allGens.get(gen).get(i);
             }
         }
         return result;
     }
 
-    private int getFitness(String text) {
+    private int fitness(String text) {
         int fitness = 0;
         for (int i = 0; i < text.length(); i++) {
             if (text.charAt(i) == desiredText.charAt(i)) fitness++;
@@ -104,9 +104,4 @@ public class TextAlgorithm {
         return CHARACTERS.charAt(random.nextInt(CHARACTERS.length()));
     }
 
-    private <E> void printList(List<E> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
-    }
 }
