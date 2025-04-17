@@ -2,46 +2,70 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class SalesAlgorithm {
 
     private static final Random random = new Random();
-    private static final int GEN_SIZE = 1000;
-    private static final int NUM_GENS = 100;
-    private static final double MUTATE_RATE = 0.02;
+    public static final int GEN_SIZE = 1000;
+    public static final int NUM_GENS = 100;
+    public static final double MUTATE_RATE = 0.02;
 
     private static double currentFitness = Integer.MAX_VALUE;
     private static double bestFitness = Integer.MAX_VALUE;
     private final List<List<List<City>>> allGens = new ArrayList<>();
     private final List<City> cities;
     private List<City> outputPath = new ArrayList<>();
+    private boolean improving = false;
+
+    public static int currentGen = 0;
+    public List<City> currentBest = new ArrayList<>();
 
     public SalesAlgorithm(List<City> cities) {
         this.cities = cities;
     }
 
-    public void run() {
+    public void start() {
         allGens.add(generateFirstGen());
         // allGens.get(0).forEach((path) -> printCities(path));
         currentFitness = getBestFitness(0);
         bestFitness = getBestFitness(0);
         System.out.println("Gen 0 Fitness: " + getBestFitness(0));
         System.out.print("Gen 0 Result: ");
-        printCities(getBestPath(0));
-        int index = 1;
-        boolean improving = false;
-        while (improving ? index <= NUM_GENS : true) {
-            allGens.add(generateNextGen(allGens.get(index-1)));
-            currentFitness = getBestFitness(index);
-            outputPath = getBestPath(index);
-            // allGens.get(index).forEach((path) -> printCities(path));
-            bestFitness = Math.min(bestFitness, currentFitness);
-            improving = bestFitness == currentFitness;
-            System.out.println("Gen " + index + " Fitness: " + currentFitness);
-            System.out.print("Gen " + index + " Result: ");
-            printCities(outputPath);
-            index++;
+        outputPath = getBestPath(0);
+        printCities(outputPath);
+        Main.salesGUI.updatePoints(outputPath, currentGen);
+        currentGen = 1;
+
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(() -> run(), 0, 34, TimeUnit.MILLISECONDS);
+
+        try {
+            Thread.sleep(10000); // Keep the program running for a while (e.g., 10 seconds)
+        } catch (InterruptedException e) {
+            System.err.println(e);
         }
+
+        executor.shutdown();
+    }
+
+    public void run() {
+        // while (improving ? currentGen <= NUM_GENS : true) {
+        if (currentGen > NUM_GENS) return;
+        allGens.add(generateNextGen(allGens.get(currentGen - 1)));
+        currentFitness = getBestFitness(currentGen);
+        outputPath = getBestPath(currentGen);
+        // allGens.get(currentGen).forEach((path) -> printCities(path));
+        bestFitness = Math.min(bestFitness, currentFitness);
+        improving = bestFitness == currentFitness;
+        currentBest = outputPath;
+        System.out.println("Gen " + currentGen + " Fitness: " + currentFitness);
+        System.out.print("Gen " + currentGen + " Result: ");
+        printCities(outputPath);
+        Main.salesGUI.updatePoints(outputPath, currentGen);
+        currentGen++;
     }
 
     /** Generates the next generation from the previous one */
@@ -78,7 +102,7 @@ public class SalesAlgorithm {
     }
 
     /** Returns the path with the highest fitness in a specified generation */
-    private List<City> getBestPath(int gen) {
+    public List<City> getBestPath(int gen) {
         double fitness = Integer.MAX_VALUE;
         List<City> result = new ArrayList<>();
         for (int i = 0; i < allGens.get(gen).size(); i++) {
