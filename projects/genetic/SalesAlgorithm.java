@@ -23,7 +23,10 @@ public class SalesAlgorithm {
     public static int currentGen = 0;
     public List<City> currentBest = new ArrayList<>();
 
-    public SalesAlgorithm(List<City> cities) {
+    private final SalesGUI gui;
+
+    public SalesAlgorithm(SalesGUI gui, List<City> cities) {
+        this.gui = gui;
         this.cities = cities;
     }
 
@@ -36,7 +39,7 @@ public class SalesAlgorithm {
         System.out.print("Gen 0 Result: ");
         outputPath = getBestPath(0);
         printCities(outputPath);
-        Main.salesGUI.updatePoints(outputPath, currentGen);
+        gui.updatePoints(outputPath, currentGen);
         currentGen = 1;
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -64,7 +67,7 @@ public class SalesAlgorithm {
         System.out.println("Gen " + currentGen + " Fitness: " + currentFitness);
         System.out.print("Gen " + currentGen + " Result: ");
         printCities(outputPath);
-        Main.salesGUI.updatePoints(outputPath, currentGen);
+        gui.updatePoints(outputPath, currentGen);
         currentGen++;
     }
 

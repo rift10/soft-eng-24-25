@@ -34,7 +34,6 @@ public class SalesGUI extends JFrame {
 
     public void run() {
         revalidate();
-        panel.increaseIndex();
         panel.repaint();
     }
 
