@@ -3,13 +3,17 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class SalesGUI extends JFrame {
     
-    private final SalesGraph panel = new SalesGraph();
+    private final SalesGraph graph = new SalesGraph();
+    private final JPanel panel = new JPanel();
+    private final JLabel label = new JLabel();
 
     public SalesGUI() {
         super("Traveling Salesperson");
@@ -28,16 +32,19 @@ public class SalesGUI extends JFrame {
     }
 
     public void start() {
-        add(panel, BorderLayout.CENTER);
+        add(graph, BorderLayout.CENTER);
+        add(panel, BorderLayout.EAST);
+        panel.add(label);
         setVisible(true);
     }
 
     public void run() {
         revalidate();
-        panel.repaint();
+        graph.repaint();
     }
 
     public void updatePoints(List<SalesAlgorithm.City> cities, int gen) {
-        panel.updatePoints(cities, gen);
+        label.setText("Generation: " + gen);
+        graph.updatePoints(cities, gen);
     }
 }

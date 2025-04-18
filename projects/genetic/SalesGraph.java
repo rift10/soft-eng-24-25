@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -15,10 +16,12 @@ public class SalesGraph extends JPanel {
 
     private final List<List<Point>> allPoints = Collections.synchronizedList(new ArrayList<>());
     private int currentGen = 0;
+    private double scalar;
+    private boolean appliedScalar;
+    private boolean madeScalars;
 
     public SalesGraph() {
         setPreferredSize(new Dimension(800, 600));
-        setBackground(Color.green);
     }
 
     public void updatePoints(List<SalesAlgorithm.City> cities, int gen) {
@@ -28,6 +31,7 @@ public class SalesGraph extends JPanel {
         }
         currentGen = gen;
         allPoints.add(points);
+        appliedScalar = false;
         repaint(); 
     }
 
@@ -39,7 +43,24 @@ public class SalesGraph extends JPanel {
 
         if (allPoints.isEmpty()) return;
         List<Point> points = allPoints.get(currentGen);
-    
+        if (!madeScalars) {
+            double maxX = allPoints.get(0).stream().map(p -> p.x).max(Comparator.naturalOrder()).get();
+            double maxY = allPoints.get(0).stream().map(p -> p.y).max(Comparator.naturalOrder()).get();
+            // double max = Math.max(maxX, maxY);
+            double xScalar = getWidth() / maxX;
+            double yScalar = getHeight() / maxY;
+            scalar = Math.min(xScalar, yScalar) * 0.8;
+            System.out.println("scalar: " + scalar);
+
+            madeScalars = true;
+        }
+        
+        if (!appliedScalar) {
+            points.forEach(p -> p.x = (int) (p.x * scalar));
+            points.forEach(p -> p.y = (int) (p.y * scalar));
+            appliedScalar = true;
+        }
+
         // Draw lines between points
         g2.setColor(Color.RED);
         for (int i = 0; i < points.size() - 1; i++) {
