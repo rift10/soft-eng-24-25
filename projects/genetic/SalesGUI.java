@@ -1,7 +1,9 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,8 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class SalesGUI extends JFrame {
     
     private final SalesGraph graph = new SalesGraph();
-    private final JPanel panel = new JPanel();
-    private final JLabel label = new JLabel();
+    private final JPanel sidePanel = new JPanel();
+    private final JLabel genLabel = new JLabel();
+    private final JLabel fitnessLabel = new JLabel();
 
     public SalesGUI() {
         super("Traveling Salesperson");
@@ -33,8 +36,12 @@ public class SalesGUI extends JFrame {
 
     public void start() {
         add(graph, BorderLayout.CENTER);
-        add(panel, BorderLayout.EAST);
-        panel.add(label);
+        add(sidePanel, BorderLayout.EAST);
+        sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
+        genLabel.setFont(genLabel.getFont().deriveFont(30f));
+        fitnessLabel.setFont(genLabel.getFont().deriveFont(30f));
+        sidePanel.add(genLabel);
+        sidePanel.add(fitnessLabel);
         setVisible(true);
     }
 
@@ -43,8 +50,13 @@ public class SalesGUI extends JFrame {
         graph.repaint();
     }
 
+    public void updateFitness(double fitness, double bestFitness) {
+        fitnessLabel.setText("Fitness: " + (int) fitness);
+        fitnessLabel.setForeground(fitness <= bestFitness ? Color.green : Color.red);
+    }
+
     public void updatePoints(List<SalesAlgorithm.City> cities, int gen) {
-        label.setText("Generation: " + gen);
+        genLabel.setText("Generation: " + gen + "     ");
         graph.updatePoints(cities, gen);
     }
 }

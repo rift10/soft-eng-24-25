@@ -10,15 +10,14 @@ public class SalesAlgorithm {
 
     private static final Random random = new Random();
     public static final int GEN_SIZE = 1000;
-    public static final int NUM_GENS = 100;
-    public static final double MUTATE_RATE = 0.02;
+    public static final int NUM_GENS = 20;
+    public static final double MUTATE_RATE = 0.01;
 
     private static double currentFitness = Integer.MAX_VALUE;
     private static double bestFitness = Integer.MAX_VALUE;
     private final List<List<List<City>>> allGens = new ArrayList<>();
     private final List<City> cities;
     private List<City> outputPath = new ArrayList<>();
-    private boolean improving = false;
 
     public static int currentGen = 0;
     public List<City> currentBest = new ArrayList<>();
@@ -35,6 +34,7 @@ public class SalesAlgorithm {
         // allGens.get(0).forEach((path) -> printCities(path));
         currentFitness = getBestFitness(0);
         bestFitness = getBestFitness(0);
+        gui.updateFitness(currentFitness, bestFitness);
         System.out.println("Gen 0 Fitness: " + getBestFitness(0));
         System.out.print("Gen 0 Result: ");
         outputPath = getBestPath(0);
@@ -43,7 +43,7 @@ public class SalesAlgorithm {
         currentGen = 1;
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(() -> run(), 0, 34, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> run(), 0, 500, TimeUnit.MILLISECONDS);
 
         try {
             Thread.sleep(10000); // Keep the program running for a while (e.g., 10 seconds)
@@ -62,7 +62,8 @@ public class SalesAlgorithm {
         outputPath = getBestPath(currentGen);
         // allGens.get(currentGen).forEach((path) -> printCities(path));
         bestFitness = Math.min(bestFitness, currentFitness);
-        improving = bestFitness == currentFitness;
+        gui.updateFitness(currentFitness, bestFitness);
+        // improving = bestFitness == currentFitness;
         currentBest = outputPath;
         System.out.println("Gen " + currentGen + " Fitness: " + currentFitness);
         System.out.print("Gen " + currentGen + " Result: ");
@@ -79,8 +80,7 @@ public class SalesAlgorithm {
             List<City> parentTwo = previousGen.get(i + previousGen.size()/2);
             for (int j = 0; j < 2; j++) {
                 List<City> child = new ArrayList<>();
-                child.add(getDistance(parentOne.get(0), parentOne.get(1)) < getDistance(parentTwo.get(0), parentTwo.get(1))
-                                ? parentOne.get(0) : parentTwo.get(0));
+                child.add(parentOne.get(0));
                 for (int k = 1; k < parentOne.size(); k++) {
                     if (random.nextDouble() < MUTATE_RATE) {
                         child.add(randomCity(child));
@@ -119,7 +119,7 @@ public class SalesAlgorithm {
 
     /** Returns the fitness of the specified path */
     private double fitness(List<City> path) {
-        double fitness = 0;
+        double fitness = getDistance(path.get(0), path.get(path.size() - 1));
         for (int i = 0; i < path.size() -1; i++) {
             fitness += getDistance(path.get(i), path.get(i + 1));
         }
@@ -131,7 +131,8 @@ public class SalesAlgorithm {
         List<List<City>> result = new ArrayList<>();
         for (int i = 0; i < GEN_SIZE; i++) {
             List<City> path = new ArrayList<>();
-            for (int j = 0; j < cities.size(); j++) {
+            path.add(cities.get(0));
+            for (int j = 1; j < cities.size(); j++) {
                 path.add(randomCity(path));
             }
             result.add(path);

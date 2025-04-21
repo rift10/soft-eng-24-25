@@ -62,17 +62,20 @@ public class SalesGraph extends JPanel {
         }
 
         // Draw lines between points
-        g2.setColor(Color.RED);
+        g2.setColor(Color.BLACK);
         for (int i = 0; i < points.size() - 1; i++) {
             Point p1 = points.get(i);
             Point p2 = points.get(i + 1);
             g2.drawLine(p1.x, p1.y, p2.x, p2.y);
         }
+        g2.drawLine(points.get(0).x, points.get(0).y, points.get(points.size() - 1).x, points.get(points.size() - 1).y);
 
         // Draw points
+        g2.setColor(Color.RED);
+        g2.fillOval(points.get(0).x - 4, points.get(0).y - 4, 8, 8);
         g2.setColor(Color.BLACK);
-        for (Point p : points) {
-            g2.fillOval(p.x - 4, p.y - 4, 8, 8);
+        for (int i = 1; i < points.size(); i++) {
+            g2.fillOval(points.get(i).x - 4, points.get(i).y - 4, 8, 8);
         }
     }
 }
