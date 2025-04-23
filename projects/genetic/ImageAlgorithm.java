@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SalesAlgorithm {
+public class ImageAlgorithm {
 
     private static final Random random = new Random();
     public static final int GEN_SIZE = 1000;
@@ -22,9 +22,9 @@ public class SalesAlgorithm {
     public static int currentGen = 0;
     public List<City> currentBest = new ArrayList<>();
 
-    private final SalesGUI gui;
+    private final ImageGUI gui;
 
-    public SalesAlgorithm(SalesGUI gui, List<City> cities) {
+    public ImageAlgorithm(ImageGUI gui, List<City> cities) {
         this.gui = gui;
         this.cities = cities;
     }
