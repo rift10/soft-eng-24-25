@@ -45,7 +45,7 @@ public class SalesAlgorithm {
         executor.scheduleAtFixedRate(() -> run(), 0, 500, TimeUnit.MILLISECONDS);
 
         try {
-            Thread.sleep(10000); // Keep the program running for a while (e.g., 10 seconds)
+            Thread.sleep(10000); // Keep the program running for 10 secs
         } catch (InterruptedException e) {
             System.err.println(e);
         }

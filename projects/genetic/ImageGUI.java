@@ -1,9 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.util.List;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,13 +14,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class ImageGUI extends JFrame {
     
-    private final SalesGraph graph = new SalesGraph();
+    private final JLabel graphics = new JLabel();
     private final JPanel sidePanel = new JPanel();
     private final JLabel genLabel = new JLabel();
     private final JLabel fitnessLabel = new JLabel();
 
     public ImageGUI() {
-        super("Traveling Salesperson");
+        super("Image Evolution");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
@@ -35,19 +36,21 @@ public class ImageGUI extends JFrame {
     }
 
     public void start() {
-        add(graph, BorderLayout.CENTER);
+        add(graphics, BorderLayout.CENTER);
         add(sidePanel, BorderLayout.EAST);
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
         genLabel.setFont(genLabel.getFont().deriveFont(30f));
         fitnessLabel.setFont(genLabel.getFont().deriveFont(30f));
         sidePanel.add(genLabel);
         sidePanel.add(fitnessLabel);
+        graphics.setFont(genLabel.getFont().deriveFont(30f));
+        graphics.setText("    Loading First Gen...");
         setVisible(true);
     }
 
     public void run() {
         revalidate();
-        graph.repaint();
+        graphics.repaint();
     }
 
     public void updateFitness(double fitness, double bestFitness) {
@@ -55,8 +58,12 @@ public class ImageGUI extends JFrame {
         fitnessLabel.setForeground(fitness <= bestFitness ? Color.green : Color.red);
     }
 
-    public void updatePoints(List<ImageAlgorithm.City> cities, int gen) {
+    public void updateImage(BufferedImage image, int gen) {
         genLabel.setText("Generation: " + gen + "     ");
-        // graph.updatePoints(cities, gen);
+        graphics.setIcon(new ImageIcon(image));
+    }
+
+    public void setImageSize(int width, int height) {
+        graphics.setSize(width, height);
     }
 }
