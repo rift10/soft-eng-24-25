@@ -33,7 +33,8 @@ public class Main {
         // salesGUI.start();
         // salesAlgorithm.start();
 
-        imageAlgorithm = new ImageAlgorithm(imageGUI, "/workspaces/rift10/projects/genetic/MonaLisa.jpg");
+        imageAlgorithm = new ImageAlgorithm(imageGUI, "/workspaces/rift10/projects/genetic/images/MonaLisa.jpg");
+        // imageAlgorithm = new ImageAlgorithm(imageGUI, "/workspaces/rift10/projects/genetic/images/Apple.png");
         imageGUI.start();
         imageAlgorithm.start();
     }

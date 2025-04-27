@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import javax.swing.BoxLayout;
@@ -48,22 +50,34 @@ public class ImageGUI extends JFrame {
         setVisible(true);
     }
 
-    public void run() {
+    private void run() {
         revalidate();
         graphics.repaint();
     }
 
-    public void updateFitness(double fitness, double bestFitness) {
+    public void updateFitness(int gen, double fitness, double bestFitness) {
+        genLabel.setText("Generation: " + gen + "     ");
         fitnessLabel.setText("Fitness: " + (int) fitness);
         fitnessLabel.setForeground(fitness <= bestFitness ? Color.green : Color.red);
     }
 
-    public void updateImage(BufferedImage image, int gen) {
-        genLabel.setText("Generation: " + gen + "     ");
-        graphics.setIcon(new ImageIcon(image));
+    public void updateImage(BufferedImage image) {
+        double xScalar = (double) getWidth() / image.getWidth();
+        double yScalar = (double) getHeight() / image.getHeight();
+        double scalar = Math.min(xScalar, yScalar) * 0.9;
+        graphics.setText("");
+        graphics.setIcon(new ImageIcon(scale(image, scalar)));
     }
 
-    public void setImageSize(int width, int height) {
-        graphics.setSize(width, height);
+    private static BufferedImage scale(BufferedImage before, double scale) {
+        int w = before.getWidth();
+        int h = before.getHeight();
+        // Create a new image of the proper size
+        int w2 = (int) (w * scale);
+        int h2 = (int) (h * scale);
+        BufferedImage after = new BufferedImage(w2, h2, BufferedImage.TYPE_INT_ARGB);
+        AffineTransformOp scaleOp = new AffineTransformOp(AffineTransform.getScaleInstance(scale, scale), AffineTransformOp.TYPE_BILINEAR);
+        scaleOp.filter(before, after);
+        return after;
     }
 }

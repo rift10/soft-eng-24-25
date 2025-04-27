@@ -46,11 +46,9 @@ public class SalesGraph extends JPanel {
         if (!madeScalars) {
             double maxX = allPoints.get(0).stream().map(p -> p.x).max(Comparator.naturalOrder()).get();
             double maxY = allPoints.get(0).stream().map(p -> p.y).max(Comparator.naturalOrder()).get();
-            // double max = Math.max(maxX, maxY);
             double xScalar = getWidth() / maxX;
             double yScalar = getHeight() / maxY;
             scalar = Math.min(xScalar, yScalar) * 0.8;
-            System.out.println("scalar: " + scalar);
 
             madeScalars = true;
         }
