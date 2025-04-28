@@ -16,10 +16,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class ImageGUI extends JFrame {
     
+    private static final String BUFFER = "     ";
     private final JLabel graphics = new JLabel();
     private final JPanel sidePanel = new JPanel();
     private final JLabel genLabel = new JLabel();
     private final JLabel fitnessLabel = new JLabel();
+    private final JLabel bestFitnessLabel = new JLabel();
 
     public ImageGUI() {
         super("Image Evolution");
@@ -43,10 +45,12 @@ public class ImageGUI extends JFrame {
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
         genLabel.setFont(genLabel.getFont().deriveFont(30f));
         fitnessLabel.setFont(genLabel.getFont().deriveFont(30f));
+        bestFitnessLabel.setFont(genLabel.getFont().deriveFont(30f));
         sidePanel.add(genLabel);
         sidePanel.add(fitnessLabel);
+        sidePanel.add(bestFitnessLabel);
         graphics.setFont(genLabel.getFont().deriveFont(30f));
-        graphics.setText("    Loading First Gen...");
+        graphics.setText(BUFFER + "Loading gen 0...");
         setVisible(true);
     }
 
@@ -55,9 +59,14 @@ public class ImageGUI extends JFrame {
         graphics.repaint();
     }
 
-    public void updateFitness(int gen, double fitness, double bestFitness) {
-        genLabel.setText("Generation: " + gen + "     ");
-        fitnessLabel.setText("Fitness: " + (int) fitness);
+    public void updateLoad(int gen) {
+        graphics.setText(BUFFER + (gen > ImageAlgorithm.NUM_GENS ? "Complete" : "Loading Gen " + gen + "..."));
+    }
+
+    public void updateFitness(int gen, int fitness, int bestFitness) {
+        genLabel.setText("Generation: " + gen);
+        fitnessLabel.setText("Fitness: " + fitness);
+        bestFitnessLabel.setText("Best Fitness: " + bestFitness + BUFFER);
         fitnessLabel.setForeground(fitness <= bestFitness ? Color.green : Color.red);
     }
 
@@ -65,7 +74,6 @@ public class ImageGUI extends JFrame {
         double xScalar = (double) getWidth() / image.getWidth();
         double yScalar = (double) getHeight() / image.getHeight();
         double scalar = Math.min(xScalar, yScalar) * 0.9;
-        graphics.setText("");
         graphics.setIcon(new ImageIcon(scale(image, scalar)));
     }
 
