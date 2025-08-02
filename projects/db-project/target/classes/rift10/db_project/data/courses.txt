@@ -1,0 +1,179 @@
+AAPI Literature
+AC-AP-Economics 
+AC-AP-LangANDCmp
+AC-AP-LitANDComp 
+AC-AP-USHistory 
+AC-AmericanLit 
+AC-Economics 
+AC-Politics AND Power 
+AC-ReadWrtShtStry 
+AC-TheoPsychology 
+AC-USHistory 
+AC-World of Media 
+AFAM-AdvDance 
+AFAM-Beg/IntDnc 
+AFAM-Economics 
+AFAM-History 1/2 
+AFAM-Literature 
+AFAM-Psychology 
+AHA-AP-StudioArt 
+AHA-AdvCreativeArts
+AHA-AdvDrawingPntg
+AHA-Math 2 
+AHA-Math 3 
+AMPS-AP-Calc AB 
+AMPS-Math 2 
+AMPS-Math 3 
+AP Chinese Language and Cultur
+AP Comp Sci Prin 
+AP Computer Science A 
+AP Latin Vergil 
+AP Patterns in Black Literatur
+AP-Art History 
+AP-Biology 
+AP-Calculs BC 
+AP-Calculus AB 
+AP-Chemistry 
+AP-EnvirScience 
+AP-FrenchSem 
+AP-MusicTheory 
+AP-Physics 1
+AP-Physics C
+AP-SpanishLit 
+AP-SpanishSem 
+AP-Statistics 
+AP-StudioArt-Photography 
+AVID 10
+AVID 11
+AVID 9
+AVID Senior Seminar 
+Adv Robotics Engineering 
+AdvCeramics 
+AdvDance/Projects 
+AdvDrawingPntg 
+AdvPhotography 
+Advanced Digital Sound Eng
+Advanced Math 3 
+ArtVidProd 
+BIHS-AcadDev
+Badminton
+Band 1
+Band 2
+Band 3
+Band 3 Honors
+Basketball
+Beg/IntDance 
+BegCeramics 
+BegPhotography 
+Biology 
+Biotech 1 
+Biotech 3 
+Black Gold and Black Soul 
+CAD Design Studio
+CAS-AdvDigPhoto 
+CAS-AdvStdEd
+CAS-Math 2 
+CAS-Math 3 
+CTE-Graphic Design
+Carpentry
+Chemistry 
+Chicano History
+Chicano Latino Literature Stud
+Chorus
+Computer Science IB HL2
+Computer Science IB SL
+Concert Chorale (1/2 Credit)
+Concert Orchestra 
+Creative Arts 
+Credit Recovery
+DanceProd/Chor 
+Data Science 
+Digital Photo 
+Digital Sound Engineering
+DramArts/ActWrk 
+Drawing 
+EMT
+Fire Science
+French I
+French II
+French III
+French IV
+Guitar 
+Hnrs-AnatPhys 
+IB SL Geography
+IB-Economics 
+IB-HL Math Analysis
+IB-HL-Film 
+IB-HL-French B 
+IB-HL-Latin B 
+IB-HL-Music 
+IB-HL-Studio Art B 
+IB-Math Studies 
+IB-SL-Art History
+IB-SL-Biology 
+IB-SL-EnvirSysSoc 
+IB-SL-Film 
+IB-SL-French B 
+IB-SL-Mandarin B 
+IB-SL-Math Analysis
+IB-SL-Math Applications
+IB-SL-Music 
+IB-SL-Studio Art A 
+IB-Soc Anth 
+INE-CLC
+Integrated Science 
+Intro to Computer Programming
+Intro to Fitness
+Intro to Journalism/Jacket New
+Jazz Band BHS
+Jazz Ensemble 
+Jazz Lab 1 
+Jazz Lab 2 
+Journalism 
+Journalism 0.5/Jacket News 0.5
+LEAP
+LGBTQIA + Literature
+Latin I 
+Latin II 
+Latin III 
+Law and Social Justice 
+Law and Social Justice II 
+Literary Magazine
+Mandarin I
+Mandarin II
+Mandarin III
+Math 2 
+Math 3 
+Mechatronics Engineering 
+No 1 Period Senior Only
+No 6 Period Senior Only
+Orchestra 1
+Orchestra 2
+Orchestra 3
+Personal Finance
+Popular Culture: Inventing Hip
+Production/Acting
+Robot Build EXT
+Robotics Build Advanced 
+Robotics Engineering 
+SEI -ExpWriting 9
+SEI-ExpWriting 10-12
+SLC-American Lit 
+SLC-Math 2
+SLC-Math 3
+Soccer
+Software Eng: AdvancedTopic CS
+SpanNatSpkrs 2
+SpanNatSpkrs III
+Spanish I 
+Spanish II 
+Spanish III 
+Spanish IV 
+Spanish in the African Diaspor
+Stagecraft /Technical Theater
+Stagecraft 3/4
+Team Sports
+Team Sports AM
+World Mythologies
+Yearbook Des & Pub 
+Yearbook Design/Pub II 
