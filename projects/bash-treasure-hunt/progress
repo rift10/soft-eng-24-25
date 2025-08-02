@@ -1,0 +1,182 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TROPHY=TROPHY
+
+here=$(pwd)
+
+puzzle_dir="$here/puzzle"
+secrets_dir="$here/.found"
+hints_dir="$here/.hints"
+
+verbose="no"
+show_hint="no"
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -c | --clean)
+            rm -rf "$secrets_dir"
+            shift;
+            ;;
+        -v | --verbose)
+            verbose=yes
+            shift;
+            ;;
+        -h | --hint)
+            show_hint=yes
+            shift
+            ;;
+        *)
+            >&2 echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
+
+script_name() {
+    printf "%s/clue-%03d.sh" "$here" "$1"
+}
+
+answer_name() {
+    printf "%s/secret-%03d.txt" "$secrets_dir" "$1"
+}
+
+hint_name() {
+    printf "%s/hint-%03d.txt" "$hints_dir" "$1"
+}
+
+# Get the clue that the current script is based on. Assumes that we've already
+# run the previous script so the answer file exists.
+get_clue() {
+    i="$1"
+    if [[ "$i" -eq 0 ]]; then
+        cat "$puzzle_dir/.first-clue"
+    else
+        secret=$(< "$(answer_name $((i - 1)))")
+        echo "${secret#*: }"
+    fi
+}
+
+# Get the secret for step i by running the script or loading the cached answer.
+get_secret() {
+    script=$(script_name "$1")
+    answer=$(answer_name "$1")
+
+    # Run the script if needed (no answer or out of date answer)
+    if [[ ! -e "$answer" || "$script" -nt "$answer" ]]; then
+        if [[ "$verbose" = "yes" ]]; then
+            >&2 echo "Running $(basename "$script")"
+        fi
+        if ! "$script" > "$answer"; then
+            rm -f "$answer"
+            return 1
+        fi
+    else
+        if [[ "$verbose" = "yes" ]]; then
+            >&2 echo "$(basename "$answer") up to date"
+        fi
+    fi
+
+    # Should be a file by now.
+    if [[ -e "$answer" ]]; then
+        cat "$answer"
+        return 0
+    else
+        >&2 echo "Weird. No answer file."
+        return 1
+    fi
+}
+
+decrypt_trophy() {
+    local keygen_opts
+    read -ra keygen_opts < "$puzzle_dir/.keygen-opts"
+    find "$secrets_dir" -type f | sort | xargs cut -d : -f 1 | \
+        openssl dgst -sha256 -binary | \
+        openssl enc -d "${keygen_opts[@]}" \
+                -in "$puzzle_dir/.trophy.enc" \
+                -out "$TROPHY" \
+                -pass stdin 2> /dev/null
+}
+
+complete=0
+
+if [[ -d "$puzzle_dir" ]]; then
+
+    next_clue=$(get_clue "0")
+
+    readarray -t hashes < <(tac "$puzzle_dir/.hashes")
+
+    mkdir -p "$secrets_dir"
+
+    i=0
+    while [[ "$i" -lt "${#hashes[@]}" ]]; do
+        #echo "Checking ${hashes[$i]}"
+        script=$(script_name "$i")
+        if [[ -e "$script" ]]; then
+            if secret=$(get_secret "$i"); then
+                check=$(sha1sum <<< "${secret%%:*}" | cut -c -40)
+                if [[ "${hashes[$i]}" = "$check" ]]; then
+                    printf "✅ %s (%s)\n" "$(get_clue "$i")" "$(basename "$script")"
+                    complete=$((complete + 1))
+                    next_clue="${secret##*: }"
+                else
+                    printf "❌ %s (%s)\n" "$(get_clue "$i")" "$(basename "$script")"
+                    break
+                fi
+            else
+                printf "💣 Problem running %s\n" "$script"
+                next_clue="$(get_clue "$i")"
+            fi
+        else
+            break
+        fi
+        ((i += 1))
+    done
+
+    # i is now at the index of the next puzzle or the length of hashes if all
+    # puzzles have been solved.
+
+    echo
+    echo "$complete of ${#hashes[@]} complete"
+
+    if [[ "$complete" -lt "${#hashes[@]}" ]]; then
+        if [[ -n "$next_clue" ]]; then
+            echo
+            echo "Next clue: $next_clue"
+            echo
+            if [[ "$show_hint" = "yes" ]]; then
+                hint=$(hint_name "$i")
+                if [[ -e "$hint" ]]; then
+                    cat "$hint"
+                else
+                    echo "Sorry, no hint available."
+                fi
+                echo
+            fi
+            next_script="$(script_name "$complete")"
+            if [[ ! -e "$next_script" ]]; then
+                cat <<EOF > "$next_script"
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+EOF
+                chmod +x "$next_script"
+            fi
+            echo "Write your code to extract this secret in ${next_script#"$here/"}"
+            echo
+        fi
+    else
+        if [[ -e "$TROPHY" ]] || decrypt_trophy; then
+            cat "$TROPHY"
+        else
+            rm -f "$TROPHY"
+            >&2 echo "Uh oh. Your trophy seems to be damaged. But you're still a winner."
+        fi
+        echo
+    fi
+else
+    echo "No puzzle directory!"
+    exit 1
+fi
