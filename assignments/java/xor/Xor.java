@@ -1,4 +1,7 @@
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.lang.StringBuilder;
+import java.lang.Integer;
 
 public class Xor {
 
@@ -38,7 +41,74 @@ public class Xor {
   // above for decoding. (This is a symmetric cipher meaning encryption
   // and decryption are the same process.)
 
+  private int key;
+  private int[] byteMasks = {0b10000000, 0b01000000, 0b00100000, 0b00010000, 0b00001000};
+  private int[] firstByteMasks = {0b01111111, 0b00011111, 0b00001111, 0b00000111};
+
+  public Xor(int key) {
+    this.key = key;
+  }
+
+  public byte[] cipherToBytes(String cipher) {
+    byte[] cipherBytes = new byte[cipher.length() / 2 + 1];
+    int index = 0;
+    for (int i = 0; i < cipher.length() - 1; i += 2) {
+      cipherBytes[index] = (byte) Integer.parseInt(cipher.substring(i, i + 2), 16);
+      index++;
+    }
+    return cipherBytes;
+  }
+
+  public byte[] xor(String cipher) {
+    int keySection = key;
+    byte[] cipherBytes = cipherToBytes(cipher);
+    byte[] result = new byte[cipher.length() / 2 + 1];
+    for (int i = 0; i < cipher.length() / 2; i++) {
+      if (i % 4 == 0) keySection = key;
+      result[i] = (byte) (keySection ^ cipherBytes[i]);
+      keySection = keySection >> 8;
+    }
+    return result;
+  }
+
+  public String decodeToUtf8(byte[] letterBytes) {
+    StringBuilder sb = new StringBuilder();
+    int numBytes = 0;
+    int codePoint = 0;
+ 
+    for (int i = 0; i < letterBytes.length; i += numBytes) {
+      numBytes = 0;
+      if (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 0) {
+        numBytes = 1;
+      } else {
+        while (((letterBytes[i] & (byteMasks[numBytes])) >>> (7 - numBytes)) == 1) {
+          numBytes++;
+        }
+      }
+
+      codePoint = letterBytes[i] & firstByteMasks[numBytes - 1];
+      for (int j = 1; j < numBytes; j++) {
+        codePoint = (codePoint << 6 | (letterBytes[i + j] & 0b00111111));
+      }
+
+      sb.append(Character.toChars(codePoint));
+    }
+
+    return sb.toString();
+  }
+
+  public String decode(String cipher) {
+    return new String(xor(cipher), StandardCharsets.UTF_8);
+  }
+
+  public String decodeWithUtf8(String text) {
+    return decodeToUtf8(new String(text).getBytes(StandardCharsets.UTF_8));
+  }
+
   public static void main(String[] argv) throws Exception {
     System.out.println(new Xor(567231495).decode(CIPHERTEXT));
+    System.out.println(new Xor(567231495).decodeWithUtf8("hello world"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("(づ ◕‿◕ )づ"));
+    System.out.println(new Xor(567231495).decodeWithUtf8("😁😱😪🤩"));
   }
 }
